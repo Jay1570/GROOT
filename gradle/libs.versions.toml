@@ -21,6 +21,7 @@ playServicesAppindexing = "9.8.0"
 firebaseAuth = "23.0.0"
 firebaseFirestore = "25.0.0"
 firebaseStorage = "21.0.0"
+lifecycleViewmodelKtx = "2.8.4"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -45,6 +46,7 @@ play-services-appindexing = { group = "com.google.android.gms", name = "play-ser
 google-firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
 google-firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
 google-firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebaseStorage" }
+androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
