@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">GROOT</string>
+    <string name="registration">Registration</string>
+    <string name="user_name">User Name</string>
+    <string name="e_mail">E-mail</string>
+    <string name="register">Register</string>
+    <string name="password">Password</string>
+    <string name="conform_password">Conform-Password</string>
 </resources>
