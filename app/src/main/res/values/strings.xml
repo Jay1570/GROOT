@@ -6,4 +6,8 @@
     <string name="register">Register</string>
     <string name="password">Password</string>
     <string name="conform_password">Conform-Password</string>
+    <string name="home">Home\n</string>
+    <string name="profile">Profile</string>
+    <string name="help">Help</string>
+    <string name="settings">Settings\n</string>
 </resources>
