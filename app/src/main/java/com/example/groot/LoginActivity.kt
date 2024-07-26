@@ -2,67 +2,63 @@ package com.example.groot
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.groot.viewmodel.AuthViewModel
-import java.util.regex.Pattern
+import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
-    private lateinit var txt_email:EditText
-    private lateinit var txt_password:EditText
-    private lateinit var reg:EditText
-    private lateinit var btn_login:Button
+    private lateinit var txtEmail:EditText
+    private lateinit var txtPassword:EditText
+    private lateinit var reg:TextView
+    private lateinit var btnLogin:Button
 
-    private  val PASS_PATTERN = "^(?=.[0-9])(?=.[a-z])(?=.*[A-Z])(?=\\S+$).{4,}$"
-
-    fun String.isValidEmail(): Boolean {
-        return this.isNotBlank() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
-    }
-
-    fun String.isValidPassword(): Boolean {
-        return this.isNotBlank() &&
-                this.length >= 8 &&
-                Pattern.compile(PASS_PATTERN).matcher(this).matches()
-    }
-
-    val authViewModel: AuthViewModel by viewModels()
+    private val authViewModel: AuthViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
 
-        txt_email=findViewById(R.id.ln_email)
-        txt_password=findViewById(R.id.ln_password)
-        btn_login=findViewById(R.id.ln_Login)
+        txtEmail=findViewById(R.id.ln_email)
+        txtPassword=findViewById(R.id.ln_password)
+        btnLogin=findViewById(R.id.login)
+        reg = findViewById(R.id.ln_Login)
 
         authViewModel.authStatus.observe(this) { status ->
             Toast.makeText(this, status, Toast.LENGTH_SHORT).show()
+            if (status.contains("Successful")) {
+                startActivity(Intent(this, HomeActivity::class.java))
+                finish()
+            }
         }
 
-        btn_login.setOnClickListener(){
-            val email=txt_email.text.toString()
-            val password=txt_password.text.toString()
+        btnLogin.setOnClickListener {
+            val email=txtEmail.text.toString()
+            val password=txtPassword.text.toString()
 
             if(!email.isValidEmail()) {
-                Toast.makeText(this,"Invalid Email...!",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,getString(R.string.invalid_email),Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if(!password.isValidPassword()) {
-                Toast.makeText(this,"Invalid Password...!",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this,getString(R.string.invalid_password),Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            authViewModel.login(email,password)
+            lifecycleScope.launch {
+                authViewModel.login(email, password)
+            }
         }
 
-        reg.setOnClickListener(){
+        reg.setOnClickListener {
             startActivity(Intent(this, RegistrationActivity::class.java))
         }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->

@@ -12,29 +12,22 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.example.groot.viewmodel.AuthViewModel
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.util.regex.Pattern
 
 class RegistrationActivity : AppCompatActivity() {
     private lateinit var userImage: ImageView
-    private lateinit var userNametxt: EditText
-    private lateinit var emailtxt: EditText
-    private lateinit var passwordtxt: EditText
-    private lateinit var confromPasswordtxt:EditText
-    private lateinit var btn_register:Button
+    private lateinit var txtUsername: EditText
+    private lateinit var txtEmail: EditText
+    private lateinit var txtPassword: EditText
+    private lateinit var txtConfirmPassword:EditText
+    private lateinit var btnRegister:Button
 
-    fun String.isValidEmail(): Boolean {
-        return this.isNotBlank() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
-    }
+    private val authViewModel: AuthViewModel by viewModels()
 
-    fun String.isValidPassword(): Boolean {
-        return this.isNotBlank() &&
-                this.length >= 8 &&
-                Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}\$").matcher(this).matches()
-    }
-
-    val authViewModel: AuthViewModel by viewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -45,52 +38,60 @@ class RegistrationActivity : AppCompatActivity() {
             insets
         }
         userImage=findViewById(R.id.imageView3)
-        userNametxt=findViewById(R.id.rg_username)
-        emailtxt=findViewById(R.id.rg_email)
-        passwordtxt=findViewById(R.id.rg_password)
-        confromPasswordtxt=findViewById(R.id.rg_con_password)
-        btn_register=findViewById(R.id.rg_Register)
+        txtUsername=findViewById(R.id.rg_username)
+        txtEmail=findViewById(R.id.rg_email)
+        txtPassword=findViewById(R.id.rg_password)
+        txtConfirmPassword=findViewById(R.id.rg_con_password)
+        btnRegister=findViewById(R.id.rg_Register)
 
         authViewModel.authStatus.observe(this) { status ->
             Toast.makeText(this, status, Toast.LENGTH_SHORT).show()
+            if (status.contains("Successful")) {
+                startActivity(Intent(this, HomeActivity::class.java))
+                finish()
+            }
         }
-        btn_register.setOnClickListener {
-            val email=emailtxt.text.toString()
-            val password=passwordtxt.text.toString()
+        btnRegister.setOnClickListener {
+            val email=txtEmail.text.toString()
+            val password=txtPassword.text.toString()
             val imgUrl=""
-            val username=userNametxt.text.toString()
-            val cof=confromPasswordtxt.text.toString()
+            val username=txtUsername.text.toString()
+            val cof=txtConfirmPassword.text.toString()
 
             if(!email.isValidEmail()) {
-                Toast.makeText(this,"Invalid Email...!",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.invalid_email), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if(!password.isValidPassword()) {
-                Toast.makeText(this,"Invalid Password...!",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.invalid_password), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if (password != cof){
-                Toast.makeText(this,"Confirm password is not match",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.confirm_password), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if (username.isBlank()) {
-                Toast.makeText(this,"Username is empty",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.empty_username), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             var checkUserName: Boolean
             runBlocking { checkUserName = authViewModel.checkUsername(username) }
             if (checkUserName) {
-                Toast.makeText(this,"Username already exists",Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.username_exists), Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            try {
+            lifecycleScope.launch{
                 authViewModel.signup(email, password, imgUrl, username)
-                val intent = Intent(this, HomeActivity::class.java)
-                startActivity(intent)
-                finish()
-            } catch (e : Exception) {
-                Toast.makeText(this, e.message.toString(), Toast.LENGTH_SHORT).show()
             }
         }
     }
+}
+fun String.isValidEmail(): Boolean {
+    return this.isNotBlank() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
+}
+
+fun String.isValidPassword(): Boolean {
+    return this.isNotBlank() &&
+            this.length >= 8 &&
+            Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}\$").matcher(this).matches()
 }
