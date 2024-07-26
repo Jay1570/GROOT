@@ -3,4 +3,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="card_view_back">#E6504F4F</color>
+    <color name="blue">#1480EB</color>
 </resources>
