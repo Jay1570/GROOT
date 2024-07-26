@@ -5,6 +5,10 @@
     <string name="e_mail">E-mail</string>
     <string name="register">Register</string>
     <string name="password">Password</string>
+    <string name="home">Home\n</string>
+    <string name="profile">Profile</string>
+    <string name="help">Help</string>
+    <string name="settings">Settings\n</string>
     <string name="conform_password">Confirm Password</string>
     <string name="login_register_txt">Not register yet? Register Here...!</string>
     <string name="login">Login</string>
