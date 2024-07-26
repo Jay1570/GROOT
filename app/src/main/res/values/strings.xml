@@ -6,4 +6,10 @@
     <string name="register">Register</string>
     <string name="password">Password</string>
     <string name="conform_password">Conform-Password</string>
+    <string name="login_register_txt">Not register yet? Register Here...!</string>
+    <string name="login">Login</string>
+    <string name="home">Home</string>
+    <string name="profile">Profile</string>
+    <string name="help">Help</string>
+    <string name="settings">Settings</string>
 </resources>
