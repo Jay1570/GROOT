@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -19,7 +18,6 @@ import kotlinx.coroutines.runBlocking
 import java.util.regex.Pattern
 
 class RegistrationActivity : AppCompatActivity() {
-    private lateinit var userImage: ImageView
     private lateinit var txtUsername: EditText
     private lateinit var txtEmail: EditText
     private lateinit var txtPassword: EditText
@@ -37,12 +35,11 @@ class RegistrationActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        userImage=findViewById(R.id.imageView3)
-        txtUsername=findViewById(R.id.rg_username)
-        txtEmail=findViewById(R.id.rg_email)
-        txtPassword=findViewById(R.id.rg_password)
-        txtConfirmPassword=findViewById(R.id.rg_con_password)
-        btnRegister=findViewById(R.id.rg_Register)
+        txtUsername=findViewById(R.id.txtUsername)
+        txtEmail=findViewById(R.id.txtEmail)
+        txtPassword=findViewById(R.id.txtPassword)
+        txtConfirmPassword=findViewById(R.id.txtConPassword)
+        btnRegister=findViewById(R.id.btnRegister)
 
         authViewModel.authStatus.observe(this) { status ->
             Snackbar.make(findViewById(R.id.main), status, Snackbar.LENGTH_SHORT).show()
