@@ -11,16 +11,17 @@
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/logoImageView"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_centerHorizontal="true"
         android:src="@drawable/logo"
+        android:layout_marginTop="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.098" />
+        app:layout_constraintVertical_bias="0.026" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="350dp"
@@ -28,6 +29,7 @@
         android:backgroundTint="@color/md_theme_surfaceContainerHighest"
         app:cardCornerRadius="50dp"
         app:cardElevation="50dp"
+        android:layout_marginTop="120dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"

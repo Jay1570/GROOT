@@ -28,10 +28,12 @@
         android:backgroundTint="@color/md_theme_surfaceContainerHighest"
         app:cardCornerRadius="50dp"
         app:cardElevation="50dp"
+        android:layout_marginTop="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/logoImageView">
 
         <ImageView
             android:id="@+id/imageView4"
