@@ -6,7 +6,6 @@ import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -14,6 +13,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.groot.viewmodel.AuthViewModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 import java.util.regex.Pattern
@@ -45,7 +45,7 @@ class RegistrationActivity : AppCompatActivity() {
         btnRegister=findViewById(R.id.rg_Register)
 
         authViewModel.authStatus.observe(this) { status ->
-            Toast.makeText(this, status, Toast.LENGTH_SHORT).show()
+            Snackbar.make(findViewById(R.id.main), status, Snackbar.LENGTH_SHORT).show()
             if (status.contains("Successful")) {
                 startActivity(Intent(this, HomeActivity::class.java))
                 finish()
@@ -59,25 +59,25 @@ class RegistrationActivity : AppCompatActivity() {
             val cof=txtConfirmPassword.text.toString()
 
             if(!email.isValidEmail()) {
-                Toast.makeText(this, getString(R.string.invalid_email), Toast.LENGTH_SHORT).show()
+                Snackbar.make(findViewById(R.id.main), getString(R.string.invalid_email), Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if(!password.isValidPassword()) {
-                Toast.makeText(this, getString(R.string.invalid_password), Toast.LENGTH_SHORT).show()
+                Snackbar.make(findViewById(R.id.main), getString(R.string.invalid_password), Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if (password != cof){
-                Toast.makeText(this, getString(R.string.confirm_password), Toast.LENGTH_SHORT).show()
+                Snackbar.make(findViewById(R.id.main), getString(R.string.confirm_password), Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if (username.isBlank()) {
-                Toast.makeText(this, getString(R.string.empty_username), Toast.LENGTH_SHORT).show()
+                Snackbar.make(findViewById(R.id.main), getString(R.string.empty_username), Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             var checkUserName: Boolean
             runBlocking { checkUserName = authViewModel.checkUsername(username) }
             if (checkUserName) {
-                Toast.makeText(this, getString(R.string.username_exists), Toast.LENGTH_SHORT).show()
+                Snackbar.make(findViewById(R.id.main), getString(R.string.username_exists), Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             lifecycleScope.launch{

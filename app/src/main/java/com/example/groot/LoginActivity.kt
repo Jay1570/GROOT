@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.groot.viewmodel.AuthViewModel
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
@@ -34,7 +35,7 @@ class LoginActivity : AppCompatActivity() {
         reg = findViewById(R.id.ln_Login)
 
         authViewModel.authStatus.observe(this) { status ->
-            Toast.makeText(this, status, Toast.LENGTH_SHORT).show()
+            Snackbar.make(findViewById(R.id.main), status, Snackbar.LENGTH_SHORT).show()
             if (status.contains("Successful")) {
                 startActivity(Intent(this, HomeActivity::class.java))
                 finish()
