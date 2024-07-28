@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/md_theme_background"
     tools:context=".HomeActivity">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -23,123 +24,19 @@
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/coordinatorLayout2"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/md_theme_background"
         app:layout_constraintTop_toBottomOf="@+id/recyclerView">
 
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/app_bar"
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:backgroundTint="#f6f6f6"
-            app:fabCradleMargin="8dp"
-            app:fabCradleRoundedCornerRadius="50dp"
-            app:fabCradleVerticalOffset="6dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <LinearLayout
-                    android:id="@+id/homeBtn"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/image1"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/home" />
-
-                    <TextView
-                        android:id="@+id/text1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/home"
-                        android:textAlignment="center"
-                        android:textColor="#676767"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/image2"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/profile" />
-
-                    <TextView
-                        android:id="@+id/text2"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/profile"
-                        android:textAlignment="center"
-                        android:textColor="#676767"
-                        android:textSize="12sp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/image4"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/help" />
-
-                    <TextView
-                        android:id="@+id/text4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/help"
-                        android:textAlignment="center"
-                        android:textColor="#676767"
-                        android:textSize="12sp"
-                        tools:ignore="DuplicateIds" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.2"
-                    android:orientation="vertical">
-
-                    <ImageView
-                        android:id="@+id/imageView5"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        app:srcCompat="@drawable/settings" />
-
-                    <TextView
-                        android:id="@+id/textView11"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/settings"
-                        android:textAlignment="center"
-                        android:textColor="#676767"
-                        android:textSize="12sp"
-                        tools:ignore="DuplicateIds" />
-                </LinearLayout>
-            </LinearLayout>
-        </com.google.android.material.bottomappbar.BottomAppBar>
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/bottom_navigation_menu" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

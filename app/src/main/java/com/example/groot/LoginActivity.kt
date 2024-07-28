@@ -29,10 +29,10 @@ class LoginActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_login)
 
-        txtEmail=findViewById(R.id.ln_email)
-        txtPassword=findViewById(R.id.ln_password)
-        btnLogin=findViewById(R.id.login)
-        reg = findViewById(R.id.ln_Login)
+        txtEmail=findViewById(R.id.txtEmail)
+        txtPassword=findViewById(R.id.txtPassword)
+        btnLogin=findViewById(R.id.btnLogin)
+        reg = findViewById(R.id.btnCreate)
 
         authViewModel.authStatus.observe(this) { status ->
             Snackbar.make(findViewById(R.id.main), status, Snackbar.LENGTH_SHORT).show()
