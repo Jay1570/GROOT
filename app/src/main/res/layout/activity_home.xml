@@ -8,17 +8,7 @@
     android:background="@color/md_theme_background"
     tools:context=".HomeActivity">
 
-<!--    <androidx.recyclerview.widget.RecyclerView-->
-<!--        android:id="@+id/recyclerView"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_weight="1"-->
-<!--        android:padding="16dp"-->
-<!--        app:layout_constraintBottom_toTopOf="@+id/coordinatorLayout2"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintHorizontal_bias="0.5"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toTopOf="parent" /> "co-ordinate mate no aatributre  app:layout_constraintTop_toBottomOf="@+id/recyclerView"\"-->
+<!--  "co-ordinate mate no aatributre  app:layout_constraintTop_toBottomOf="@+id/recyclerView"\"-->
 
     <FrameLayout
         android:id="@+id/nevhost"
