@@ -17,4 +17,7 @@
     <string name="confirm_password">Confirm password must be same as password</string>
     <string name="empty_username">Username is empty</string>
     <string name="username_exists">Username already exists</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="Search">search\n</string>
 </resources>
