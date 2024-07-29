@@ -1,10 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/main"
+    android:fillViewport="true">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/md_theme_background"
     tools:context=".LoginActivity">
 
@@ -23,11 +28,14 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardLogin"
-        android:layout_width="350dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/md_theme_surfaceContainer"
         app:cardCornerRadius="50dp"
         app:cardElevation="50dp"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="10dp"
         app:layout_constraintVertical_bias="0.2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,11 +46,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/rg_Register"
-            app:layout_constraintTop_toBottomOf="@+id/logoImageView"
-            app:layout_constraintVertical_bias="0.0"
-            tools:layout_editor_absoluteX="0dp">
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -52,8 +56,8 @@
                 android:fontFamily="monospace"
                 android:text="@string/login"
                 android:textAlignment="center"
-                android:textSize="22sp"
                 android:textColor="@color/md_theme_onSurface"
+                android:textSize="22sp"
                 android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
@@ -108,12 +112,12 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
-                style="@style/Widget.Material3.Button.ElevatedButton"
                 android:id="@+id/btnLogin"
-                android:layout_width="250dp"
+                style="@style/Widget.Material3.Button.ElevatedButton"
+                android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginHorizontal="10dp"
+                android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="50dp"
                 android:layout_marginBottom="10dp"
                 android:backgroundTint="@color/md_theme_primaryContainer"
@@ -123,17 +127,18 @@
                 android:textSize="20sp" />
 
             <com.google.android.material.button.MaterialButton
-                style="@style/Widget.Material3.Button.TextButton"
                 android:id="@+id/btnCreate"
-                android:layout_width="wrap_content"
+                style="@style/Widget.Material3.Button.TextButton"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginHorizontal="10dp"
-                android:text="@string/login_register_txt"/>
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginBottom="20dp"
+                android:text="@string/login_register_txt" />
 
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

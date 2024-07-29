@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -47,11 +46,11 @@ class LoginActivity : AppCompatActivity() {
             val password=txtPassword.text.toString()
 
             if(!email.isValidEmail()) {
-                Toast.makeText(this,getString(R.string.invalid_email),Toast.LENGTH_SHORT).show()
+                Snackbar.make(findViewById(R.id.main),getString(R.string.invalid_email),Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             if(!password.isValidPassword()) {
-                Toast.makeText(this,getString(R.string.invalid_password),Toast.LENGTH_SHORT).show()
+                Snackbar.make(findViewById(R.id.main),getString(R.string.invalid_password),Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
             lifecycleScope.launch {
