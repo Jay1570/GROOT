@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fregment.ProfileFragment">
+    tools:context=".fragments.ProfileFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
@@ -24,5 +24,51 @@
             app:title="@string/profile" />
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/md_theme_background"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="20dp"
+        app:cardCornerRadius="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/appBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="20dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profileImage"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@drawable/user"
+                android:layout_gravity="center_horizontal"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="16dp">
+
+                <TextView
+                    android:id="@+id/viewUsername"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/user_name"
+                    android:textSize="30sp"
+                    android:textStyle="bold"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

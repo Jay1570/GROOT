@@ -10,10 +10,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.lifecycleScope
 import com.example.groot.viewmodel.AuthViewModel
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.launch
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var txtEmail:EditText
@@ -53,9 +51,7 @@ class LoginActivity : AppCompatActivity() {
                 Snackbar.make(findViewById(R.id.main),getString(R.string.invalid_password),Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            lifecycleScope.launch {
-                authViewModel.login(email, password)
-            }
+            authViewModel.login(email, password)
         }
 
         reg.setOnClickListener {

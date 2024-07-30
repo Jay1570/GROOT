@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    tools:context=".RegistrationActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/md_theme_background"
-        tools:context=".RegistrationActivity">
+        android:background="@color/md_theme_background">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/logoImageView"
@@ -164,14 +164,13 @@
                     android:id="@+id/btnRegister"
                     android:layout_width="match_parent"
                     android:layout_height="60dp"
+                    app:backgroundTint="@color/md_theme_primaryContainer"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginHorizontal="16dp"
                     android:layout_marginTop="50dp"
                     android:layout_marginBottom="20dp"
-                    android:backgroundTint="@color/md_theme_primaryContainer"
                     android:elevation="50dp"
                     android:text="@string/register"
-                    android:textColor="@color/md_theme_onPrimaryContainer"
                     android:textSize="20sp" />
 
             </LinearLayout>

@@ -24,6 +24,7 @@ firebaseFirestore = "25.0.0"
 firebaseStorage = "21.0.0"
 lifecycleViewmodelKtx = "2.8.4"
 circleimageview = "3.1.0"
+coil = "2.7.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -50,6 +51,7 @@ google-firebase-firestore = { group = "com.google.firebase", name = "firebase-fi
 google-firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebaseStorage" }
 androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 circleimageview = { group = "de.hdodenhof", name = "circleimageview", version.ref = "circleimageview" }
+coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

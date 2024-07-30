@@ -6,10 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
-import com.example.groot.fregment.HelpFragment
-import com.example.groot.fregment.HomeFragment
-import com.example.groot.fregment.ProfileFragment
-import com.example.groot.fregment.SettingsFragment
+import com.example.groot.fragments.HelpFragment
+import com.example.groot.fragments.HomeFragment
+import com.example.groot.fragments.ProfileFragment
+import com.example.groot.fragments.SettingsFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity() {

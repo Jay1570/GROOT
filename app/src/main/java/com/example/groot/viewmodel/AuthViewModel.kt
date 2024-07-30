@@ -5,77 +5,51 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.groot.model.User
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.firestore.FirebaseFirestore
+import com.example.groot.repositories.AuthRepository
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.tasks.await
+import kotlinx.coroutines.runBlocking
 
 class AuthViewModel : ViewModel() {
 
-    private val auth: FirebaseAuth = FirebaseAuth.getInstance()
-    private val fireStore: FirebaseFirestore = FirebaseFirestore.getInstance()
-    private val userCollection = "users"
-    val hasUser: Boolean get() =  auth.currentUser != null
+    private val authRepository: AuthRepository = AuthRepository()
 
-    private val _user = MutableLiveData<FirebaseUser?>()
-    val user: LiveData<FirebaseUser?> get() = _user
+    val hasUser: Boolean get() =  authRepository.hasUser
+
+    val profile = authRepository.profile
 
     private val _authStatus = MutableLiveData<String>()
     val authStatus: LiveData<String> get() = _authStatus
 
-    fun login(email: String, password: String): Boolean {
-        var successful = false
+    fun login(email: String, password: String) {
         viewModelScope.launch {
             try {
-                _user.value = auth.signInWithEmailAndPassword(email, password).await().user
+                authRepository.login(email, password)
                 _authStatus.value = "Login Successful"
-                successful = true
             } catch (e: Exception) {
                 Log.e("AuthViewModel", "Signup failed :- ${e.message.toString()}")
                 _authStatus.value = e.message.toString()
-                successful = false
             }
         }
-        return successful
     }
 
-    fun signup(email: String, password: String, imgUrl: String, userName: String): Boolean {
-        var successful = false
+    fun signup(email: String, password: String, imgUrl: String, userName: String) {
         viewModelScope.launch {
             try {
-                _user.value = auth.createUserWithEmailAndPassword(email, password).await().user
-                val userId = user.value?.uid ?: ""
-                val user = User(email = email, imgUrl = imgUrl, userName = userName, userId = userId)
-                fireStore.collection(userCollection).document(userId).set(user).await()
+                authRepository.signup(email, password, imgUrl, userName)
                 _authStatus.value = "Signup Successful"
-                successful = true
             } catch (e: Exception) {
                 Log.e("AuthViewModel", "Signup failed :- ${e.message.toString()}")
                 _authStatus.value = e.message.toString()
-                successful = false
             }
         }
-        return successful
     }
 
-    fun signout() {
-        auth.signOut()
-        _user.value = auth.currentUser
+    fun signOut() {
+        authRepository.signOut()
         _authStatus.value = "SignedOut Successfully"
     }
 
-    suspend fun checkUsername(userName: String): Boolean {
-        return try {
-            val querySnapshot = fireStore.collection("users")
-                .whereEqualTo("userName", userName)
-                .get()
-                .await()
-            !querySnapshot.isEmpty
-        } catch (e: Exception) {
-            Log.e("AuthViewModel", "Error checking username", e)
-            false
-        }
+    fun checkUsername(userName: String): Boolean {
+        return runBlocking { authRepository.checkUsername(userName) }
     }
 }

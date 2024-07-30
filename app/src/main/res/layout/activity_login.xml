@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    tools:context=".LoginActivity">
 
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/md_theme_background"
-    tools:context=".LoginActivity">
+    android:background="@color/md_theme_background">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/logoImageView"

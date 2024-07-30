@@ -54,6 +54,7 @@ dependencies {
     implementation(libs.firebase.perf)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.circleimageview)
+    implementation(libs.coil)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

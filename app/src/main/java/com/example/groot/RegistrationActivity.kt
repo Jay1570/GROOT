@@ -10,11 +10,8 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.lifecycle.lifecycleScope
 import com.example.groot.viewmodel.AuthViewModel
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import java.util.regex.Pattern
 
 class RegistrationActivity : AppCompatActivity() {
@@ -71,15 +68,11 @@ class RegistrationActivity : AppCompatActivity() {
                 Snackbar.make(findViewById(R.id.main), getString(R.string.empty_username), Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            var checkUserName: Boolean
-            runBlocking { checkUserName = authViewModel.checkUsername(username) }
-            if (checkUserName) {
+            if (authViewModel.checkUsername(username)) {
                 Snackbar.make(findViewById(R.id.main), getString(R.string.username_exists), Snackbar.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
-            lifecycleScope.launch{
-                authViewModel.signup(email, password, imgUrl, username)
-            }
+            authViewModel.signup(email, password, imgUrl, username)
         }
     }
 }
