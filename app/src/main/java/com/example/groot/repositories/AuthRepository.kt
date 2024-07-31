@@ -32,11 +32,10 @@ class AuthRepository {
                     val userProfile = snapshot.toObject(User::class.java) ?: User()
                     _profile.value = userProfile
                 } else {
-                    _profile.value = User() // Default user or handle as needed
+                    _profile.value = User()
                 }
             }
         } else {
-            // Handle case when user is not signed in or ID is invalid
             _profile.value = User()
         }
     }

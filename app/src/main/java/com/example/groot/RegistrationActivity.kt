@@ -2,7 +2,7 @@ package com.example.groot
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Patterns
+import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.activity.enableEdgeToEdge
@@ -10,9 +10,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updateLayoutParams
+import androidx.core.view.updateMargins
 import com.example.groot.viewmodel.AuthViewModel
 import com.google.android.material.snackbar.Snackbar
-import java.util.regex.Pattern
 
 class RegistrationActivity : AppCompatActivity() {
     private lateinit var txtUsername: EditText
@@ -28,10 +29,21 @@ class RegistrationActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_registration)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+            val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
+            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val bottomPadding = if (!insets.isVisible(WindowInsetsCompat.Type.ime())) systemBarsInsets.bottom else 0
+            v.setPadding(
+                systemBarsInsets.left,
+                systemBarsInsets.top,
+                systemBarsInsets.right,
+                bottomPadding
+            )
+            v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                updateMargins(bottom = imeInsets.bottom)
+            }
+            WindowInsetsCompat.CONSUMED
         }
+
         txtUsername=findViewById(R.id.txtUsername)
         txtEmail=findViewById(R.id.txtEmail)
         txtPassword=findViewById(R.id.txtPassword)
@@ -39,7 +51,7 @@ class RegistrationActivity : AppCompatActivity() {
         btnRegister=findViewById(R.id.btnRegister)
 
         authViewModel.authStatus.observe(this) { status ->
-            Snackbar.make(findViewById(R.id.main), status, Snackbar.LENGTH_SHORT).show()
+            showSnackBar(status)
             if (status.contains("Successful")) {
                 startActivity(Intent(this, HomeActivity::class.java))
                 finish()
@@ -52,36 +64,28 @@ class RegistrationActivity : AppCompatActivity() {
             val username=txtUsername.text.toString()
             val cof=txtConfirmPassword.text.toString()
 
+            if (email.isEmpty() || password.isEmpty() || username.isEmpty() || cof.isEmpty()) {
+                showSnackBar(getString(R.string.empty_fields))
+                return@setOnClickListener
+            }
+
             if(!email.isValidEmail()) {
-                Snackbar.make(findViewById(R.id.main), getString(R.string.invalid_email), Snackbar.LENGTH_SHORT).show()
+                showSnackBar(getString(R.string.invalid_email))
                 return@setOnClickListener
             }
             if(!password.isValidPassword()) {
-                Snackbar.make(findViewById(R.id.main), getString(R.string.invalid_password), Snackbar.LENGTH_SHORT).show()
+                showSnackBar(getString(R.string.invalid_password))
                 return@setOnClickListener
             }
             if (password != cof){
-                Snackbar.make(findViewById(R.id.main), getString(R.string.confirm_password), Snackbar.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-            if (username.isBlank()) {
-                Snackbar.make(findViewById(R.id.main), getString(R.string.empty_username), Snackbar.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-            if (authViewModel.checkUsername(username)) {
-                Snackbar.make(findViewById(R.id.main), getString(R.string.username_exists), Snackbar.LENGTH_SHORT).show()
+                showSnackBar(getString(R.string.confirm_password))
                 return@setOnClickListener
             }
             authViewModel.signup(email, password, imgUrl, username)
         }
     }
-}
-fun String.isValidEmail(): Boolean {
-    return this.isNotBlank() && Patterns.EMAIL_ADDRESS.matcher(this).matches()
-}
 
-fun String.isValidPassword(): Boolean {
-    return this.isNotBlank() &&
-            this.length >= 8 &&
-            Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,}\$").matcher(this).matches()
+    private fun showSnackBar(message: String) {
+        Snackbar.make(findViewById(R.id.main), message, Snackbar.LENGTH_SHORT).show()
+    }
 }

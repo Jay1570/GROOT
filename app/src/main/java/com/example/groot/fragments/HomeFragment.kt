@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.groot.R
+import com.google.android.material.appbar.MaterialToolbar
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,6 +37,18 @@ class HomeFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        val appBar = view.findViewById<MaterialToolbar>(R.id.topAppBar)
+        appBar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.search -> {
+                    true
+                }
+                else -> false
+            }
+        }
     }
 
     companion object {
