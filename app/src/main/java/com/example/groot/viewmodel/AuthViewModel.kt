@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.groot.repositories.AuthRepository
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class AuthViewModel : ViewModel() {
 
@@ -35,6 +34,10 @@ class AuthViewModel : ViewModel() {
     fun signup(email: String, password: String, imgUrl: String, userName: String) {
         viewModelScope.launch {
             try {
+                if (authRepository.checkUsername(userName)) {
+                    _authStatus.value = "Username already exists"
+                    return@launch
+                }
                 authRepository.signup(email, password, imgUrl, userName)
                 _authStatus.value = "Signup Successful"
             } catch (e: Exception) {
@@ -47,9 +50,5 @@ class AuthViewModel : ViewModel() {
     fun signOut() {
         authRepository.signOut()
         _authStatus.value = "SignedOut Successfully"
-    }
-
-    fun checkUsername(userName: String): Boolean {
-        return runBlocking { authRepository.checkUsername(userName) }
     }
 }

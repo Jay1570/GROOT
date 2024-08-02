@@ -32,7 +32,7 @@ class LoginActivity : AppCompatActivity() {
         reg = findViewById(R.id.btnCreate)
 
         authViewModel.authStatus.observe(this) { status ->
-            Snackbar.make(findViewById(R.id.main), status, Snackbar.LENGTH_SHORT).show()
+            showSnackBar(status)
             if (status.contains("Successful")) {
                 startActivity(Intent(this, HomeActivity::class.java))
                 finish()
@@ -43,12 +43,17 @@ class LoginActivity : AppCompatActivity() {
             val email=txtEmail.text.toString()
             val password=txtPassword.text.toString()
 
+            if (email.isEmpty() || password.isEmpty()) {
+                showSnackBar(getString(R.string.empty_fields))
+                return@setOnClickListener
+            }
+
             if(!email.isValidEmail()) {
-                Snackbar.make(findViewById(R.id.main),getString(R.string.invalid_email),Snackbar.LENGTH_SHORT).show()
+                showSnackBar(getString(R.string.invalid_email))
                 return@setOnClickListener
             }
             if(!password.isValidPassword()) {
-                Snackbar.make(findViewById(R.id.main),getString(R.string.invalid_password),Snackbar.LENGTH_SHORT).show()
+                showSnackBar(getString(R.string.invalid_password))
                 return@setOnClickListener
             }
             authViewModel.login(email, password)
@@ -57,10 +62,14 @@ class LoginActivity : AppCompatActivity() {
         reg.setOnClickListener {
             startActivity(Intent(this, RegistrationActivity::class.java))
         }
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
+    }
+    private fun showSnackBar(message: String) {
+        Snackbar.make(findViewById(R.id.main), message, Snackbar.LENGTH_SHORT).show()
     }
 }
