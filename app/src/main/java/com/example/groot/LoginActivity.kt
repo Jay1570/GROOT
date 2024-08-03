@@ -2,6 +2,7 @@ package com.example.groot
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -10,14 +11,18 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import com.example.groot.viewmodel.AuthViewModel
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.snackbar.Snackbar
 
 class LoginActivity : AppCompatActivity() {
+
     private lateinit var txtEmail:EditText
     private lateinit var txtPassword:EditText
     private lateinit var reg:TextView
     private lateinit var btnLogin:Button
+    private lateinit var progressBar: CircularProgressIndicator
 
     private val authViewModel: AuthViewModel by viewModels()
 
@@ -30,13 +35,26 @@ class LoginActivity : AppCompatActivity() {
         txtPassword=findViewById(R.id.txtPassword)
         btnLogin=findViewById(R.id.btnLogin)
         reg = findViewById(R.id.btnCreate)
+        progressBar = findViewById(R.id.progressBar)
+
+        progressBar.indicatorDirection = CircularProgressIndicator.INDICATOR_DIRECTION_CLOCKWISE
 
         authViewModel.authStatus.observe(this) { status ->
-            showSnackBar(status)
             if (status.contains("Successful")) {
                 startActivity(Intent(this, HomeActivity::class.java))
                 finish()
+                return@observe
             }
+            showSnackBar(status)
+        }
+
+        authViewModel.isLoading.observe(this) { isLoading ->
+            progressBar.isVisible = isLoading
+            findViewById<View>(R.id.loadingOverlay).isVisible = isLoading
+            txtEmail.isEnabled = !isLoading
+            txtPassword.isEnabled = !isLoading
+            btnLogin.isEnabled = !isLoading
+            reg.isEnabled = !isLoading
         }
 
         btnLogin.setOnClickListener {

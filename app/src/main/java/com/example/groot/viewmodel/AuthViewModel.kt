@@ -19,7 +19,11 @@ class AuthViewModel : ViewModel() {
     private val _authStatus = MutableLiveData<String>()
     val authStatus: LiveData<String> get() = _authStatus
 
+    private val _isLoading = MutableLiveData<Boolean>()
+    val isLoading: LiveData<Boolean> get() = _isLoading
+
     fun login(email: String, password: String) {
+        _isLoading.value = true
         viewModelScope.launch {
             try {
                 authRepository.login(email, password)
@@ -28,10 +32,13 @@ class AuthViewModel : ViewModel() {
                 Log.e("AuthViewModel", "Signup failed :- ${e.message.toString()}")
                 _authStatus.value = e.message.toString()
             }
+        }.invokeOnCompletion {
+            _isLoading.value = false
         }
     }
 
     fun signup(email: String, password: String, imgUrl: String, userName: String) {
+        _isLoading.value = true
         viewModelScope.launch {
             try {
                 if (authRepository.checkUsername(userName)) {
@@ -44,6 +51,8 @@ class AuthViewModel : ViewModel() {
                 Log.e("AuthViewModel", "Signup failed :- ${e.message.toString()}")
                 _authStatus.value = e.message.toString()
             }
+        }.invokeOnCompletion {
+            _isLoading.value = false
         }
     }
 

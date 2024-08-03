@@ -1,4 +1,5 @@
 <resources>
+    <color name="semi_transparent">#80000000</color>
     <color name="md_theme_primary">#ADC6FF</color>
     <color name="md_theme_onPrimary">#102F60</color>
     <color name="md_theme_primaryContainer">#2B4678</color>
