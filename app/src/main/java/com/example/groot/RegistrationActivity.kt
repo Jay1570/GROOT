@@ -2,6 +2,7 @@ package com.example.groot
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
@@ -10,17 +11,21 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMargins
 import com.example.groot.viewmodel.AuthViewModel
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.snackbar.Snackbar
 
 class RegistrationActivity : AppCompatActivity() {
+
     private lateinit var txtUsername: EditText
     private lateinit var txtEmail: EditText
     private lateinit var txtPassword: EditText
     private lateinit var txtConfirmPassword:EditText
     private lateinit var btnRegister:Button
+    private lateinit var progressBar: CircularProgressIndicator
 
     private val authViewModel: AuthViewModel by viewModels()
 
@@ -49,14 +54,28 @@ class RegistrationActivity : AppCompatActivity() {
         txtPassword=findViewById(R.id.txtPassword)
         txtConfirmPassword=findViewById(R.id.txtConPassword)
         btnRegister=findViewById(R.id.btnRegister)
+        progressBar = findViewById(R.id.progressBar)
+
 
         authViewModel.authStatus.observe(this) { status ->
-            showSnackBar(status)
             if (status.contains("Successful")) {
                 startActivity(Intent(this, HomeActivity::class.java))
                 finish()
+                return@observe
             }
+            showSnackBar(status)
         }
+
+        authViewModel.isLoading.observe(this) { isLoading ->
+            progressBar.isVisible = isLoading
+            findViewById<View>(R.id.loadingOverlay).isVisible = isLoading
+            txtUsername.isEnabled = !isLoading
+            txtEmail.isEnabled = !isLoading
+            txtPassword.isEnabled = !isLoading
+            txtConfirmPassword.isEnabled = !isLoading
+            btnRegister.isEnabled = !isLoading
+        }
+
         btnRegister.setOnClickListener {
             val email=txtEmail.text.toString()
             val password=txtPassword.text.toString()

@@ -13,6 +13,33 @@
         android:layout_height="wrap_content"
         android:background="@color/md_theme_background">
 
+        <View
+            android:id="@+id/loadingOverlay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/semi_transparent"
+            android:visibility="gone"
+            android:elevation="90dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            style="Widget.Material3.CircularProgressIndicator"
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="100dp"
+            android:visibility="gone"
+            android:indeterminate="true"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintVertical_bias="0.5"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/logoImageView"
             android:layout_width="120dp"
