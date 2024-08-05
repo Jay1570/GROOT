@@ -13,25 +13,28 @@
         android:theme="@style/AppTheme"
         tools:targetApi="34">
         <activity
+            android:name=".UserActivity"
+            android:exported="false" />
+        <activity
             android:name=".IntroActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".RepoActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".HomeActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".RegistrationActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".LoginActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"/>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".SplashActivity"
             android:exported="true"

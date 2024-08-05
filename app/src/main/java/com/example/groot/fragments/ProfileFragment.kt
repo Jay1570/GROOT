@@ -1,5 +1,6 @@
 package com.example.groot.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,7 +11,8 @@ import androidx.lifecycle.ViewModelProvider
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.example.groot.R
-import com.example.groot.viewmodel.AuthViewModel
+import com.example.groot.UserActivity
+import com.example.groot.viewmodel.ProfileViewModel
 import de.hdodenhof.circleimageview.CircleImageView
 
 // TODO: Rename parameter arguments, choose names that match
@@ -24,7 +26,7 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ProfileFragment : Fragment() {
-    private lateinit var authViewModel: AuthViewModel
+    private lateinit var viewModel: ProfileViewModel
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -41,19 +43,40 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        authViewModel = ViewModelProvider(this)[AuthViewModel::class.java]
+        viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
         val viewUsername = view?.findViewById<TextView>(R.id.viewUsername)
         val profileImage = view?.findViewById<CircleImageView>(R.id.profileImage)
-        authViewModel.profile.observe(viewLifecycleOwner) { user ->
+        val followerCount = view?.findViewById<TextView>(R.id.followersCount)
+        val followingCount = view?.findViewById<TextView>(R.id.followingCount)
+
+        viewModel.profile.observe(viewLifecycleOwner) { user ->
             viewUsername?.text = user.userName
             if (user.imgUrl.isNotEmpty()){
                 profileImage?.load(user.imgUrl) {
                     transformations(CircleCropTransformation())
                     placeholder(R.drawable.user)
+                    error(R.drawable.user)
                 }
             }
         }
+
+        viewModel.followers.observe(viewLifecycleOwner) { followers ->
+            followerCount?.text = followers.followers.count().toString()
+        }
+
+        viewModel.following.observe(viewLifecycleOwner) { following ->
+            followingCount?.text = following.following.count().toString()
+        }
+
+        followerCount?.setOnClickListener {
+            startActivity(Intent(requireContext(), UserActivity::class.java))
+        }
+
+        view?.findViewById<TextView>(R.id.followers)?.setOnClickListener {
+            startActivity(Intent(requireContext(), UserActivity::class.java))
+        }
+
         return view
     }
 
