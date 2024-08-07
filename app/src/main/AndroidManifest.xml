@@ -13,6 +13,19 @@
         android:theme="@style/AppTheme"
         tools:targetApi="34">
         <activity
+            android:name=".SearchResultsActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"
+            android:launchMode="singleTop"
+            android:parentActivityName=".HomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
+        </activity>
+        <activity
             android:name=".UserActivity"
             android:exported="false" />
         <activity

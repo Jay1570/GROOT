@@ -8,13 +8,13 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.groot.adapter.FollowersRecyclerViewAdapter
-import com.example.groot.repositories.AuthRepository
+import com.example.groot.adapter.UserListRecyclerViewAdapter
+import com.example.groot.repositories.UserRepository
 
 class UserActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private val authRepository = AuthRepository()
+    private val userRepository = UserRepository()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -24,11 +24,11 @@ class UserActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        recyclerView = findViewById(R.id.recyclerView)
+        recyclerView = findViewById(R.id.recyclerViewFollowers)
         recyclerView.layoutManager = LinearLayoutManager(this)
-        val recyclerAdapter = FollowersRecyclerViewAdapter(authRepository.followerProfile.value ?: emptyList())
+        val recyclerAdapter = UserListRecyclerViewAdapter(userRepository.followerProfiles.value ?: emptyList())
         recyclerView.adapter = recyclerAdapter
-        authRepository.followerProfile.observe(this) {
+        userRepository.followerProfiles.observe(this) {
             recyclerAdapter.updateUsers(it)
             recyclerAdapter.notifyDataSetChanged()
             Log.d("User",it.size.toString())

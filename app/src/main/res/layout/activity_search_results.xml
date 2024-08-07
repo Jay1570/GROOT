@@ -2,16 +2,31 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".fragments.HomeFragment">
+    tools:context=".SearchResultsActivity">
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+        style="Widget.Material3.CircularProgressIndicator"
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:elevation="100dp"
+        android:visibility="gone"
+        android:indeterminate="true"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintVertical_bias="0.5"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerViewFollowers"
+        app:layout_constraintBottom_toTopOf="@+id/recyclerViewSearch"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,18 +38,17 @@
             android:layout_height="wrap_content"
             android:background="@color/md_theme_surfaceContainer"
             android:minHeight="?attr/actionBarSize"
-            app:menu="@menu/top_app_bar"
-            app:title="@string/home" />
+            app:title="@string/Search"
+            app:navigationIcon="@drawable/arrow_back"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewFollowers"
+        android:id="@+id/recyclerViewSearch"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
-        android:layout_marginHorizontal="10dp"
-        android:padding="16dp"
+        android:background="@color/md_theme_background"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

@@ -1,11 +1,16 @@
 package com.example.groot.fragments
 
+import android.app.SearchManager
+import android.content.ComponentName
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import com.example.groot.R
+import com.example.groot.SearchResultsActivity
 import com.google.android.material.appbar.MaterialToolbar
 
 // TODO: Rename parameter arguments, choose names that match
@@ -35,8 +40,8 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_home, container, false)
+        val view = inflater.inflate(R.layout.fragment_home, container, false)
+        return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -49,6 +54,11 @@ class HomeFragment : Fragment() {
                 else -> false
             }
         }
+        val searchManager: SearchManager = activity?.getSystemService(Context.SEARCH_SERVICE) as SearchManager
+        val searchView = appBar.menu.findItem(R.id.search).actionView as SearchView
+        val component = ComponentName(requireContext(), SearchResultsActivity::class.java)
+        val searchableInfo = searchManager.getSearchableInfo(component)
+        searchView.setSearchableInfo(searchableInfo)
     }
 
     companion object {

@@ -14,8 +14,6 @@ class AuthViewModel : ViewModel() {
 
     val hasUser: Boolean get() =  authRepository.hasUser
 
-    val profile = authRepository.profile
-
     private val _authStatus = MutableLiveData<String>()
     val authStatus: LiveData<String> get() = _authStatus
 

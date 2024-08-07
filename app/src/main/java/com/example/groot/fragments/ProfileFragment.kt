@@ -61,12 +61,9 @@ class ProfileFragment : Fragment() {
             }
         }
 
-        viewModel.followers.observe(viewLifecycleOwner) { followers ->
-            followerCount?.text = followers.followers.count().toString()
-        }
-
-        viewModel.following.observe(viewLifecycleOwner) { following ->
-            followingCount?.text = following.following.count().toString()
+        viewModel.friends.observe(viewLifecycleOwner) { friends ->
+            followerCount?.text = friends.followers.count().toString()
+            followingCount?.text = friends.following.count().toString()
         }
 
         followerCount?.setOnClickListener {

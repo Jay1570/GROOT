@@ -11,11 +11,12 @@ import com.example.groot.R
 import com.example.groot.model.User
 import de.hdodenhof.circleimageview.CircleImageView
 
-class FollowersRecyclerViewAdapter(private var users: List<User>):
-    RecyclerView.Adapter<FollowersRecyclerViewAdapter.ViewHolder>() {
+class UserListRecyclerViewAdapter(private var users: List<User>):
+    RecyclerView.Adapter<UserListRecyclerViewAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val imageView: CircleImageView = itemView.findViewById(R.id.userImage)
         val username: TextView = itemView.findViewById(R.id.username)
+        val email: TextView = itemView.findViewById(R.id.email)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -31,6 +32,7 @@ class FollowersRecyclerViewAdapter(private var users: List<User>):
             error(R.drawable.user)
         }
         holder.username.text = currentUser.userName
+        holder.email.text = currentUser.email
     }
 
     fun updateUsers(newUsers: List<User>) {
