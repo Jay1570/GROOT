@@ -23,7 +23,7 @@ class UserRepository {
     private val fireStore = FirebaseFirestore.getInstance()
     private val currentUserId get() = auth.currentUser?. uid ?: ""
 
-    private val _profile = MutableLiveData<User>()
+    private val _profile = MutableLiveData<User>() // this is for the use who has logged in
     val profile: LiveData<User> get() = _profile
 
     private val _friends = MutableLiveData<Friends>()
@@ -34,6 +34,12 @@ class UserRepository {
 
     private val _followingProfiles = MutableLiveData<List<User>>()
     val followingProfiles: LiveData<List<User>> = _followingProfiles
+
+    private val _user = MutableLiveData<User>() // this for viewing other users
+    val user: LiveData<User> get() = _user
+
+    private val _userFriends = MutableLiveData<Friends>()
+    val userFriends: LiveData<Friends> get() = _userFriends
 
     init {
         getProfile()
@@ -69,9 +75,9 @@ class UserRepository {
             }
             if (snapshot != null && snapshot.exists()) {
                 val userProfile = snapshot.toObject(User::class.java) ?: User()
-                _profile.value = userProfile
+                _user.value = userProfile
             } else {
-                _profile.value = User()
+                _user.value = User()
             }
         }
     }
@@ -176,6 +182,22 @@ class UserRepository {
         } catch (e: Exception) {
             Log.e("AuthRepository", "Error fetching follower profiles", e)
             _followingProfiles.postValue(emptyList())
+        }
+    }
+
+    fun getUserFriends(userId: String) {
+        val docRef = fireStore.collection(FRIENDS_COLLECTION).document(userId)
+        docRef.addSnapshotListener { snapshot, e ->
+            if (e != null) {
+                Log.e("GetFriends", "Error fetching friends", e)
+                return@addSnapshotListener
+            }
+            if (snapshot != null && snapshot.exists()) {
+                val friends = snapshot.toObject(Friends::class.java) ?: Friends()
+                _userFriends.value = friends
+            } else {
+                _userFriends.value = Friends()
+            }
         }
     }
 }

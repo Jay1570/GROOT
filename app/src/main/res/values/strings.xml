@@ -20,4 +20,8 @@
     <string name="signout">Sign Out</string>
     <string name="Search">Search</string>
     <string name="empty_fields">Every Field is mandatory</string>
+    <string name="follow">Follow</string>
+    <string name="unfollow">Unfollow</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
 </resources>

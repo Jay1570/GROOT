@@ -73,27 +73,25 @@
 
                     <TextView
                         android:id="@+id/followersCount"
-                        android:text="0"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                     <TextView
                         android:id="@+id/followers"
-                        android:text="Followers"
+                        android:text="@string/followers"
                         android:layout_marginStart="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                     <TextView
                         android:id="@+id/followingCount"
-                        android:text="0"
                         android:layout_marginStart="20dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />
 
                     <TextView
                         android:id="@+id/following"
-                        android:text="Following"
+                        android:text="@string/following"
                         android:layout_marginStart="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" />

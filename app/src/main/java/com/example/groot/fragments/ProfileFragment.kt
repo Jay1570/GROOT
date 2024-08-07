@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.example.groot.R
-import com.example.groot.UserActivity
+import com.example.groot.FriendsActivity
 import com.example.groot.viewmodel.ProfileViewModel
 import de.hdodenhof.circleimageview.CircleImageView
 
@@ -67,11 +67,11 @@ class ProfileFragment : Fragment() {
         }
 
         followerCount?.setOnClickListener {
-            startActivity(Intent(requireContext(), UserActivity::class.java))
+            startActivity(Intent(requireContext(), FriendsActivity::class.java))
         }
 
         view?.findViewById<TextView>(R.id.followers)?.setOnClickListener {
-            startActivity(Intent(requireContext(), UserActivity::class.java))
+            startActivity(Intent(requireContext(), FriendsActivity::class.java))
         }
 
         return view

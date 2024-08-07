@@ -40,7 +40,7 @@ class SearchResultsActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progressBar)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        val recyclerAdapter = UserListRecyclerViewAdapter(emptyList())
+        val recyclerAdapter = UserListRecyclerViewAdapter(emptyList()) { onItemClick(it) }
         recyclerView.adapter = recyclerAdapter
 
         viewModel.userList.observe(this) { users ->
@@ -48,13 +48,23 @@ class SearchResultsActivity : AppCompatActivity() {
             recyclerAdapter.notifyDataSetChanged()
         }
 
+        viewModel.error.observe(this) { error ->
+            Snackbar.make(findViewById(R.id.main), error, Snackbar.LENGTH_SHORT).show()
+        }
+
         viewModel.isLoading.observe(this) { isLoading ->
             progressBar.isVisible = isLoading
         }
 
         appBar.setNavigationOnClickListener {
-            finish()
+            onNavigateUp()
         }
+    }
+
+    fun onItemClick(userId: String) {
+        val intent = Intent(this, UserActivity::class.java)
+        intent.putExtra("userId", userId)
+        startActivity(intent)
     }
 
     override fun onStart() {
@@ -71,7 +81,6 @@ class SearchResultsActivity : AppCompatActivity() {
         if (Intent.ACTION_SEARCH == intent.action) {
             val query = intent.getStringExtra(SearchManager.QUERY) ?: ""
             viewModel.onSearch(query)
-            Snackbar.make(findViewById(R.id.main), "Search Query :- $query", Snackbar.LENGTH_SHORT).show()
         }
     }
 }

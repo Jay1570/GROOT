@@ -11,12 +11,18 @@ import com.example.groot.R
 import com.example.groot.model.User
 import de.hdodenhof.circleimageview.CircleImageView
 
-class UserListRecyclerViewAdapter(private var users: List<User>):
+class UserListRecyclerViewAdapter(private var users: List<User>, val onItemClick: (String) -> Unit):
     RecyclerView.Adapter<UserListRecyclerViewAdapter.ViewHolder>() {
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val imageView: CircleImageView = itemView.findViewById(R.id.userImage)
         val username: TextView = itemView.findViewById(R.id.username)
         val email: TextView = itemView.findViewById(R.id.email)
+
+        init {
+            itemView.setOnClickListener {
+                onItemClick(users[adapterPosition].userId)
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {

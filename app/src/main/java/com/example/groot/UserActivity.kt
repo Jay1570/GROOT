@@ -1,20 +1,31 @@
 package com.example.groot
 
 import android.os.Bundle
-import android.util.Log
+import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatToggleButton
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.groot.adapter.UserListRecyclerViewAdapter
-import com.example.groot.repositories.UserRepository
+import coil.load
+import coil.transform.CircleCropTransformation
+import com.example.groot.viewmodel.UserViewModel
+import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.snackbar.Snackbar
+import de.hdodenhof.circleimageview.CircleImageView
 
 class UserActivity : AppCompatActivity() {
 
-    private lateinit var recyclerView: RecyclerView
-    private val userRepository = UserRepository()
+    private val viewModel: UserViewModel by viewModels()
+
+    private lateinit var viewUsername: TextView
+    private lateinit var followersCount: TextView
+    private lateinit var followingCount: TextView
+    private lateinit var profileImage: CircleImageView
+    private lateinit var btnFollow: AppCompatToggleButton
+    private lateinit var appBar: MaterialToolbar
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -24,14 +35,50 @@ class UserActivity : AppCompatActivity() {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        recyclerView = findViewById(R.id.recyclerViewFollowers)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        val recyclerAdapter = UserListRecyclerViewAdapter(userRepository.followerProfiles.value ?: emptyList())
-        recyclerView.adapter = recyclerAdapter
-        userRepository.followerProfiles.observe(this) {
-            recyclerAdapter.updateUsers(it)
-            recyclerAdapter.notifyDataSetChanged()
-            Log.d("User",it.size.toString())
+        val userId = intent.getStringExtra("userId") ?: ""
+        viewModel.getUserId(userId)
+
+        viewUsername = findViewById(R.id.viewUsername)
+        followersCount = findViewById(R.id.followersCount)
+        followingCount = findViewById(R.id.followingCount)
+        profileImage = findViewById(R.id.profileImage)
+        btnFollow = findViewById(R.id.btnFollow)
+        appBar = findViewById(R.id.topAppBar)
+
+        viewModel.user.observe(this) { user ->
+            viewUsername.text = user.userName
+            if (user.imgUrl.isNotEmpty()){
+                profileImage.load(user.imgUrl) {
+                    transformations(CircleCropTransformation())
+                    placeholder(R.drawable.user)
+                    error(R.drawable.user)
+                }
+            }
+        }
+
+        viewModel.userFriends.observe(this) { friends ->
+            followingCount.text = friends.following.size.toString()
+            followersCount.text = friends.followers.size.toString()
+        }
+
+        viewModel.error.observe(this) { error ->
+            Snackbar.make(findViewById(R.id.main), error, Snackbar.LENGTH_SHORT).show()
+        }
+
+        viewModel.isFollowing.observe(this) { isFollowing ->
+            btnFollow.isChecked = isFollowing
+        }
+
+        btnFollow.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                viewModel.follow()
+            } else {
+                viewModel.unfollow()
+            }
+        }
+
+        appBar.setNavigationOnClickListener {
+            finish()
         }
     }
 }
