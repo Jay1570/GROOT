@@ -15,7 +15,6 @@ import com.example.groot.FriendsActivity
 import com.example.groot.viewmodel.ProfileViewModel
 import de.hdodenhof.circleimageview.CircleImageView
 
-// TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -26,8 +25,9 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ProfileFragment : Fragment() {
+
     private lateinit var viewModel: ProfileViewModel
-    // TODO: Rename and change types of parameters
+
     private var param1: String? = null
     private var param2: String? = null
 
@@ -45,10 +45,13 @@ class ProfileFragment : Fragment() {
     ): View? {
         viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
+
         val viewUsername = view?.findViewById<TextView>(R.id.viewUsername)
         val profileImage = view?.findViewById<CircleImageView>(R.id.profileImage)
         val followerCount = view?.findViewById<TextView>(R.id.followersCount)
         val followingCount = view?.findViewById<TextView>(R.id.followingCount)
+        val followers = view?.findViewById<TextView>(R.id.followers)
+        val following = view?.findViewById<TextView>(R.id.following)
 
         viewModel.profile.observe(viewLifecycleOwner) { user ->
             viewUsername?.text = user.userName
@@ -70,8 +73,20 @@ class ProfileFragment : Fragment() {
             startActivity(Intent(requireContext(), FriendsActivity::class.java))
         }
 
-        view?.findViewById<TextView>(R.id.followers)?.setOnClickListener {
+        followers?.setOnClickListener {
             startActivity(Intent(requireContext(), FriendsActivity::class.java))
+        }
+
+        followingCount?.setOnClickListener {
+            val intent = Intent(Intent(requireContext(), FriendsActivity::class.java))
+            intent.putExtra("position", 1)
+            startActivity(intent)
+        }
+
+        following?.setOnClickListener {
+            val intent = Intent(Intent(requireContext(), FriendsActivity::class.java))
+            intent.putExtra("position", 1)
+            startActivity(intent)
         }
 
         return view
@@ -86,7 +101,6 @@ class ProfileFragment : Fragment() {
          * @param param2 Parameter 2.
          * @return A new instance of fragment ProfileFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             ProfileFragment().apply {

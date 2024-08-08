@@ -102,7 +102,7 @@ class UserRepository {
         val usersByEmail = usersByEmailSnapshot.documents.mapNotNull { document ->
             document.toObject(User::class.java)
         }
-        return (usersByName + usersByEmail).distinctBy { it.userId }
+        return (usersByName + usersByEmail).distinctBy { it.userId }.filter { it.id != currentUserId }
     }
 
     suspend fun follow(userId: String) {

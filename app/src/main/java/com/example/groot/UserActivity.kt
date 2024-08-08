@@ -25,11 +25,16 @@ class UserActivity : AppCompatActivity() {
     private lateinit var profileImage: CircleImageView
     private lateinit var btnFollow: AppCompatToggleButton
     private lateinit var appBar: MaterialToolbar
+    private var isChecked: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_user)
+
+        window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
+        window.navigationBarColor = getColor(R.color.md_theme_surfaceContainer)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -66,10 +71,14 @@ class UserActivity : AppCompatActivity() {
         }
 
         viewModel.isFollowing.observe(this) { isFollowing ->
-            btnFollow.isChecked = isFollowing
+            isChecked = isFollowing
+            btnFollow.isChecked = isChecked
         }
 
-        btnFollow.setOnCheckedChangeListener { _, isChecked ->
+        btnFollow.setOnClickListener {
+            isChecked = !isChecked
+            btnFollow.isChecked = isChecked
+
             if (isChecked) {
                 viewModel.follow()
             } else {

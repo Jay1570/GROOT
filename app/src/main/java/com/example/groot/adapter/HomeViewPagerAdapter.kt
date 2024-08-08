@@ -8,7 +8,7 @@ import com.example.groot.fragments.HomeFragment
 import com.example.groot.fragments.ProfileFragment
 import com.example.groot.fragments.SettingsFragment
 
-class ViewPagerAdapter(activity: AppCompatActivity): FragmentStateAdapter(activity) {
+class HomeViewPagerAdapter(activity: AppCompatActivity): FragmentStateAdapter(activity) {
     override fun getItemCount(): Int = 4
 
     override fun createFragment(position: Int): Fragment {

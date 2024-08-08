@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.viewpager2.widget.ViewPager2
-import com.example.groot.adapter.ViewPagerAdapter
+import com.example.groot.adapter.HomeViewPagerAdapter
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class HomeActivity : AppCompatActivity() {
@@ -24,7 +24,7 @@ class HomeActivity : AppCompatActivity() {
         window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
         window.navigationBarColor = getColor(R.color.md_theme_surfaceContainer)
 
-        viewPager.adapter = ViewPagerAdapter(this)
+        viewPager.adapter = HomeViewPagerAdapter(this)
 
         navView.setOnItemSelectedListener {
             when(it.itemId){

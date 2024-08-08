@@ -24,4 +24,8 @@
     <string name="unfollow">Unfollow</string>
     <string name="followers">Followers</string>
     <string name="following">Following</string>
+    <string name="friends">Friends</string>
+    <string name="no_records">No records available</string>
+    <string name="no_followers">You don\'t have any followers yet.</string>
+    <string name="no_follow">You are currently not following anyone.</string>
 </resources>
