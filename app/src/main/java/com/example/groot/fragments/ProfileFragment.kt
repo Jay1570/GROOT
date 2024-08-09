@@ -1,5 +1,6 @@
 package com.example.groot.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +11,10 @@ import androidx.lifecycle.ViewModelProvider
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.example.groot.R
-import com.example.groot.viewmodel.AuthViewModel
+import com.example.groot.FriendsActivity
+import com.example.groot.viewmodel.ProfileViewModel
 import de.hdodenhof.circleimageview.CircleImageView
 
-// TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
@@ -24,8 +25,9 @@ private const val ARG_PARAM2 = "param2"
  * create an instance of this fragment.
  */
 class ProfileFragment : Fragment() {
-    private lateinit var authViewModel: AuthViewModel
-    // TODO: Rename and change types of parameters
+
+    private lateinit var viewModel: ProfileViewModel
+
     private var param1: String? = null
     private var param2: String? = null
 
@@ -41,19 +43,52 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        authViewModel = ViewModelProvider(this)[AuthViewModel::class.java]
+        viewModel = ViewModelProvider(this)[ProfileViewModel::class.java]
         val view = inflater.inflate(R.layout.fragment_profile, container, false)
+
         val viewUsername = view?.findViewById<TextView>(R.id.viewUsername)
         val profileImage = view?.findViewById<CircleImageView>(R.id.profileImage)
-        authViewModel.profile.observe(viewLifecycleOwner) { user ->
+        val followerCount = view?.findViewById<TextView>(R.id.followersCount)
+        val followingCount = view?.findViewById<TextView>(R.id.followingCount)
+        val followers = view?.findViewById<TextView>(R.id.followers)
+        val following = view?.findViewById<TextView>(R.id.following)
+
+        viewModel.profile.observe(viewLifecycleOwner) { user ->
             viewUsername?.text = user.userName
             if (user.imgUrl.isNotEmpty()){
                 profileImage?.load(user.imgUrl) {
                     transformations(CircleCropTransformation())
                     placeholder(R.drawable.user)
+                    error(R.drawable.user)
                 }
             }
         }
+
+        viewModel.friends.observe(viewLifecycleOwner) { friends ->
+            followerCount?.text = friends.followers.count().toString()
+            followingCount?.text = friends.following.count().toString()
+        }
+
+        followerCount?.setOnClickListener {
+            startActivity(Intent(requireContext(), FriendsActivity::class.java))
+        }
+
+        followers?.setOnClickListener {
+            startActivity(Intent(requireContext(), FriendsActivity::class.java))
+        }
+
+        followingCount?.setOnClickListener {
+            val intent = Intent(Intent(requireContext(), FriendsActivity::class.java))
+            intent.putExtra("position", 1)
+            startActivity(intent)
+        }
+
+        following?.setOnClickListener {
+            val intent = Intent(Intent(requireContext(), FriendsActivity::class.java))
+            intent.putExtra("position", 1)
+            startActivity(intent)
+        }
+
         return view
     }
 
@@ -66,7 +101,6 @@ class ProfileFragment : Fragment() {
          * @param param2 Parameter 2.
          * @return A new instance of fragment ProfileFragment.
          */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             ProfileFragment().apply {

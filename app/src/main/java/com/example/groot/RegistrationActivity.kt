@@ -77,11 +77,11 @@ class RegistrationActivity : AppCompatActivity() {
         }
 
         btnRegister.setOnClickListener {
-            val email=txtEmail.text.toString()
-            val password=txtPassword.text.toString()
+            val email=txtEmail.text.toString().trim() // trimming for white spaces in beginning and end
+            val password=txtPassword.text.toString().trim()
             val imgUrl=""
-            val username=txtUsername.text.toString()
-            val cof=txtConfirmPassword.text.toString()
+            val username=txtUsername.text.toString().trim()
+            val cof=txtConfirmPassword.text.toString().trim()
 
             if (email.isEmpty() || password.isEmpty() || username.isEmpty() || cof.isEmpty()) {
                 showSnackBar(getString(R.string.empty_fields))

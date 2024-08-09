@@ -1,8 +1,9 @@
 package com.example.groot.repositories
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import com.example.groot.FRIENDS_COLLECTION
+import com.example.groot.USER_COLLECTION
+import com.example.groot.model.Friends
 import com.example.groot.model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -12,39 +13,15 @@ class AuthRepository {
 
     private val auth = FirebaseAuth.getInstance()
     private val fireStore = FirebaseFirestore.getInstance()
-    private val userCollection = "users"
-    private val currentUserId get() = auth.currentUser?. uid ?: ""
     val hasUser: Boolean get() = auth.currentUser != null
-
-    private val _profile = MutableLiveData<User>()
-
-    val profile: LiveData<User> get() = _profile
-
-    init {
-        if (currentUserId.isNotEmpty()) {
-            val docRef = fireStore.collection(userCollection).document(currentUserId)
-            docRef.addSnapshotListener { snapshot, e ->
-                if (e != null) {
-                    Log.e("UserProfileViewModel", "Error fetching profile", e)
-                    return@addSnapshotListener
-                }
-                if (snapshot != null && snapshot.exists()) {
-                    val userProfile = snapshot.toObject(User::class.java) ?: User()
-                    _profile.value = userProfile
-                } else {
-                    _profile.value = User()
-                }
-            }
-        } else {
-            _profile.value = User()
-        }
-    }
 
     suspend fun signup(email: String, password: String, imgUrl: String, userName: String) {
         auth.createUserWithEmailAndPassword(email, password).await()
         val userId = auth.currentUser?.uid ?: ""
         val user = User(email = email, imgUrl = imgUrl, userName = userName, userId = userId)
-        fireStore.collection(userCollection).document(userId).set(user).await()
+        val friends = Friends(userId = userId)
+        fireStore.collection(USER_COLLECTION).document(userId).set(user).await()
+        fireStore.collection(FRIENDS_COLLECTION).document(userId).set(friends).await()
     }
 
     suspend fun login(email: String, password: String) {
