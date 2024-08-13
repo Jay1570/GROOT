@@ -1,23 +1,18 @@
 package com.example.groot.fragments
 
-import android.app.SearchManager
-import android.content.ComponentName
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.example.groot.R
 import com.example.groot.FriendsActivity
-import com.example.groot.SearchResultsActivity
-import com.example.groot.Settings
+import com.example.groot.SettingsActivity
 import com.example.groot.viewmodel.ProfileViewModel
 import com.google.android.material.appbar.MaterialToolbar
 import de.hdodenhof.circleimageview.CircleImageView
@@ -102,8 +97,8 @@ class ProfileFragment : Fragment() {
         val appBar = view.findViewById<MaterialToolbar>(R.id.topAppBar)
         appBar.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.Setting -> {
-                    startActivity(Intent(requireContext(),Settings::class.java))
+                R.id.Settings -> {
+                    startActivity(Intent(requireContext(),SettingsActivity::class.java))
                     true
                 }
                 else -> false

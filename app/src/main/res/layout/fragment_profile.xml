@@ -21,7 +21,7 @@
             android:layout_height="50dp"
             android:background="@color/md_theme_surfaceContainer"
             android:minHeight="?attr/actionBarSize"
-            app:menu="@menu/profile_menubar"
+            app:menu="@menu/top_app_bar_profile"
             app:title="@string/profile" />
 
     </com.google.android.material.appbar.AppBarLayout>

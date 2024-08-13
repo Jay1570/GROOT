@@ -23,7 +23,6 @@ class FriendsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_friends)
 
         window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
-        window.navigationBarColor = getColor(R.color.md_theme_surfaceContainer)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())

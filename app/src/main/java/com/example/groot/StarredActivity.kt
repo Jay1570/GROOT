@@ -15,6 +15,7 @@ class StarredActivity : AppCompatActivity() {
         setContentView(R.layout.activity_starred)
 
         val toolbarStar: MaterialToolbar = findViewById(R.id.topAppBar)
+        window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
 
         toolbarStar.setNavigationOnClickListener {
             // Perform a custom action here, like starting a new activity

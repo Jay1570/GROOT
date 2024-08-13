@@ -30,4 +30,5 @@
     <string name="no_follow">You are currently not following anyone.</string>
     <string name="Starred">Starred</string>
     <string name="Repositories">Repositories</string>
+    <string name="my_work">My Work</string>
 </resources>

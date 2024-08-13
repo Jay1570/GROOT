@@ -4,18 +4,18 @@
     <item
         android:id="@+id/home"
         android:enabled="true"
-        android:icon="@drawable/home"
+        android:icon="@drawable/home_selector"
         android:title="@string/home" />
 
     <item
         android:id="@+id/explore"
         android:enabled="true"
-        android:icon="@drawable/explore"
+        android:icon="@drawable/explore_selector"
        android:title="@string/explore" />
 
     <item
         android:id="@+id/profile"
         android:enabled="true"
-        android:icon="@drawable/profile"
-      android:title="@string/profile"/>
+        android:icon="@drawable/profile_selector"
+        android:title="@string/profile"/>
 </menu>

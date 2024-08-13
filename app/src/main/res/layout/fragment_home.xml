@@ -35,7 +35,7 @@
         android:layout_marginBottom="16dp"
         android:padding="10dp"
         android:layout_margin="8dp"
-        android:text="My Work"
+        android:text="@string/my_work"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/layRepository"
@@ -55,6 +55,7 @@
         app:layout_constraintTop_toBottomOf="@+id/myWorkText">
 
         <ImageView
+            android:contentDescription="@string/Repositories"
             android:id="@+id/itemIcon"
             android:layout_width="32dp"
             android:layout_height="32dp"
@@ -77,6 +78,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:contentDescription="@string/Starred"
         android:id="@+id/layStarred"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -94,7 +96,8 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_marginStart="16dp"
-            android:src="@drawable/starrd"
+            android:contentDescription="@string/Starred"
+            android:src="@drawable/starred"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

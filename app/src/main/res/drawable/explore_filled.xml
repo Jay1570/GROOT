@@ -1,0 +1,12 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="200dp"
+    android:height="200dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    <path
+        android:pathData="M0.408,15.13a2,2 0,0 1,0.59 -2.642L17.038,1.33a2,2 0,0 1,2.85 0.602l2.828,4.644a2,2 0,0 1,-0.851 2.847l-17.762,8.43a2,2 0,0 1,-2.59 -0.807L0.408,15.13zM5.671,11.064l7.842,-5.455 2.857,4.76 -8.712,4.135 -1.987,-3.44zM4.436,11.924L1.854,13.72a0.5,0.5 0,0 0,-0.147 0.66l1.105,1.915a0.5,0.5 0,0 0,0.648 0.201l2.838,-1.347 -1.862,-3.225zM17.731,9.724L14.747,4.75l3.148,-2.19a0.5,0.5 0,0 1,0.713 0.151l2.826,4.644a0.5,0.5 0,0 1,-0.212 0.712l-3.49,1.656z"
+        android:fillColor="@color/md_theme_onBackground"/> <!-- Changed color to red -->
+    <path
+        android:pathData="M17.155,22.87a0.75,0.75 0,0 0,0.226 -1.036l-4,-6.239a0.75,0.75 0,0 0,-0.941 -0.278l-2.75,1.25a0.75,0.75 0,0 0,-0.318 0.274l-3.25,4.989a0.75,0.75 0,0 0,1.256 0.819l3.131,-4.806 0.51,-0.232v5.64a0.75,0.75 0,1 0,1.5 0v-6.22l3.6,5.613a0.75,0.75 0,0 0,1.036 0.226z"
+        android:fillColor="@color/md_theme_onBackground"/> <!-- Changed color to red -->
+</vector>
