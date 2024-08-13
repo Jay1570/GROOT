@@ -14,10 +14,10 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [HelpFragment.newInstance] factory method to
+ * Use the [ExploreFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class HelpFragment : Fragment() {
+class ExploreFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
@@ -34,7 +34,7 @@ class HelpFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_help, container, false)
+        return inflater.inflate(R.layout.fragment_explore, container, false)
     }
 
     companion object {
@@ -48,7 +48,7 @@ class HelpFragment : Fragment() {
          */
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            HelpFragment().apply {
+            ExploreFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

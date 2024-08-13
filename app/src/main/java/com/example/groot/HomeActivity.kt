@@ -20,30 +20,27 @@ class HomeActivity : AppCompatActivity() {
         setContentView(R.layout.activity_home)
 
         navView=findViewById(R.id.bottom_navigation)
-        viewPager = findViewById(R.id.viewPager)
+        viewPager=findViewById(R.id.viewPager)
         window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
         window.navigationBarColor = getColor(R.color.md_theme_surfaceContainer)
 
-        viewPager.adapter = HomeViewPagerAdapter(this)
-
-        navView.setOnItemSelectedListener {
+        viewPager.adapter=HomeViewPagerAdapter(this)
+        navView.setOnItemSelectedListener(){
             when(it.itemId){
-                R.id.home -> viewPager.currentItem = 0
-                R.id.profile -> viewPager.currentItem = 1
-                R.id.help -> viewPager.currentItem = 2
-                R.id.settings -> viewPager.currentItem = 3
+                R.id.home->viewPager.currentItem=0
+                R.id.explore->viewPager.currentItem=1
+                R.id.profile->viewPager.currentItem=2
             }
             true
         }
 
-        viewPager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+        viewPager.registerOnPageChangeCallback(object: ViewPager2.OnPageChangeCallback(){
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
-                when(position) {
+                when (position) {
                     0 -> navView.selectedItemId = R.id.home
-                    1 -> navView.selectedItemId = R.id.profile
-                    2 -> navView.selectedItemId = R.id.help
-                    3 -> navView.selectedItemId = R.id.settings
+                    1 -> navView.selectedItemId = R.id.explore
+                    2 -> navView.selectedItemId = R.id.profile
                 }
             }
         })
