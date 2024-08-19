@@ -30,7 +30,7 @@
 
     <TextView
         android:id="@+id/myWorkText"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:padding="10dp"
@@ -38,80 +38,50 @@
         android:text="@string/my_work"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/layRepository"
+        app:layout_constraintBottom_toTopOf="@+id/btnRepository"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBar" />
 
-    <LinearLayout
-        android:id="@+id/layRepository"
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Material3.Button.TextButton.Icon"
+        android:id="@+id/btnRepository"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="10dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/md_theme_onBackground"
+        app:iconTint="@color/md_theme_onBackground"
+        app:icon="@drawable/repo"
+        android:text="@string/Repositories"
+        app:iconPadding="16dp"
+        app:iconSize="32dp"
+        app:rippleColor="@color/md_theme_surfaceContainer"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/myWorkText">
+        app:layout_constraintTop_toBottomOf="@+id/myWorkText" />
 
-        <ImageView
-            android:contentDescription="@string/Repositories"
-            android:id="@+id/itemIcon"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="16dp"
-            android:src="@drawable/repo"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/itemText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/Repositories"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/itemIcon"
-            app:layout_constraintTop_toTopOf="parent" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:contentDescription="@string/Starred"
-        android:id="@+id/layStarred"
+    <com.google.android.material.button.MaterialButton
+        style="@style/Widget.Material3.Button.TextButton.Icon"
+        android:id="@+id/btnStarred"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="10dp"
-        android:layout_marginTop="16dp"
+        android:layout_height="wrap_content"
+        app:icon="@drawable/starred"
+        android:text="@string/Starred"
+        app:iconSize="32dp"
+        app:iconPadding="16dp"
+        app:iconTint="@color/md_theme_onBackground"
+        app:rippleColor="@color/md_theme_surfaceContainer"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/md_theme_onBackground"
+        android:layout_marginHorizontal="10dp"
+        android:layout_marginVertical="16dp"
         android:gravity="center_vertical"
-        android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layRepository">
-
-        <ImageView
-            android:id="@+id/itemIcon1"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginStart="16dp"
-            android:contentDescription="@string/Starred"
-            android:src="@drawable/starred"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/itemText1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:text="@string/Starred"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@id/itemIcon"
-            app:layout_constraintTop_toTopOf="parent" />
-    </LinearLayout>
+        app:layout_constraintTop_toBottomOf="@+id/btnRepository" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

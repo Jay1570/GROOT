@@ -71,22 +71,22 @@ class ProfileFragment : Fragment() {
             followingCount?.text = friends.following.count().toString()
         }
 
+        val intent = Intent(requireContext(), FriendsActivity::class.java)
+
         followerCount?.setOnClickListener {
-            startActivity(Intent(requireContext(), FriendsActivity::class.java))
+            startActivity(intent)
         }
 
         followers?.setOnClickListener {
-            startActivity(Intent(requireContext(), FriendsActivity::class.java))
+            startActivity(intent)
         }
 
         followingCount?.setOnClickListener {
-            val intent = Intent(Intent(requireContext(), FriendsActivity::class.java))
             intent.putExtra("position", 1)
             startActivity(intent)
         }
 
         following?.setOnClickListener {
-            val intent = Intent(Intent(requireContext(), FriendsActivity::class.java))
             intent.putExtra("position", 1)
             startActivity(intent)
         }
