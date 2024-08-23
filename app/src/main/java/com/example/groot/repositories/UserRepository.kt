@@ -34,12 +34,7 @@ class UserRepository {
     private val _followingProfiles = MutableStateFlow<List<User>>(emptyList())
     val followingProfiles: StateFlow<List<User>> = _followingProfiles
 
-    init {
-        getProfile()
-        getFriends()
-    }
-
-    private fun getProfile() {
+    fun getProfile() {
         if (currentUserId.isNotEmpty()) {
             val docRef = fireStore.collection(USER_COLLECTION).document(currentUserId)
             docRef.addSnapshotListener { snapshot, e ->
@@ -82,7 +77,7 @@ class UserRepository {
         return (usersByName + usersByEmail).distinctBy { it.userId }.filter { it.id != currentUserId }
     }
 
-    private fun getFriends() {
+    fun getFriends() {
         if (currentUserId.isEmpty()) {
             _friends.value = Friends()
             return

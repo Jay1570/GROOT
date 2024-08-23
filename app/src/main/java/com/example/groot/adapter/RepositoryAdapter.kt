@@ -12,7 +12,8 @@ import com.example.groot.R
 class RepositoryAdapter(
     private val context: Context,
     private val repositories: List<Repository>,
-    private val onRepoClick: (Repository) -> Unit
+    private val onRepoClick: (Repository) -> Unit,
+    private val onFileClick: (Repository) -> Unit
 ) : RecyclerView.Adapter<RepositoryAdapter.RepositoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryViewHolder {
@@ -39,9 +40,12 @@ class RepositoryAdapter(
             userIcon.setImageResource(R.drawable.repo_git_svgrepo_com)
             username.text = repository.username
             repoName.text = repository.name
-            itemView.setOnClickListener { onRepoClick(repository) }
+            itemView.setOnClickListener {
+                if(repository.isFile) onFileClick(repository)
+                else onRepoClick(repository)
+            }
         }
     }
 }
 
-data class Repository(val name: String, val username: String)
+data class Repository(val name: String, val username: String, val isFile: Boolean=false)

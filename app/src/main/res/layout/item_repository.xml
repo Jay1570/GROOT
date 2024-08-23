@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="#17181c"
+    android:background="@color/md_theme_surfaceContainerLow"
     android:padding="16dp">
 
     <ImageView
@@ -25,16 +25,16 @@
             android:id="@+id/username"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Username"
-            android:textColor="#6A6C76"
-            android:layout_marginStart="6dp"/>
+            android:text="@string/user_name"
+            android:layout_marginStart="6dp"
+            android:textColor="@color/md_theme_outline"/>
 
         <TextView
             android:id="@+id/repo_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Repository Name"
+            android:text="@string/Repositories"
             android:textSize="18sp"
-            android:textColor="#FFFF"/>
+            android:textColor="@color/md_theme_onSurface"/>
     </LinearLayout>
 </LinearLayout>

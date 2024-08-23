@@ -12,4 +12,9 @@ class ProfileViewModel : ViewModel() {
     val friends = userRepository.friends.asLiveData()
     val followingProfiles = userRepository.followingProfiles.asLiveData()
     val followerProfiles = userRepository.followerProfiles.asLiveData()
+
+    init {
+        userRepository.getProfile()
+        userRepository.getFriends()
+    }
 }

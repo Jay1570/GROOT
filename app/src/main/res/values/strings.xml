@@ -34,4 +34,5 @@
     <string name="change_theme">Change Theme</string>
     <string name="done">Done</string>
     <string name="cancel">Cancel</string>
+    <string name="no_repository">User does not have any repository</string>
 </resources>
