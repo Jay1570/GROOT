@@ -74,10 +74,10 @@ class RepoActivity : AppCompatActivity() {
     }
 
     private fun openRepository(repository: Repository) {
-        /*val intent = Intent(this, MainActivity5::class.java).apply {
+        val intent = Intent(this, repo_details::class.java).apply {
             putExtra("REPOSITORY_NAME", repository.name)
             putExtra("USER_NAME", username)
         }
-        startActivity(intent)*/
+        startActivity(intent)
     }
 }
