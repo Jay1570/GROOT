@@ -1,8 +1,8 @@
 package com.example.groot.repositories
 
 import android.util.Log
-import com.example.groot.FRIENDS_COLLECTION
-import com.example.groot.USER_COLLECTION
+import com.example.groot.utility.FRIENDS_COLLECTION
+import com.example.groot.utility.USER_COLLECTION
 import com.example.groot.model.Friends
 import com.example.groot.model.User
 import com.google.firebase.auth.FirebaseAuth

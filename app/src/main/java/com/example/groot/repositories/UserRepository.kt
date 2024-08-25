@@ -1,19 +1,18 @@
 package com.example.groot.repositories
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import com.example.groot.FRIENDS_COLLECTION
-import com.example.groot.USER_COLLECTION
 import com.example.groot.model.Friends
 import com.example.groot.model.User
+import com.example.groot.utility.FRIENDS_COLLECTION
+import com.example.groot.utility.USER_COLLECTION
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
@@ -21,25 +20,19 @@ class UserRepository {
 
     private val auth = FirebaseAuth.getInstance()
     private val fireStore = FirebaseFirestore.getInstance()
-    private val currentUserId get() = auth.currentUser?. uid ?: ""
+    private val currentUserId get() = auth.currentUser?.uid ?: ""
 
-    private val _profile = MutableLiveData<User>() // this is for the use who has logged in
-    val profile: LiveData<User> get() = _profile
+    private val _profile = MutableStateFlow(User()) // this is for the use who has logged in
+    val profile: StateFlow<User> get() = _profile
 
-    private val _friends = MutableLiveData<Friends>()
-    val friends: LiveData<Friends> get() = _friends
+    private val _friends = MutableStateFlow(Friends())
+    val friends: StateFlow<Friends> get() = _friends
 
-    private val _followerProfiles = MutableLiveData<List<User>>()
-    val followerProfiles: LiveData<List<User>> get() = _followerProfiles
+    private val _followerProfiles = MutableStateFlow<List<User>>(emptyList())
+    val followerProfiles: StateFlow<List<User>> get() = _followerProfiles
 
-    private val _followingProfiles = MutableLiveData<List<User>>()
-    val followingProfiles: LiveData<List<User>> = _followingProfiles
-
-    private val _user = MutableLiveData<User>() // this for viewing other users
-    val user: LiveData<User> get() = _user
-
-    private val _userFriends = MutableLiveData<Friends>()
-    val userFriends: LiveData<Friends> get() = _userFriends
+    private val _followingProfiles = MutableStateFlow<List<User>>(emptyList())
+    val followingProfiles: StateFlow<List<User>> = _followingProfiles
 
     init {
         getProfile()
@@ -66,22 +59,6 @@ class UserRepository {
         }
     }
 
-    fun getProfile(userId: String) {
-        val docRef = fireStore.collection(USER_COLLECTION).document(userId)
-        docRef.addSnapshotListener { snapshot, e ->
-            if (e != null) {
-                Log.e("UserProfileViewModel", "Error fetching profile", e)
-                return@addSnapshotListener
-            }
-            if (snapshot != null && snapshot.exists()) {
-                val userProfile = snapshot.toObject(User::class.java) ?: User()
-                _user.value = userProfile
-            } else {
-                _user.value = User()
-            }
-        }
-    }
-
     suspend fun fetchUsersByNameAndEmail(query: String) : List<User> {
         val usersByNameSnapshot = fireStore.collection(USER_COLLECTION)
             .whereGreaterThanOrEqualTo("userName", query)
@@ -103,22 +80,6 @@ class UserRepository {
             document.toObject(User::class.java)
         }
         return (usersByName + usersByEmail).distinctBy { it.userId }.filter { it.id != currentUserId }
-    }
-
-    suspend fun follow(userId: String) {
-        val docRef = fireStore.collection(FRIENDS_COLLECTION).document(currentUserId)
-        val docRefFollow = fireStore.collection(FRIENDS_COLLECTION).document(userId)
-
-        docRef.update("following", FieldValue.arrayUnion(userId)).await()
-        docRefFollow.update("followers", FieldValue.arrayUnion(currentUserId)).await()
-    }
-
-    suspend fun unfollow(userId: String) {
-        val docRef = fireStore.collection(FRIENDS_COLLECTION).document(currentUserId)
-        val docRefFollow = fireStore.collection(FRIENDS_COLLECTION).document(userId)
-
-        docRef.update("following", FieldValue.arrayRemove(userId)).await()
-        docRefFollow.update("followers", FieldValue.arrayRemove(currentUserId)).await()
     }
 
     private fun getFriends() {
@@ -147,7 +108,7 @@ class UserRepository {
 
     private suspend fun getFollowerProfiles(followerIds: List<String>) {
         if (followerIds.isEmpty()) {
-            _followerProfiles.postValue(emptyList())
+            _followerProfiles.value = emptyList()
             return
         }
 
@@ -158,16 +119,16 @@ class UserRepository {
         try {
             val followers = Tasks.whenAllSuccess<DocumentSnapshot>(userFollowerRefs).await()
             val profiles = followers.mapNotNull { it.toObject(User::class.java) }
-            _followerProfiles.postValue(profiles)
+            _followerProfiles.value = profiles
         } catch (e: Exception) {
             Log.e("AuthRepository", "Error fetching follower profiles", e)
-            _followerProfiles.postValue(emptyList())
+            _followerProfiles.value = emptyList()
         }
     }
 
     private suspend fun getFollowingProfiles(followingIds: List<String>) {
         if (followingIds.isEmpty()) {
-            _followingProfiles.postValue(emptyList())
+            _followingProfiles.value = emptyList()
             return
         }
 
@@ -178,26 +139,10 @@ class UserRepository {
         try {
             val following = Tasks.whenAllSuccess<DocumentSnapshot>(userFollowerRefs).await()
             val profiles = following.mapNotNull { it.toObject(User::class.java) }
-            _followingProfiles.postValue(profiles)
+            _followingProfiles.value = profiles
         } catch (e: Exception) {
             Log.e("AuthRepository", "Error fetching follower profiles", e)
-            _followingProfiles.postValue(emptyList())
-        }
-    }
-
-    fun getUserFriends(userId: String) {
-        val docRef = fireStore.collection(FRIENDS_COLLECTION).document(userId)
-        docRef.addSnapshotListener { snapshot, e ->
-            if (e != null) {
-                Log.e("GetFriends", "Error fetching friends", e)
-                return@addSnapshotListener
-            }
-            if (snapshot != null && snapshot.exists()) {
-                val friends = snapshot.toObject(Friends::class.java) ?: Friends()
-                _userFriends.value = friends
-            } else {
-                _userFriends.value = Friends()
-            }
+            _followingProfiles.value = emptyList()
         }
     }
 }

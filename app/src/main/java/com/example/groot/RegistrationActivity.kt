@@ -14,6 +14,8 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMargins
+import com.example.groot.utility.isValidEmail
+import com.example.groot.utility.isValidPassword
 import com.example.groot.viewmodel.AuthViewModel
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.snackbar.Snackbar
@@ -59,7 +61,9 @@ class RegistrationActivity : AppCompatActivity() {
 
         authViewModel.authStatus.observe(this) { status ->
             if (status.contains("Successful")) {
-                startActivity(Intent(this, HomeActivity::class.java))
+                val intent = Intent(this, HomeActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                startActivity(intent)
                 finish()
                 return@observe
             }

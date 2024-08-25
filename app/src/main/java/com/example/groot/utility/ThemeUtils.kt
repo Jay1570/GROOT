@@ -1,4 +1,4 @@
-package com.example.groot
+package com.example.groot.utility
 
 import android.content.Context
 import android.content.SharedPreferences

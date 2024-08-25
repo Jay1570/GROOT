@@ -49,7 +49,7 @@ class UserActivity : AppCompatActivity() {
         btnFollow = findViewById(R.id.btnFollow)
         appBar = findViewById(R.id.topAppBar)
 
-        viewModel.user.observe(this) { user ->
+        viewModel.profile.observe(this) { user ->
             viewUsername.text = user.userName
             if (user.imgUrl.isNotEmpty()){
                 profileImage.load(user.imgUrl) {
@@ -60,7 +60,7 @@ class UserActivity : AppCompatActivity() {
             }
         }
 
-        viewModel.userFriends.observe(this) { friends ->
+        viewModel.friends.observe(this) { friends ->
             followingCount.text = friends.following.size.toString()
             followersCount.text = friends.followers.size.toString()
         }

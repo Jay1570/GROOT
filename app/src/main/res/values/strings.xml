@@ -32,4 +32,6 @@
     <string name="Repositories">Repositories</string>
     <string name="my_work">My Work</string>
     <string name="change_theme">Change Theme</string>
+    <string name="done">Done</string>
+    <string name="cancel">Cancel</string>
 </resources>

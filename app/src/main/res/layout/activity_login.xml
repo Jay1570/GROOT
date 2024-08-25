@@ -122,6 +122,7 @@
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="10dp"
                     android:hint="@string/password"
+                    app:passwordToggleEnabled="true"
                     android:padding="5dp"
                     app:hintTextColor="@color/md_theme_primary">
 

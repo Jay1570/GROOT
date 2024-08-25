@@ -9,13 +9,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import androidx.appcompat.widget.SearchView
 import com.example.groot.R
 import com.example.groot.RepoActivity
 import com.example.groot.SearchResultsActivity
 import com.example.groot.StarredActivity
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.button.MaterialButton
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
@@ -43,16 +43,15 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-        val layRepository: LinearLayout = view.findViewById(R.id.layRepository)
-        val layStarred: LinearLayout = view.findViewById(R.id.layStarred)
-        layRepository.setOnClickListener {
+        val layRepository: MaterialButton = view.findViewById(R.id.btnRepository)
+        val layStarred: MaterialButton = view.findViewById(R.id.btnStarred)
 
+        layRepository.setOnClickListener {
             val intent = Intent(activity, RepoActivity::class.java)
             startActivity(intent)
         }
 
         layStarred.setOnClickListener {
-
             val intent = Intent(activity, StarredActivity::class.java)
             startActivity(intent)
         }

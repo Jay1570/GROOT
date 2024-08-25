@@ -4,31 +4,30 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.groot.model.Friends
 import com.example.groot.model.User
-import com.example.groot.repositories.UserRepository
+import com.example.groot.repositories.OtherUserRepository
 import kotlinx.coroutines.launch
 
 class UserViewModel : ViewModel() {
 
-    private val userRepository: UserRepository = UserRepository()
+    private val otherUserRepository: OtherUserRepository = OtherUserRepository()
 
     private var userId = ""
 
-    val user: LiveData<User> = userRepository.user
-    val userFriends: LiveData<Friends> = userRepository.userFriends
+    val profile: LiveData<User> = otherUserRepository.profile.asLiveData()
+    val friends: LiveData<Friends> = otherUserRepository.friends.asLiveData()
 
     private val _isFollowing = MutableLiveData<Boolean>()
     val isFollowing: LiveData<Boolean> get() = _isFollowing
-
-    private val friends = userRepository.friends
 
     private val _error = MutableLiveData<String>()
     val error: LiveData<String> get() = _error
 
     private val friendsObserver = Observer<Friends> { friendsData ->
-        val isCurrentlyFollowing = friendsData.following.contains(userId)
+        val isCurrentlyFollowing = friendsData.followers.contains(otherUserRepository.currentUserId)
         _isFollowing.value = isCurrentlyFollowing
     }
 
@@ -38,14 +37,14 @@ class UserViewModel : ViewModel() {
 
     fun getUserId(id: String) {
         userId = id
-        userRepository.getProfile(userId)
-        userRepository.getUserFriends(userId)
+        otherUserRepository.getProfile(userId)
+        otherUserRepository.getFriends(userId)
     }
 
     fun follow() {
         viewModelScope.launch {
             try {
-                userRepository.follow(userId)
+                otherUserRepository.follow(userId)
                 _isFollowing.value = true
             } catch (e: Exception) {
                 _error.value = e.message.toString()
@@ -56,7 +55,7 @@ class UserViewModel : ViewModel() {
     fun unfollow() {
         viewModelScope.launch {
             try {
-                userRepository.unfollow(userId)
+                otherUserRepository.unfollow(userId)
                 _isFollowing.value = false
             } catch (e: Exception) {
                 _error.value = e.message.toString()
