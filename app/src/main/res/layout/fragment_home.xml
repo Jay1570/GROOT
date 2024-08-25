@@ -49,7 +49,7 @@
         android:layout_height="wrap_content"
         android:textColor="@color/md_theme_onBackground"
         app:iconTint="@color/md_theme_onBackground"
-        app:icon="@drawable/repo"
+        app:icon="@drawable/repository"
         android:text="@string/Repositories"
         app:iconPadding="16dp"
         app:iconSize="32dp"
