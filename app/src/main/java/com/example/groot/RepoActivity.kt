@@ -87,24 +87,23 @@ class RepoActivity : AppCompatActivity() {
     }
 
     private fun openRepository(repository: Repository) {
-        path = path + "/" + repository.name
+        val nextPath = path + "/" + repository.name
         val intent = Intent(this, RepoActivity::class.java).apply {
-            putExtra("path", path)
+            putExtra("path", nextPath)
         }
         startActivity(intent)
     }
 
     private fun openFile(repository: Repository) {
-        path = path + "/" + repository.name
+        val nextPath = path + "/" + repository.name
         val intent = Intent(this, FileContentActivity::class.java).apply {
-            putExtra("path", path)
+            putExtra("path", nextPath)
         }
         startActivity(intent)
     }
 
     override fun onRestart() {
         super.onRestart()
-        path = path.substringBeforeLast("/")
         Log.i(TAG, path)
     }
 }
