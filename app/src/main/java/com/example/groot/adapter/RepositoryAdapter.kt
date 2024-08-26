@@ -11,8 +11,8 @@ import com.example.groot.R
 
 class RepositoryAdapter(
     private val context: Context,
-    private val repositories: List<Repository>,
-    private val onRepoClick: (Repository) -> Unit
+    private val repositories: List<RepositoryDetails>,
+    private val onRepoClick: (RepositoryDetails) -> Unit
 ) : RecyclerView.Adapter<RepositoryAdapter.RepositoryViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RepositoryViewHolder {
@@ -34,8 +34,7 @@ class RepositoryAdapter(
         private val username: TextView = itemView.findViewById(R.id.username)
         private val repoName: TextView = itemView.findViewById(R.id.repo_name)
 
-        fun bind(repository: Repository) {
-            // Assuming you have a user icon drawable resource
+        fun bind(repository: RepositoryDetails) {
             userIcon.setImageResource(R.drawable.repo_git_svgrepo_com)
             username.text = repository.username
             repoName.text = repository.name
@@ -44,4 +43,4 @@ class RepositoryAdapter(
     }
 }
 
-data class Repository(val name: String, val username: String)
+data class RepositoryDetails(val name: String, val username: String)
