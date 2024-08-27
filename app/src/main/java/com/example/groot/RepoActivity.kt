@@ -33,7 +33,7 @@ class RepoActivity : AppCompatActivity() {
 
 
         toolbarRepo.setNavigationOnClickListener {
-            finish()  // Optional: Finish the current activity if you don't want to keep it in the back stack
+            finish()
         }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -50,7 +50,7 @@ class RepoActivity : AppCompatActivity() {
 
         progressBar = findViewById(R.id.progressBar)
 
-        username = "Jay1570 " // Replace with dynamic username if needed
+        username = intent.getStringExtra("username") ?: ""
         userStorageRef = FirebaseStorage.getInstance().reference.child(username)
         fetchRepositories()
     }
