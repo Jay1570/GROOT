@@ -1,6 +1,5 @@
 package com.example.groot
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,7 +9,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.groot.adapter.Repository
+import com.example.groot.adapter.RepositoryDetails
 import com.example.groot.adapter.RepositoryAdapter
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.firebase.storage.FirebaseStorage
@@ -20,7 +19,7 @@ class RepoActivity : AppCompatActivity() {
     private val TAG = "RepositoryListActivity"
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: RepositoryAdapter
-    private val repositories = mutableListOf<Repository>()
+    private val repositories = mutableListOf<RepositoryDetails>()
     private lateinit var userStorageRef: StorageReference
     private lateinit var username: String
     private lateinit var progressBar: View
@@ -34,7 +33,7 @@ class RepoActivity : AppCompatActivity() {
 
 
         toolbarRepo.setNavigationOnClickListener {
-            finish()  // Optional: Finish the current activity if you don't want to keep it in the back stack
+            finish()
         }
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -51,7 +50,7 @@ class RepoActivity : AppCompatActivity() {
 
         progressBar = findViewById(R.id.progressBar)
 
-        username = "Jay1570 " // Replace with dynamic username if needed
+        username = intent.getStringExtra("username") ?: ""
         userStorageRef = FirebaseStorage.getInstance().reference.child(username)
         fetchRepositories()
     }
@@ -62,7 +61,7 @@ class RepoActivity : AppCompatActivity() {
             .addOnSuccessListener { listResult ->
                 repositories.clear()
                 listResult.prefixes.forEach { prefix ->
-                    repositories.add(Repository(prefix.name, userStorageRef.name))
+                    repositories.add(RepositoryDetails(prefix.name, userStorageRef.name))
                 }
                 adapter.notifyDataSetChanged()
                 progressBar.visibility = View.GONE
@@ -73,7 +72,7 @@ class RepoActivity : AppCompatActivity() {
             }
     }
 
-    private fun openRepository(repository: Repository) {
+    private fun openRepository(repository: RepositoryDetails) {
         /*val intent = Intent(this, MainActivity5::class.java).apply {
             putExtra("REPOSITORY_NAME", repository.name)
             putExtra("USER_NAME", username)

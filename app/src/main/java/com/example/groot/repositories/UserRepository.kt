@@ -2,8 +2,10 @@ package com.example.groot.repositories
 
 import android.util.Log
 import com.example.groot.model.Friends
+import com.example.groot.model.Repository
 import com.example.groot.model.User
 import com.example.groot.utility.FRIENDS_COLLECTION
+import com.example.groot.utility.REPOSITORY_COLLECTION
 import com.example.groot.utility.USER_COLLECTION
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
@@ -80,6 +82,22 @@ class UserRepository {
             document.toObject(User::class.java)
         }
         return (usersByName + usersByEmail).distinctBy { it.userId }.filter { it.id != currentUserId }
+    }
+
+    suspend fun searchRepository(query: String): List<Repository> {
+        val repositories = fireStore.collection(REPOSITORY_COLLECTION)
+            .whereEqualTo("isPrivate", false)
+            .orderBy("name")
+            .startAt(query.uppercase())
+            .endAt(query.lowercase() + '\uf8ff')
+            .get()
+            .await()
+
+        val repository = repositories.documents.mapNotNull { document ->
+            document.toObject(Repository::class.java)
+        }
+
+        return repository
     }
 
     private fun getFriends() {
