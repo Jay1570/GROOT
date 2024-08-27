@@ -50,7 +50,7 @@ class RepoActivity : AppCompatActivity() {
 
         progressBar = findViewById(R.id.progressBar)
 
-        username = "Jay1570 " // Replace with dynamic username if needed
+        username = intent.getStringExtra("username") ?: ""
         userStorageRef = FirebaseStorage.getInstance().reference.child(username)
         fetchRepositories()
     }

@@ -86,9 +86,10 @@ class UserRepository {
 
     suspend fun searchRepository(query: String): List<Repository> {
         val repositories = fireStore.collection(REPOSITORY_COLLECTION)
-            .whereGreaterThanOrEqualTo("name", query)
-            .whereLessThanOrEqualTo("name", query + '\uf8ff')
             .whereEqualTo("isPrivate", false)
+            .orderBy("name")
+            .startAt(query.uppercase())
+            .endAt(query.lowercase() + '\uf8ff')
             .get()
             .await()
 
