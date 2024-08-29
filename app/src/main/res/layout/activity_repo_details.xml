@@ -5,15 +5,16 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#050505"
-    tools:context=".repo_details">
+    android:background="@color/md_theme_background"
+    tools:context=".RepoDetailsActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#050505"
+        android:background="@color/md_theme_background"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        app:navigationIcon="@drawable/arrow_back"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -56,15 +57,15 @@
                     android:layout_height="25dp"
                     android:layout_marginStart="16dp"
                     android:src="@drawable/repo_git_svgrepo_com"
-                    app:civ_border_color="#fff"
+                    app:civ_border_color="@color/md_theme_onBackground"
                     app:civ_border_width="1dp"/>
 
                 <TextView
                     android:id="@+id/txt_username"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Tejas_ktc"
-                    android:textColor="#949191"
+                    android:textColor="@color/md_theme_outline"
+                    android:text="@string/user_name"
                     android:layout_marginTop="3dp"
                     android:textSize="15sp"
                     android:layout_marginStart="15dp"/>
@@ -77,8 +78,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
                 android:layout_marginTop="20dp"
-                android:text="GROOT-The Version Control System"
-                android:textColor="#fff"
+                android:text="@string/Repositories"
+                android:textColor="@color/md_theme_onBackground"
                 android:textSize="30sp"/>
 
             <LinearLayout
@@ -92,7 +93,7 @@
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_marginStart="15dp"
-                    android:src="@drawable/star_sharp_svgrepo_com"/>
+                    android:src="@drawable/starred"/>
 
                 <TextView
                     android:id="@+id/textView"
@@ -100,7 +101,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:text="0 Star"
-                    android:textColor="#fff"
+                    android:textColor="@color/md_theme_onBackground"
                     android:textSize="15sp"/>
             </LinearLayout>
 
@@ -116,11 +117,11 @@
                     android:layout_width="300dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="15dp"
-                    android:backgroundTint="#17181c"
+                    android:backgroundTint="@color/md_theme_surfaceContainerLow"
                     app:cardCornerRadius="8dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView"
-                    app:strokeColor="#17181c">
+                    app:strokeColor="@color/md_theme_surfaceContainerLow">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -129,7 +130,7 @@
                         <ImageView
                             android:layout_width="25dp"
                             android:layout_height="25dp"
-                            android:src="@drawable/star_sharp_svgrepo_com"
+                            android:src="@drawable/starred"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toStartOf="@+id/textView2"
                             app:layout_constraintTop_toTopOf="parent" />
@@ -139,8 +140,8 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:paddingStart="8dp"
-                            android:text="Star"
-                            android:textColor="#fff"
+                            android:text="@string/Starred"
+                            android:textColor="@color/md_theme_onBackground"
                             android:textSize="18sp"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
@@ -155,10 +156,10 @@
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:backgroundTint="#17181c"
+                    android:backgroundTint="@color/md_theme_surfaceContainerLow"
                     android:layout_marginStart="15dp"
                     app:cardCornerRadius="8dp"
-                    app:strokeColor="#17181c">
+                    app:strokeColor="@color/md_theme_surfaceContainerLow">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
                         android:layout_width="match_parent"
@@ -173,7 +174,8 @@
                             app:layout_constraintHorizontal_bias="0.5"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toTopOf="parent"
-                            app:layout_constraintVertical_bias="0.5" />
+                            app:layout_constraintVertical_bias="0.5"
+                            app:tint="@color/md_theme_primary" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
@@ -183,7 +185,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#4C4E59"
+                android:background="@color/md_theme_outlineVariant"
                 android:layout_marginTop="15dp"/>
 
             <com.google.android.material.card.MaterialCardView
@@ -191,11 +193,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardCornerRadius="8dp"
-                android:backgroundTint="#17181c"
+                android:backgroundTint="@color/md_theme_surfaceContainerLow"
                 android:layout_marginTop="15dp"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
-                app:strokeColor="#17181c">
+                app:strokeColor="@color/md_theme_surfaceContainerLow">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -205,12 +207,12 @@
                         android:id="@+id/materialCardView2"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:backgroundTint="#484B5B"
+                        android:backgroundTint="@color/md_theme_outline"
                         app:cardCornerRadius="8dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:strokeColor="#17181c">
+                        app:strokeColor="@color/md_theme_surfaceContainerLow">
 
                         <androidx.constraintlayout.widget.ConstraintLayout
                             android:layout_width="match_parent"
@@ -233,8 +235,8 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Code"
-                        android:textColor="#fff"
+                        android:text="@string/code"
+                        android:textColor="@color/md_theme_onBackground"
                         android:textSize="20sp"
                         android:layout_marginStart="20dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -246,7 +248,7 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#4C4E59"
+                android:background="@color/md_theme_outlineVariant"
                 android:layout_marginTop="15dp"/>
 
             <LinearLayout
@@ -258,8 +260,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Languages"
-                    android:textColor="#fff"
+                    android:text="@string/languages"
+                    android:textColor="@color/md_theme_onBackground"
                     android:textSize="20sp"
                     android:layout_marginStart="30dp"/>
 
@@ -270,7 +272,7 @@
                     <com.google.android.material.card.MaterialCardView
                         android:layout_width="match_parent"
                         android:layout_height="10dp"
-                        android:backgroundTint="#050505"
+                        android:backgroundTint="@color/md_theme_background"
                         android:layout_marginStart="30dp"
                         android:layout_marginEnd="30dp"
                         android:layout_marginTop="10dp"
@@ -297,14 +299,14 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
-                android:background="#4C4E59"
+                android:background="@color/md_theme_outlineVariant"
                 android:layout_marginTop="15dp"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:background="#17181c">
+                android:background="@color/md_theme_surfaceContainer">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -331,7 +333,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="README.md"
-                            android:textColor="#797C89"
+                            android:textColor="@color/md_theme_outline"
                             android:textSize="13sp"
                             android:layout_marginStart="15dp"
                             app:layout_constraintBottom_toBottomOf="parent"
@@ -347,7 +349,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
-                    android:textColor="#fff"
+                    android:textColor="@color/md_theme_onBackground"
                     android:textSize="16sp"/>
 
             </LinearLayout>

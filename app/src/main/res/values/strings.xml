@@ -34,4 +34,6 @@
     <string name="change_theme">Change Theme</string>
     <string name="done">Done</string>
     <string name="cancel">Cancel</string>
+    <string name="code">Code</string>
+    <string name="languages">Languages</string>
 </resources>

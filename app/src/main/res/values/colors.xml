@@ -153,5 +153,8 @@
     <color name="kotlin_color">#7F52FF</color>
     <color name="html_color">#E34F26</color>
     <color name="css_color">#1572B6</color>
+    <color name="vb_color">#FF0000</color>
+    <color name="rust_color">#FFFF00</color>
+    <color name="go_color">#278886</color>
     <color name="default_color">#9E9E9E</color>
 </resources>
