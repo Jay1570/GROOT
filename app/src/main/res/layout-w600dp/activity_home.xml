@@ -10,23 +10,23 @@
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/navigation"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/navigation"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <com.google.android.material.bottomnavigation.BottomNavigationView
+    <com.google.android.material.navigationrail.NavigationRailView
         style="@style/Widget.Material3.BottomNavigationView"
         android:id="@+id/navigation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
         app:labelVisibilityMode="unlabeled"
         app:menu="@menu/bottom_navigation_menu"
-        app:layout_constraintTop_toBottomOf="@+id/viewPager"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toStartOf="@id/viewPager"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

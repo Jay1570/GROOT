@@ -5,16 +5,18 @@ import android.view.ViewGroup
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
+import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMargins
 import androidx.viewpager2.widget.ViewPager2
 import com.example.groot.adapter.HomeViewPagerAdapter
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationBarView
 
 class HomeActivity : AppCompatActivity() {
 
-    private lateinit var navView: BottomNavigationView
+    private lateinit var navView: NavigationBarView
     private lateinit var viewPager: ViewPager2
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,10 +24,15 @@ class HomeActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_home)
 
-        navView=findViewById(R.id.bottom_navigation)
+
+        val windowInsetsController = WindowCompat.getInsetsController(window, window.decorView)
+        windowInsetsController.hide(WindowInsetsCompat.Type.navigationBars())
+        windowInsetsController.systemBarsBehavior = WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE
+
+        navView=findViewById(R.id.navigation)
         viewPager=findViewById(R.id.viewPager)
         window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
-        window.navigationBarColor = getColor(R.color.md_theme_surfaceContainer)
+        window.navigationBarColor = getColor(R.color.md_theme_background)
 
         viewPager.adapter=HomeViewPagerAdapter(this)
         navView.setOnItemSelectedListener {
