@@ -1,5 +1,6 @@
 package com.example.groot
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -73,10 +74,10 @@ class RepoActivity : AppCompatActivity() {
     }
 
     private fun openRepository(repository: RepositoryDetails) {
-        /*val intent = Intent(this, MainActivity5::class.java).apply {
+        val intent = Intent(this, repo_details::class.java).apply {
             putExtra("REPOSITORY_NAME", repository.name)
             putExtra("USER_NAME", username)
         }
-        startActivity(intent)*/
+        startActivity(intent)
     }
 }

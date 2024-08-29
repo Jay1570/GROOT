@@ -141,4 +141,17 @@
     <color name="md_theme_surfaceContainer_highContrast">#EDEDF4</color>
     <color name="md_theme_surfaceContainerHigh_highContrast">#E8E7EE</color>
     <color name="md_theme_surfaceContainerHighest_highContrast">#E2E2E9</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="java_color">#FF5733</color>
+    <color name="python_color">#33FF57</color>
+    <color name="cpp_color">#3357FF</color>
+    <color name="javascript_color">#F0DB4F</color>
+    <color name="swift_color">#F05138</color>
+    <color name="cs_color">#4B2D4E</color>
+    <color name="c_color">#7F7F7F</color>
+    <color name="kotlin_color">#7F52FF</color>
+    <color name="html_color">#E34F26</color>
+    <color name="css_color">#1572B6</color>
+    <color name="default_color">#9E9E9E</color>
 </resources>
