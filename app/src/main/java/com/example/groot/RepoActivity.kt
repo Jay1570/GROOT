@@ -75,8 +75,8 @@ class RepoActivity : AppCompatActivity() {
 
     private fun openRepository(repository: RepositoryDetails) {
         val intent = Intent(this, repo_details::class.java).apply {
-            putExtra("REPOSITORY_NAME", repository.name)
-            putExtra("USER_NAME", username)
+            putExtra("path", username + "/" + repository.name)
+            Log.i(TAG, username + "/" + repository.name)
         }
         startActivity(intent)
     }

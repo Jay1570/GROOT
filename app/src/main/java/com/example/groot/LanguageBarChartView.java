@@ -59,7 +59,7 @@ public class LanguageBarChartView extends LinearLayout {
         String colorName = language.toLowerCase().replace(" ", "_") + "_color";
         int colorId = getResources().getIdentifier(colorName, "color", getContext().getPackageName());
         if (colorId == 0) {
-            colorId = R.color.default_color; // Fallback color
+            colorId = R.color.default_color;
         }
         return getResources().getColor(colorId, null);
     }

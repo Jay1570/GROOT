@@ -1,6 +1,6 @@
 package com.example.groot
 
-import android.annotation.SuppressLint
+
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -25,12 +25,10 @@ class repo_details : AppCompatActivity() {
     private lateinit var markwon: Markwon
     private lateinit var progressBar: ProgressBar
     private lateinit var btnCode: MaterialCardView
-    private lateinit var repoName: String
-    private lateinit var username: String
+    private lateinit var path: String
     private lateinit var maincontent: ScrollView
     private lateinit var languageBarChartView: LanguageBarChartView
 
-    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_repo_details)
@@ -44,9 +42,14 @@ class repo_details : AppCompatActivity() {
         supportActionBar?.title = ""
 
         intent?.let {
-            repoName = it.getStringExtra("REPOSITORY_NAME") ?: ""
-            username = it.getStringExtra("USER_NAME") ?: ""
+            path = it.getStringExtra("path") ?: ""
         }
+
+        val username = path.substringBefore("/").trim()
+        val repoName = path.substringAfter("/").trim()
+
+        findViewById<TextView>(R.id.txt_username).text = username
+        findViewById<TextView>(R.id.txt_repo_name).text = repoName
 
         readmeTextView = findViewById(R.id.readme_text)
         markwon = Markwon.builder(this)
@@ -62,38 +65,30 @@ class repo_details : AppCompatActivity() {
             }
             startActivity(intent)
         }*/
-
-        // Show progress bar and hide main content initially
         progressBar.visibility = View.VISIBLE
         maincontent.visibility = View.GONE
 
-        searchReadmeFile(username, repoName)
-        fetchFilesAndCalculateContributions(username, repoName) // Add this line to fetch and display contributions
+        searchReadmeFile(path)
+        fetchFilesAndCalculateContributions(path)
     }
 
-    private fun searchReadmeFile(username: String, repoName: String) {
-        val rootDirectory = username  // Root folder name
-        val storageReference = FirebaseStorage.getInstance().reference.child(rootDirectory).child(repoName)
+    private fun searchReadmeFile(path: String) {
+        val storageReference = FirebaseStorage.getInstance().reference.child(path)
 
         searchReadmeInDirectory(storageReference)
     }
 
     private fun searchReadmeInDirectory(directory: StorageReference) {
         directory.listAll().addOnSuccessListener { listResult ->
-            // Check if README.md file is present
-            for (fileRef in listResult.items) {
-                if (fileRef.name == "README.md") {
-                    fetchReadmeFile(fileRef)
+            listResult.items.forEach {
+                if(it.name == "README.md") {
+                    fetchReadmeFile(it)
                     return@addOnSuccessListener
                 }
             }
-            // Recursively search in subdirectories
-            for (folderRef in listResult.prefixes) {
-                searchReadmeInDirectory(folderRef)
-            }
         }.addOnFailureListener { exception ->
             Log.e(TAG, "Error listing items in directory", exception)
-            progressBar.visibility = View.GONE  // Hide loader on failure
+            progressBar.visibility = View.GONE
             Toast.makeText(this, "Error listing items in directory", Toast.LENGTH_SHORT).show()
         }
     }
@@ -106,33 +101,27 @@ class repo_details : AppCompatActivity() {
             val readmeContent = String(bytes, StandardCharsets.UTF_8)
             Log.d(TAG, "README.md content: $readmeContent")
             markwon.setMarkdown(readmeTextView, readmeContent)
-            // Ensure progress bar is hidden
             progressBar.visibility = View.GONE
-            // Make main content visible
             maincontent.visibility = View.VISIBLE
         }.addOnFailureListener { exception ->
             Log.e(TAG, "Error fetching README.md file", exception)
-            progressBar.visibility = View.GONE // Hide loader on failure
+            progressBar.visibility = View.GONE
             Toast.makeText(this, "Error fetching README.md file", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun fetchFilesAndCalculateContributions(username: String, repoName: String) {
-        val rootDirectory = username
-        val storageReference = FirebaseStorage.getInstance().reference.child(rootDirectory).child(repoName)
+    private fun fetchFilesAndCalculateContributions(path:String) {
+        val storageReference = FirebaseStorage.getInstance().reference.child(path)
 
         Log.d(TAG, "Fetching files from: ${storageReference.path}")
 
         fetchFilesInDirectory(storageReference) { files ->
             if (files.isNotEmpty()) {
-                // Calculate language contributions
                 val contributions = calculateLanguageContributions(files)
-                // Display contributions
                 displayContributions(contributions)
             } else {
                 Log.w(TAG, "No files found in directory")
                 Toast.makeText(this, "No files found in the directory.", Toast.LENGTH_SHORT).show()
-                // Hide progress bar and show a message or empty state if needed
                 progressBar.visibility = View.GONE
                 maincontent.visibility = View.VISIBLE
             }
@@ -149,10 +138,8 @@ class repo_details : AppCompatActivity() {
             Log.d(TAG, "Found ${prefixes.size} folders and ${allFiles.size} files")
 
             if (prefixes.isEmpty()) {
-                // No subdirectories
                 callback(allFiles)
             } else {
-                // Handle subdirectories
                 var pendingPrefixes = prefixes.size
                 prefixes.forEach { folderRef ->
                     fetchFilesInDirectory(folderRef) { files ->
@@ -172,19 +159,7 @@ class repo_details : AppCompatActivity() {
     }
 
     private fun getFileLanguage(fileName: String): String {
-        return when {
-            fileName.endsWith(".java") -> "Java"
-            fileName.endsWith(".py") -> "Python"
-            fileName.endsWith(".cpp") -> "C++"
-            fileName.endsWith(".js") -> "JavaScript"
-            fileName.endsWith(".swift") -> "Swift"
-            fileName.endsWith(".cs") -> "C#"
-            fileName.endsWith(".c") -> "C"
-            fileName.endsWith(".kt") -> "Kotlin"
-            fileName.endsWith(".html") -> "HTML"
-            fileName.endsWith(".css") -> "CSS"
-            else -> "Unknown"
-        }
+        return fileName.substringAfter(".")
     }
 
     private fun calculateLanguageContributions(files: List<StorageReference>): Map<String, Float> {
@@ -210,7 +185,6 @@ class repo_details : AppCompatActivity() {
             Log.e(TAG, "LanguageBarChartView is not initialized")
         }
 
-        // Ensure main content is visible after displaying contributions
         progressBar.visibility = View.GONE
         maincontent.visibility = View.VISIBLE
     }
