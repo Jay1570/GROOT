@@ -1,6 +1,7 @@
 package com.example.groot
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.ProgressBar
 import android.widget.ScrollView
 import android.widget.TextView
@@ -60,6 +61,7 @@ class RepoDetailsActivity : AppCompatActivity() {
         markwon = Markwon.builder(this).usePlugin(ImagesPlugin.create()).build()
 
         viewModel.languageContributions.observe(this) { contributions ->
+            Log.d("repo_details",contributions.size.toString())
             languageBarChartView.setLanguagesData(contributions)
         }
 

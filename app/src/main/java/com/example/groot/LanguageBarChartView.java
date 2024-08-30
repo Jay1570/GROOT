@@ -1,12 +1,21 @@
 package com.example.groot;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
 public class LanguageBarChartView extends LinearLayout {
@@ -43,7 +52,7 @@ public class LanguageBarChartView extends LinearLayout {
 
             // Create a view for the bar
             View languageBar = new View(getContext());
-            int color = getColorForLanguage(language);
+            int color = getColorForLanguage("."+language);
             languageBar.setBackgroundColor(color);
 
             // Calculate bar width based on percentage
@@ -56,11 +65,36 @@ public class LanguageBarChartView extends LinearLayout {
     }
 
     private int getColorForLanguage(String language) {
-        String colorName = language.toLowerCase().replace(" ", "_") + "_color";
-        int colorId = getResources().getIdentifier(colorName, "color", getContext().getPackageName());
-        if (colorId == 0) {
-            colorId = R.color.default_color;
+        int colorId = ContextCompat.getColor(getContext(), R.color.default_color);
+        Log.d("LanguageBarChart","Language :- "+language);
+        try {
+            String json = loadJsonFromAsset();
+            if (json == null) {
+                return colorId;
+            }
+            JSONObject jsonObject = new JSONObject(json);
+            if (jsonObject.has(language)) {
+                JSONArray values = jsonObject.getJSONArray(language);
+                String color = values.optString(1);
+                Log.d("LanguageBarChart","Color :-"+ color);
+                colorId = (color == null || color.isEmpty()) ? colorId : Color.parseColor(color);
+            }
+        } catch (Exception e) {
+            Log.e("LanguageBarChart",e.getMessage());
+            return colorId;
         }
-        return getResources().getColor(colorId, null);
+        return colorId;
+    }
+
+    private String loadJsonFromAsset() {
+        try (InputStream is = getContext().getAssets().open("languages.json")) {
+            int size = is.available();
+            byte[] buffer = new byte[size];
+            is.read(buffer);
+            return new String(buffer, StandardCharsets.UTF_8);
+        } catch (IOException ex) {
+            Log.e("LanguageBarChart",ex.getMessage());
+            return null;
+        }
     }
 }
