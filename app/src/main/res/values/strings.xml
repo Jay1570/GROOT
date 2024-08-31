@@ -36,4 +36,6 @@
     <string name="cancel">Cancel</string>
     <string name="code">Code</string>
     <string name="languages">Languages</string>
+    <string name="unstarred">Star</string>
+    <string name="README">README.md</string>
 </resources>

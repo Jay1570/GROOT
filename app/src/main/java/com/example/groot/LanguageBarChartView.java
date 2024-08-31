@@ -36,26 +36,22 @@ public class LanguageBarChartView extends LinearLayout {
 
     public void setLanguagesData(Map<String, Float> languagesData) {
         removeAllViews();
-        float totalPercentage = 0;
 
+        float totalPercentage = 0f;
         for (Float percentage : languagesData.values()) {
             totalPercentage += percentage;
         }
 
-        if (totalPercentage == 0) {
-            totalPercentage = 1;
-        }
+        totalPercentage =  (totalPercentage == 0) ? 1 : totalPercentage;
 
+        String json = loadJsonFromAsset();
         for (Map.Entry<String, Float> entry : languagesData.entrySet()) {
             String language = entry.getKey();
             float percentage = entry.getValue();
-
-            // Create a view for the bar
             View languageBar = new View(getContext());
-            int color = getColorForLanguage("."+language);
+            int color = getColorForLanguage("."+language, json);
             languageBar.setBackgroundColor(color);
 
-            // Calculate bar width based on percentage
             LayoutParams params = new LayoutParams(
                     0, LayoutParams.MATCH_PARENT, percentage / totalPercentage
             );
@@ -64,11 +60,10 @@ public class LanguageBarChartView extends LinearLayout {
         }
     }
 
-    private int getColorForLanguage(String language) {
+    private int getColorForLanguage(String language, String json) {
         int colorId = ContextCompat.getColor(getContext(), R.color.default_color);
         Log.d("LanguageBarChart","Language :- "+language);
         try {
-            String json = loadJsonFromAsset();
             if (json == null) {
                 return colorId;
             }

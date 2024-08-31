@@ -18,7 +18,7 @@ class RepositorySearchAdapter(private var repo: List<Repository>, val onItemClic
         val repoName: TextView = itemView.findViewById(R.id.repo_name)
 
         init {
-            itemView.setOnClickListener { onItemClick(repo[adapterPosition].owner + " /" + repo[adapterPosition].name) }
+            itemView.setOnClickListener { onItemClick(repo[adapterPosition].owner + " / " + repo[adapterPosition].name) }
         }
     }
 

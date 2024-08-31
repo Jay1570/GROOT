@@ -2,14 +2,20 @@ package com.example.groot
 
 import android.os.Bundle
 import android.util.Log
+import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.ScrollView
 import android.widget.TextView
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
+import androidx.core.view.updateMargins
 import com.example.groot.viewmodel.RepoDetailsViewModel
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.snackbar.Snackbar
 import io.noties.markwon.Markwon
@@ -24,7 +30,7 @@ class RepoDetailsActivity : AppCompatActivity() {
     private lateinit var readmeTextView: TextView
     private lateinit var progressBar: ProgressBar
     private lateinit var btnCode: MaterialCardView
-    private lateinit var toolbar: Toolbar
+    private lateinit var toolbar: MaterialToolbar
     private lateinit var maincontent: ScrollView
     private lateinit var languageBarChartView: LanguageBarChartView
 
@@ -33,6 +39,7 @@ class RepoDetailsActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContentView(R.layout.activity_repo_details)
 
         txtUsername = findViewById(R.id.txt_username)
@@ -40,7 +47,7 @@ class RepoDetailsActivity : AppCompatActivity() {
         readmeTextView = findViewById(R.id.readme_text)
         progressBar = findViewById(R.id.progressBar)
         btnCode = findViewById(R.id.btn_code)
-        toolbar = findViewById(R.id.toolbar)
+        toolbar = findViewById(R.id.topAppBar)
         maincontent = findViewById(R.id.maincontent)
         languageBarChartView = findViewById(R.id.languageBarChartView)
 
@@ -55,6 +62,7 @@ class RepoDetailsActivity : AppCompatActivity() {
         val username = path.substringBefore("/").trim()
         val repoName = path.substringAfter("/").trim()
 
+        toolbar.title = repoName
         txtUsername.text = username
         txtReponame.text = repoName
 
@@ -84,5 +92,21 @@ class RepoDetailsActivity : AppCompatActivity() {
             }
             startActivity(intent)
         }*/
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
+            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val bottomPadding = if (!insets.isVisible(WindowInsetsCompat.Type.ime())) systemBarsInsets.bottom else 0
+            v.setPadding(
+                systemBarsInsets.left,
+                systemBarsInsets.top,
+                systemBarsInsets.right,
+                bottomPadding
+            )
+            v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                updateMargins(bottom = imeInsets.bottom)
+            }
+            WindowInsetsCompat.CONSUMED
+        }
     }
 }

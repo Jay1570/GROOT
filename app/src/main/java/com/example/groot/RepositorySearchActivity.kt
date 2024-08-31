@@ -1,5 +1,6 @@
 package com.example.groot
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -48,7 +49,7 @@ class RepositorySearchActivity : AppCompatActivity() {
         viewModel.onRepositorySearch(query)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        val recyclerAdapter = RepositorySearchAdapter(emptyList()) {}
+        val recyclerAdapter = RepositorySearchAdapter(emptyList()) { onItemClick(it) }
         recyclerView.adapter = recyclerAdapter
 
         viewModel.repoList.observe(this) { repoList ->
@@ -68,5 +69,11 @@ class RepositorySearchActivity : AppCompatActivity() {
         appBar.setNavigationOnClickListener {
             finish()
         }
+    }
+
+    fun onItemClick(path: String) {
+        val intent = Intent(this, RepoDetailsActivity::class.java)
+        intent.putExtra("path", path)
+        startActivity(intent)
     }
 }
