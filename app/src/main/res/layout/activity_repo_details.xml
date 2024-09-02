@@ -98,26 +98,33 @@
 
                 <com.google.android.material.button.MaterialButton
                     style="@style/Widget.Material3.Button.TextButton.Icon"
-                    android:id="@+id/textView"
+                    android:id="@+id/starCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="@string/star"
                     android:layout_marginStart="10dp"
                     app:iconTint="@color/md_theme_onBackground"
                     app:icon="@drawable/starred"
                     app:iconPadding="10dp"
                     app:iconSize="24dp"
-                    android:text="0 Stars"
                     android:textColor="@color/md_theme_onBackground"
                     android:textSize="15sp" />
             </LinearLayout>
 
-            <androidx.appcompat.widget.AppCompatToggleButton
-                android:id="@+id/btnFollow"
-                android:background="@drawable/follow_button_border"
+            <com.google.android.material.button.MaterialButton
+                style="@style/Widget.Material3.Button.OutlinedButton.Icon"
+                android:id="@+id/btnStar"
+                android:backgroundTint="@color/md_theme_surfaceContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textOn="@string/Starred"
-                android:textOff="@string/unstarred"
+                android:text="@string/star"
+                android:textSize="16sp"
+                app:iconPadding="20dp"
+                app:iconGravity="textStart"
+                android:textColor="@color/md_theme_onBackground"
+                app:icon="@drawable/starred"
+                app:iconTint="#FFFF00"
+                app:iconSize="24dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="20dp"/>
 

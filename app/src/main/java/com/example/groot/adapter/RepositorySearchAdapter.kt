@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.groot.R
 import com.example.groot.model.Repository
 
-class RepositorySearchAdapter(private var repo: List<Repository>, val onItemClick : (String) -> Unit):
+class RepositorySearchAdapter(private var repo: List<Repository> = emptyList(), private var repoPath: List<String> = emptyList(), val onItemClick : (String) -> Unit):
     RecyclerView.Adapter<RepositorySearchAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
@@ -18,7 +18,10 @@ class RepositorySearchAdapter(private var repo: List<Repository>, val onItemClic
         val repoName: TextView = itemView.findViewById(R.id.repo_name)
 
         init {
-            itemView.setOnClickListener { onItemClick(repo[adapterPosition].owner + " / " + repo[adapterPosition].name) }
+            itemView.setOnClickListener {
+                if (repo.isNotEmpty()) onItemClick(repo[adapterPosition].owner + " / " + repo[adapterPosition].name)
+                else onItemClick(repoPath[adapterPosition])
+            }
         }
     }
 
@@ -28,17 +31,27 @@ class RepositorySearchAdapter(private var repo: List<Repository>, val onItemClic
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val repository = repo[position]
         holder.userIcon.setImageResource(R.drawable.repo_git_svgrepo_com)
-        holder.username.text = repository.owner
-        holder.repoName.text = repository.name
+        if (repo.isNotEmpty()){
+            val repository = repo[position]
+            holder.username.text = repository.owner
+            holder.repoName.text = repository.name
+        } else {
+            val path = repoPath[position]
+            holder.username.text = path.substringBefore("/").trim()
+            holder.repoName.text = path.substringAfter("/").trim()
+        }
     }
 
     override fun getItemCount(): Int {
-        return repo.size
+        return if (repo.isNotEmpty()) repo.size else repoPath.size
     }
 
     fun updateList(newList: List<Repository>) {
         repo = newList
+    }
+
+    fun updatePath(newList: List<String>) {
+        repoPath = newList
     }
 }

@@ -7,4 +7,5 @@ data class Repository(
     val name: String = "",
     val owner: String = "",
     val isPrivate: Boolean = false,
+    val stars: List<String> = emptyList()
 )

@@ -3,8 +3,12 @@ package com.example.groot.viewmodel
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
+import com.example.groot.model.Repository
+import com.example.groot.repositories.RepositoryData
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageException
 import com.google.firebase.storage.StorageReference
@@ -15,11 +19,21 @@ class RepoDetailsViewModel : ViewModel() {
 
     private val firebaseStorage = FirebaseStorage.getInstance()
 
+    private val repository = RepositoryData()
+
     private val _readmeContent = MutableLiveData<String>()
     val readmeContent: LiveData<String> get() = _readmeContent
 
     private val _languageContributions = MutableLiveData<Map<String, Float>>()
     val languageContributions: LiveData<Map<String, Float>> get() = _languageContributions
+
+    private val _isStarred = MutableLiveData<Boolean>()
+    val isStarred: LiveData<Boolean> get() = _isStarred
+
+    private val _starCount = MutableLiveData<Int>()
+    val starCount: LiveData<Int> get() = _starCount
+
+    val repositoryDetails: LiveData<Repository> = repository.repository.asLiveData()
 
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> get() = _isLoading
@@ -27,11 +41,32 @@ class RepoDetailsViewModel : ViewModel() {
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> get() = _error
 
+    private val repoObserver = Observer<Repository> { repo ->
+        _isStarred.value = repo.stars.contains(repository.currentUserId)
+        _starCount.value = repo.stars.size
+    }
+
+    init {
+        repositoryDetails.observeForever(repoObserver)
+    }
+
+    fun starRepo(path: String) {
+        viewModelScope.launch {
+            repository.starRepo(path)
+        }
+    }
+
+    fun unstarRepo(path: String) {
+        viewModelScope.launch {
+            repository.unstarRepo(path)
+        }
+    }
+
     fun fetchReadmeAndContributions(path: String) {
         _isLoading.value = true
-
         viewModelScope.launch {
             try {
+                repository.getRepository(path)
                 fetchReadmeFile(path)
                 fetchFilesAndCalculateContributions(path)
             } catch (e : Exception) {
@@ -123,5 +158,9 @@ class RepoDetailsViewModel : ViewModel() {
                 }
             }
         }
+    }
+    override fun onCleared() {
+        super.onCleared()
+        repositoryDetails.removeObserver(repoObserver)
     }
 }

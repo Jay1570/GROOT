@@ -16,6 +16,7 @@ import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMargins
 import com.example.groot.viewmodel.RepoDetailsViewModel
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.snackbar.Snackbar
 import io.noties.markwon.Markwon
@@ -28,12 +29,15 @@ class RepoDetailsActivity : AppCompatActivity() {
     private lateinit var txtUsername: TextView
     private lateinit var txtReponame: TextView
     private lateinit var readmeTextView: TextView
+    private lateinit var btnStar: MaterialButton
+    private lateinit var starCount: MaterialButton
     private lateinit var progressBar: ProgressBar
     private lateinit var btnCode: MaterialCardView
     private lateinit var toolbar: MaterialToolbar
     private lateinit var maincontent: ScrollView
     private lateinit var languageBarChartView: LanguageBarChartView
 
+    private var isStarred = false
     private lateinit var markwon: Markwon
     private lateinit var path: String
 
@@ -45,6 +49,8 @@ class RepoDetailsActivity : AppCompatActivity() {
         txtUsername = findViewById(R.id.txt_username)
         txtReponame = findViewById(R.id.txt_repo_name)
         readmeTextView = findViewById(R.id.readme_text)
+        btnStar = findViewById(R.id.btnStar)
+        starCount = findViewById(R.id.starCount)
         progressBar = findViewById(R.id.progressBar)
         btnCode = findViewById(R.id.btn_code)
         toolbar = findViewById(R.id.topAppBar)
@@ -84,6 +90,24 @@ class RepoDetailsActivity : AppCompatActivity() {
         viewModel.isLoading.observe(this) { isLoading ->
             progressBar.isVisible = isLoading
             maincontent.isVisible = !isLoading
+        }
+
+        viewModel.starCount.observe(this) { stars ->
+            starCount.text = "$stars"
+        }
+
+        viewModel.isStarred.observe(this) {
+            isStarred = it
+            btnStar.text = if (isStarred) getString(R.string.Starred) else getString(R.string.star)
+            btnStar.icon = if (isStarred) getDrawable(R.drawable.filled_star) else getDrawable(R.drawable.starred)
+        }
+
+        btnStar.setOnClickListener {
+            if (isStarred) {
+                viewModel.unstarRepo(path)
+            } else {
+                viewModel.starRepo(path)
+            }
         }
 
         /*btnCode.setOnClickListener {
