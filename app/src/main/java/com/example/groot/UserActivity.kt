@@ -59,6 +59,7 @@ class UserActivity : AppCompatActivity() {
 
         viewModel.profile.observe(this) { user ->
             username = user.userName + " "
+
             viewUsername.text = user.userName
             if (user.imgUrl.isNotEmpty()){
                 profileImage.load(user.imgUrl) {
@@ -101,7 +102,9 @@ class UserActivity : AppCompatActivity() {
         }
 
         btnStarred.setOnClickListener {
-            startActivity(Intent(this, StarredActivity::class.java))
+            val intent = Intent(this, StarredActivity::class.java)
+            intent.putExtra("userId", userId)
+            startActivity(intent)
         }
 
         appBar.setNavigationOnClickListener {

@@ -21,6 +21,8 @@ class RepositoryData {
     private val _repository = MutableStateFlow(Repository())
     val repository: StateFlow<Repository> get() =  _repository
 
+    private val _starredRepositories = MutableStateFlow(StarredRepositories())
+    val starredRepositories: StateFlow<StarredRepositories> get() = _starredRepositories
 
     suspend fun getRepository (path: String) {
         val owner = path.substringBefore("/").trim()
@@ -91,6 +93,31 @@ class RepositoryData {
             fireStore.collection(REPOSITORY_COLLECTION).document(repoDocument).update("stars", FieldValue.arrayRemove(currentUserId))
         } catch (e: Exception) {
             Log.e("Repository", e.message.toString())
+        }
+    }
+    fun getStarredRepositories() {
+        val docRef = fireStore.collection(STARRED_REPOSITORY).document(currentUserId)
+        docRef.addSnapshotListener { snapshot, e ->
+            if (e != null) {
+                Log.e("UserRepository", e.message.toString())
+                return@addSnapshotListener
+            }
+            if (snapshot != null && snapshot.exists()) {
+                _starredRepositories.value = snapshot.toObject(StarredRepositories::class.java) ?: StarredRepositories()
+            }
+        }
+    }
+
+    fun getStarredRepositories(userId: String) {
+        val docRef = fireStore.collection(STARRED_REPOSITORY).document(userId)
+        docRef.addSnapshotListener { snapshot, e ->
+            if (e != null) {
+                Log.e("UserRepository", e.message.toString())
+                return@addSnapshotListener
+            }
+            if (snapshot != null && snapshot.exists()) {
+                _starredRepositories.value = snapshot.toObject(StarredRepositories::class.java) ?: StarredRepositories()
+            }
         }
     }
 }

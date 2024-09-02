@@ -17,6 +17,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
 class RepoActivity : AppCompatActivity() {
+
     private val TAG = "RepositoryListActivity"
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: RepositoryAdapter
@@ -24,6 +25,7 @@ class RepoActivity : AppCompatActivity() {
     private lateinit var userStorageRef: StorageReference
     private lateinit var username: String
     private lateinit var progressBar: View
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

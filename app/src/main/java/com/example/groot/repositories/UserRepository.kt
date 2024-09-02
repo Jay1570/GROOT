@@ -3,11 +3,9 @@ package com.example.groot.repositories
 import android.util.Log
 import com.example.groot.model.Friends
 import com.example.groot.model.Repository
-import com.example.groot.model.StarredRepositories
 import com.example.groot.model.User
 import com.example.groot.utility.FRIENDS_COLLECTION
 import com.example.groot.utility.REPOSITORY_COLLECTION
-import com.example.groot.utility.STARRED_REPOSITORY
 import com.example.groot.utility.USER_COLLECTION
 import com.google.android.gms.tasks.Tasks
 import com.google.firebase.auth.FirebaseAuth
@@ -37,9 +35,6 @@ class UserRepository {
 
     private val _followingProfiles = MutableStateFlow<List<User>>(emptyList())
     val followingProfiles: StateFlow<List<User>> = _followingProfiles
-
-    private val _starredRepositories = MutableStateFlow(StarredRepositories())
-    val starredRepositories: StateFlow<StarredRepositories> get() = _starredRepositories
 
     fun getProfile() {
         if (currentUserId.isNotEmpty()) {
@@ -161,19 +156,6 @@ class UserRepository {
         } catch (e: Exception) {
             Log.e("AuthRepository", "Error fetching follower profiles", e)
             _followingProfiles.value = emptyList()
-        }
-    }
-
-    fun getStarredRepositories() {
-        val docRef = fireStore.collection(STARRED_REPOSITORY).document(currentUserId)
-        docRef.addSnapshotListener { snapshot, e ->
-            if (e != null) {
-                Log.e("UserRepository", e.message.toString())
-                return@addSnapshotListener
-            }
-            if (snapshot != null && snapshot.exists()) {
-                _starredRepositories.value = snapshot.toObject(StarredRepositories::class.java) ?: StarredRepositories()
-            }
         }
     }
 }

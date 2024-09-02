@@ -71,7 +71,7 @@ class RepositorySearchActivity : AppCompatActivity() {
         }
     }
 
-    fun onItemClick(path: String) {
+    private fun onItemClick(path: String) {
         val intent = Intent(this, RepoDetailsActivity::class.java)
         intent.putExtra("path", path)
         startActivity(intent)
