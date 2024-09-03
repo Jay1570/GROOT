@@ -6,6 +6,6 @@ data class Repository(
     @DocumentId val id: String = "",
     val name: String = "",
     val owner: String = "",
-    val isPrivate: Boolean = false,
+    val private: Boolean = false,
     val stars: List<String> = emptyList()
 )

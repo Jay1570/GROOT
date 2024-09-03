@@ -11,7 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.groot.adapter.RepositorySearchAdapter
+import com.example.groot.adapter.RepositoryListAdapter
 import com.example.groot.viewmodel.SearchResultsActivityViewModel
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.progressindicator.CircularProgressIndicator
@@ -49,7 +49,7 @@ class RepositorySearchActivity : AppCompatActivity() {
         viewModel.onRepositorySearch(query)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        val recyclerAdapter = RepositorySearchAdapter(emptyList()) { onItemClick(it) }
+        val recyclerAdapter = RepositoryListAdapter(emptyList()) { onItemClick(it) }
         recyclerView.adapter = recyclerAdapter
 
         viewModel.repoList.observe(this) { repoList ->

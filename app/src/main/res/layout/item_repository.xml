@@ -12,6 +12,7 @@
         android:layout_height="30dp"
         android:layout_marginEnd="16dp"
         android:layout_gravity="center_vertical"
+        android:contentDescription="@string/Repositories"
         android:src="@drawable/repo_git_svgrepo_com" />
 
     <LinearLayout
@@ -26,7 +27,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/user_name"
-            android:layout_marginStart="6dp"
             android:textColor="@color/md_theme_outline"/>
 
         <TextView

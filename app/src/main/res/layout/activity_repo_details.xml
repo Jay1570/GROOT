@@ -123,7 +123,7 @@
                 app:iconGravity="textStart"
                 android:textColor="@color/md_theme_onBackground"
                 app:icon="@drawable/starred"
-                app:iconTint="#FFFF00"
+                app:iconTint="#DAA520"
                 app:iconSize="24dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginHorizontal="20dp"/>

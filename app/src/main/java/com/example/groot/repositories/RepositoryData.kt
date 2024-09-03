@@ -18,6 +18,8 @@ class RepositoryData {
     private val fireStore = FirebaseFirestore.getInstance()
     val currentUserId get() = auth.currentUser?.uid ?: ""
 
+    private var repoId = ""
+
     private val _repository = MutableStateFlow(Repository())
     val repository: StateFlow<Repository> get() =  _repository
 
@@ -29,10 +31,12 @@ class RepositoryData {
         val repoName = path.substringAfter("/").trim()
         val query = fireStore.collection(REPOSITORY_COLLECTION).whereEqualTo("name", repoName).whereEqualTo("owner", owner).get().await()
         if (query.documents.isEmpty()) {
-            _repository.value = Repository()
-            return
+            val repo = Repository(name = repoName, owner = owner, private = false, stars = emptyList())
+            repoId = fireStore.collection(REPOSITORY_COLLECTION).add(repo).await().id
+            _repository.value = repo.copy(id = repoId)
+        } else {
+            repoId = query.documents.first().id
         }
-        val repoId = query.documents.first().id
         val docRef = fireStore.collection(REPOSITORY_COLLECTION).document(repoId)
         docRef.addSnapshotListener { snapshot, e ->
             if (e != null) {
@@ -46,31 +50,10 @@ class RepositoryData {
     }
 
     suspend fun starRepo(path: String) {
-        val owner = path.substringBefore("/").trim()
-        val repoName = path.substringAfter("/").trim()
         try {
 
-            val docRef = fireStore.collection(STARRED_REPOSITORY).document(currentUserId)
-            val document = docRef.get().await()
-
-            if (document.exists()) {
-                docRef.update("repositories", FieldValue.arrayUnion(path)).await()
-            } else {
-                val star = StarredRepositories(userId = currentUserId, repositories = listOf(path))
-                docRef.set(star).await()
-            }
-
-            val query = fireStore.collection(REPOSITORY_COLLECTION).whereEqualTo("name", repoName).whereEqualTo("owner", owner)
-            val repoDocument = query.get().await()
-
-            if (repoDocument.isEmpty) {
-                val repo = Repository(name = repoName, owner = owner, stars = listOf(currentUserId))
-                fireStore.collection(REPOSITORY_COLLECTION).add(repo).await()
-                _repository.value = repo
-            } else {
-                val docId = repoDocument.documents.first().id
-                fireStore.collection(REPOSITORY_COLLECTION).document(docId).update("stars", FieldValue.arrayUnion(currentUserId)).await()
-            }
+            fireStore.collection(STARRED_REPOSITORY).document(currentUserId).update("repositories", FieldValue.arrayUnion(path)).await()
+            fireStore.collection(REPOSITORY_COLLECTION).document(repoId).update("stars", FieldValue.arrayUnion(currentUserId)).await()
 
         } catch (e: Exception) {
             Log.e("Repository", e.message.toString())
@@ -79,37 +62,24 @@ class RepositoryData {
 
     suspend fun unstarRepo(path: String) {
         try {
-            val repoName = path.substringAfter("/").trim()
-            val owner = path.substringBefore("/").trim()
-            fireStore.collection(STARRED_REPOSITORY).document(currentUserId)
-                .update("repositories", FieldValue.arrayRemove(path)).await()
-            val repoDocument = fireStore
-                .collection(REPOSITORY_COLLECTION)
-                .whereEqualTo("name", repoName)
-                .whereEqualTo("owner", owner)
-                .get()
-                .await().documents.first().id
 
-            fireStore.collection(REPOSITORY_COLLECTION).document(repoDocument).update("stars", FieldValue.arrayRemove(currentUserId))
+            fireStore.collection(STARRED_REPOSITORY).document(currentUserId).update("repositories", FieldValue.arrayRemove(path)).await()
+            fireStore.collection(REPOSITORY_COLLECTION).document(repoId).update("stars", FieldValue.arrayRemove(currentUserId))
+
         } catch (e: Exception) {
             Log.e("Repository", e.message.toString())
         }
     }
-    fun getStarredRepositories() {
-        val docRef = fireStore.collection(STARRED_REPOSITORY).document(currentUserId)
-        docRef.addSnapshotListener { snapshot, e ->
-            if (e != null) {
-                Log.e("UserRepository", e.message.toString())
-                return@addSnapshotListener
-            }
-            if (snapshot != null && snapshot.exists()) {
-                _starredRepositories.value = snapshot.toObject(StarredRepositories::class.java) ?: StarredRepositories()
+
+    fun getStarredRepositories(userId: String = currentUserId) {
+        val docRef = fireStore.collection(STARRED_REPOSITORY).document(userId)
+        docRef.get().addOnSuccessListener {
+            if (!it.exists()) {
+                val star = StarredRepositories(userId = currentUserId, repositories = emptyList())
+                docRef.set(star)
+                _starredRepositories.value = star
             }
         }
-    }
-
-    fun getStarredRepositories(userId: String) {
-        val docRef = fireStore.collection(STARRED_REPOSITORY).document(userId)
         docRef.addSnapshotListener { snapshot, e ->
             if (e != null) {
                 Log.e("UserRepository", e.message.toString())

@@ -12,7 +12,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.groot.adapter.RepositorySearchAdapter
+import com.example.groot.adapter.RepositoryListAdapter
 import com.example.groot.viewmodel.StarRepoViewModel
 import com.google.android.material.appbar.MaterialToolbar
 
@@ -42,7 +42,7 @@ class StarredActivity : AppCompatActivity() {
         window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        val recyclerAdapter = RepositorySearchAdapter(repoPath = emptyList()) { onItemClick(it) }
+        val recyclerAdapter = RepositoryListAdapter(repoPath = emptyList()) { onItemClick(it) }
         recyclerView.adapter = recyclerAdapter
 
         toolbar.setNavigationOnClickListener {

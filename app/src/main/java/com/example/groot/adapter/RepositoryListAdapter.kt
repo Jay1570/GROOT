@@ -9,8 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.groot.R
 import com.example.groot.model.Repository
 
-class RepositorySearchAdapter(private var repo: List<Repository> = emptyList(), private var repoPath: List<String> = emptyList(), val onItemClick : (String) -> Unit):
-    RecyclerView.Adapter<RepositorySearchAdapter.ViewHolder>() {
+class RepositoryListAdapter(private var repo: List<Repository> = emptyList(), private var repoPath: List<String> = emptyList(), val onItemClick : (String) -> Unit):
+    RecyclerView.Adapter<RepositoryListAdapter.ViewHolder>() {
 
     inner class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val userIcon: ImageView = itemView.findViewById(R.id.user_icon)

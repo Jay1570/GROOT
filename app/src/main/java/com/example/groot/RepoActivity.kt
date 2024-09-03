@@ -10,8 +10,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.groot.adapter.RepositoryDetails
-import com.example.groot.adapter.RepositoryAdapter
+import com.example.groot.adapter.RepositoryListAdapter
+import com.example.groot.model.Repository
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -20,8 +20,8 @@ class RepoActivity : AppCompatActivity() {
 
     private val TAG = "RepositoryListActivity"
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: RepositoryAdapter
-    private val repositories = mutableListOf<RepositoryDetails>()
+    private val repositories = mutableListOf<Repository>()
+    private lateinit var adapter: RepositoryListAdapter
     private lateinit var userStorageRef: StorageReference
     private lateinit var username: String
     private lateinit var progressBar: View
@@ -46,9 +46,7 @@ class RepoActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        adapter = RepositoryAdapter(this, repositories) { repo ->
-            openRepository(repo)
-        }
+        adapter = RepositoryListAdapter(repo = repositories) { openRepository(it) }
         recyclerView.adapter = adapter
 
         progressBar = findViewById(R.id.progressBar)
@@ -64,7 +62,7 @@ class RepoActivity : AppCompatActivity() {
             .addOnSuccessListener { listResult ->
                 repositories.clear()
                 listResult.prefixes.forEach { prefix ->
-                    repositories.add(RepositoryDetails(prefix.name, userStorageRef.name))
+                    repositories.add(Repository(name = prefix.name.trim(), owner = username.trim()))
                 }
                 adapter.notifyDataSetChanged()
                 progressBar.visibility = View.GONE
@@ -75,10 +73,9 @@ class RepoActivity : AppCompatActivity() {
             }
     }
 
-    private fun openRepository(repository: RepositoryDetails) {
+    private fun openRepository(path: String) {
         val intent = Intent(this, RepoDetailsActivity::class.java).apply {
-            putExtra("path", username + "/" + repository.name)
-            Log.i(TAG, username + "/" + repository.name)
+            putExtra("path", path)
         }
         startActivity(intent)
     }
