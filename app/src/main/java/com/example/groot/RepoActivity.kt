@@ -4,10 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updateLayoutParams
+import androidx.core.view.updateMargins
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.groot.adapter.RepositoryListAdapter
@@ -31,6 +34,22 @@ class RepoActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_repo)
 
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
+            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            val bottomPadding = if (!insets.isVisible(WindowInsetsCompat.Type.ime())) systemBarsInsets.bottom else 0
+            v.setPadding(
+                systemBarsInsets.left,
+                systemBarsInsets.top,
+                systemBarsInsets.right,
+                bottomPadding
+            )
+            v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                updateMargins(bottom = imeInsets.bottom)
+            }
+            WindowInsetsCompat.CONSUMED
+        }
+
         val toolbarRepo: MaterialToolbar = findViewById(R.id.topAppBar)
         window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
 
@@ -38,11 +57,7 @@ class RepoActivity : AppCompatActivity() {
         toolbarRepo.setNavigationOnClickListener {
             finish()
         }
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
+
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
