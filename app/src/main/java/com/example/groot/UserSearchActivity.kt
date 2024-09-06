@@ -2,6 +2,7 @@ package com.example.groot
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -9,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
+import androidx.core.view.updateMargins
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.groot.adapter.UserListRecyclerViewAdapter
@@ -31,19 +34,25 @@ class UserSearchActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_search_results)
 
-        window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
-        window.navigationBarColor = getColor(R.color.md_theme_surfaceContainer)
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-
         recyclerView = findViewById(R.id.recyclerViewSearch)
         appBar = findViewById(R.id.topAppBar)
         progressBar = findViewById(R.id.progressBar)
         message = findViewById(R.id.message)
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
+            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.findViewById<MaterialToolbar>(R.id.topAppBar).setPadding(
+                systemBarsInsets.left,
+                systemBarsInsets.top,
+                systemBarsInsets.right,
+                appBar.paddingBottom
+            )
+            v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                updateMargins(bottom = imeInsets.bottom)
+            }
+            WindowInsetsCompat.CONSUMED
+        }
 
         val query = intent.getStringExtra("QUERY") ?: ""
         viewModel.onUserSearch(query)

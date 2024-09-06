@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
@@ -99,7 +100,7 @@ class RepoDetailsActivity : AppCompatActivity() {
         viewModel.isStarred.observe(this) {
             isStarred = it
             btnStar.text = if (isStarred) getString(R.string.Starred) else getString(R.string.star)
-            btnStar.icon = if (isStarred) getDrawable(R.drawable.filled_star) else getDrawable(R.drawable.starred)
+            btnStar.icon = if (isStarred) AppCompatResources.getDrawable(this, R.drawable.filled_star) else AppCompatResources.getDrawable(this, R.drawable.starred)
         }
 
         btnStar.setOnClickListener {
@@ -120,12 +121,11 @@ class RepoDetailsActivity : AppCompatActivity() {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
             val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            val bottomPadding = if (!insets.isVisible(WindowInsetsCompat.Type.ime())) systemBarsInsets.bottom else 0
-            v.setPadding(
+            v.findViewById<MaterialToolbar>(R.id.topAppBar).setPadding(
                 systemBarsInsets.left,
                 systemBarsInsets.top,
                 systemBarsInsets.right,
-                bottomPadding
+                toolbar.paddingBottom
             )
             v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 updateMargins(bottom = imeInsets.bottom)
