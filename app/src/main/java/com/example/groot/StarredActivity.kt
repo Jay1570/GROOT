@@ -2,6 +2,7 @@ package com.example.groot
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
@@ -10,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
+import androidx.core.view.updateMargins
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.groot.adapter.RepositoryListAdapter
@@ -39,8 +42,6 @@ class StarredActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progressBar)
         message = findViewById(R.id.message)
 
-        window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
-
         recyclerView.layoutManager = LinearLayoutManager(this)
         val recyclerAdapter = RepositoryListAdapter(repoPath = emptyList()) { onItemClick(it) }
         recyclerView.adapter = recyclerAdapter
@@ -62,9 +63,18 @@ class StarredActivity : AppCompatActivity() {
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+            val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
+            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.findViewById<MaterialToolbar>(R.id.topAppBar).setPadding(
+                systemBarsInsets.left,
+                systemBarsInsets.top,
+                systemBarsInsets.right,
+                toolbar.paddingBottom
+            )
+            v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                updateMargins(bottom = imeInsets.bottom)
+            }
+            WindowInsetsCompat.CONSUMED
         }
     }
 

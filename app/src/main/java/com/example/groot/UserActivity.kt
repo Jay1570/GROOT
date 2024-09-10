@@ -2,6 +2,7 @@ package com.example.groot
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -9,6 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatToggleButton
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.updateLayoutParams
+import androidx.core.view.updateMargins
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.example.groot.viewmodel.UserViewModel
@@ -36,18 +39,6 @@ class UserActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_user)
 
-        window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-        val userId = intent.getStringExtra("userId") ?: ""
-        viewModel.getUserId(userId)
-
-        var username = ""
-
         viewUsername = findViewById(R.id.viewUsername)
         followersCount = findViewById(R.id.followersCount)
         followingCount = findViewById(R.id.followingCount)
@@ -56,6 +47,25 @@ class UserActivity : AppCompatActivity() {
         profileImage = findViewById(R.id.profileImage)
         btnFollow = findViewById(R.id.btnFollow)
         appBar = findViewById(R.id.topAppBar)
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
+            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
+            v.findViewById<MaterialToolbar>(R.id.topAppBar).setPadding(
+                systemBarsInsets.left,
+                systemBarsInsets.top,
+                systemBarsInsets.right,
+                appBar.paddingBottom
+            )
+            v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
+                updateMargins(bottom = imeInsets.bottom)
+            }
+            WindowInsetsCompat.CONSUMED
+        }
+        val userId = intent.getStringExtra("userId") ?: ""
+        viewModel.getUserId(userId)
+
+        var username = ""
 
         viewModel.profile.observe(this) { user ->
             username = user.userName + " "

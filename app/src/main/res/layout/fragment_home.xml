@@ -8,27 +8,6 @@
     android:id="@+id/main"
     tools:context=".fragments.HomeFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/myWorkText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/topAppBar"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/md_theme_surfaceContainer"
-            android:minHeight="?attr/actionBarSize"
-            app:menu="@menu/top_app_bar"
-            app:title="@string/home" />
-
-    </com.google.android.material.appbar.AppBarLayout>
-
     <TextView
         android:id="@+id/myWorkText"
         android:layout_width="match_parent"
@@ -41,7 +20,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/btnRepository"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBar" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.button.MaterialButton
         style="@style/Widget.Material3.Button.TextButton.Icon"

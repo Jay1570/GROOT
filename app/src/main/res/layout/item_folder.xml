@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="#17181c"
+    android:padding="17dp">
+
+    <ImageView
+        android:id="@+id/icon"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
+        android:src="@drawable/folder_svgrepo_com" />
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Folder"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+</LinearLayout>
