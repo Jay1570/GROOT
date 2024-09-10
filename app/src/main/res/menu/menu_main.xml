@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/action_search"
-        android:icon="@drawable/search_svgrepo_com"
+        android:icon="@drawable/baseline_search_24"
         android:title="Search"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_share"
-        android:icon="@drawable/share_svgrepo_com__1_"
+        android:icon="@drawable/share"
         android:title="Share"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_more"
-        android:icon="@drawable/menu_vertical_svgrepo_com"
+        android:icon="@drawable/more"
         android:title="More"
         app:showAsAction="ifRoom" />
 </menu>

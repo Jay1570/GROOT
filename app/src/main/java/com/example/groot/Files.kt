@@ -23,7 +23,7 @@ import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
 class Files : AppCompatActivity() {
-    private val TAG = "MainActivity"
+    private val TAG = "FilesListActivity"
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: StorageAdapter
     private val storageItems = mutableListOf<StorageItem>()
@@ -36,15 +36,13 @@ class Files : AppCompatActivity() {
     private lateinit var treeAdapter: TreeViewAdapter
     private lateinit var recycler_ViewDraw: RecyclerView
 
-    private lateinit var username: String
-    private lateinit var repositoryName: String
+    private lateinit var path: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         this.enableEdgeToEdge()
         setContentView(R.layout.activity_files)
-        username = intent.getStringExtra("USERNAME") ?: "defaultUsername"
-        repositoryName = intent.getStringExtra("REPOSITORY_NAME") ?: "defaultRepository"
+        path = intent.getStringExtra("path") ?: ""
 
         recycler_ViewDraw = findViewById(R.id.recycler_view)
         drawerLayout = findViewById(R.id.drawer_layout)
@@ -53,13 +51,13 @@ class Files : AppCompatActivity() {
 
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
-            setHomeAsUpIndicator(R.drawable.menu_alt_1_svgrepo_com) // Set custom icon
+            setHomeAsUpIndicator(R.drawable.menu_alt_1_svgrepo_com)
         }
 
         // Initialize StorageReference to point to repositoryName directory
-        repoRef = FirebaseStorage.getInstance().reference.child(username).child(repositoryName)
+        repoRef = FirebaseStorage.getInstance().reference.child(path)
         currentRef = repoRef
-        currentRefTree = FirebaseStorage.getInstance().reference.child(username)
+        currentRefTree = FirebaseStorage.getInstance().reference.child(path.substringBefore("/"))
 
         // Set up main RecyclerView
         recyclerView = findViewById(R.id.recyclerView)

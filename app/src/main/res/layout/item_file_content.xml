@@ -6,33 +6,33 @@
 
     <LinearLayout
         android:layout_width="40dp"
-        android:layout_height="40dp"
+        android:layout_height="25dp"
         android:gravity="center"
-        android:background="#201f24">
+        android:background="@color/md_theme_surfaceContainer">
 
         <TextView
             android:id="@+id/lineNumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="13sp"
-            android:textColor="#9D8686" />
+            android:textColor="@color/md_theme_onSurface" />
     </LinearLayout>
     <View
         android:layout_width="1dp"
         android:layout_height="match_parent"
-        android:background="#4E4141"/>
+        android:background="@color/md_theme_outline"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#17181c"
+        android:background="@color/md_theme_background"
         android:gravity="center">
 
         <TextView
             android:id="@+id/lineContent"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="@android:color/white"
+            android:textColor="@color/md_theme_onBackground"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
             android:textSize="17sp"/>
