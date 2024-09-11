@@ -5,18 +5,15 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.groot.adapter.StorageAdapter
-import com.example.groot.fragments.TreeViewAdapter
+import com.example.groot.adapter.TreeViewAdapter
 import com.example.groot.model.StorageItem
 import com.example.groot.model.TreeNode
 import com.google.firebase.storage.FirebaseStorage
@@ -65,7 +62,11 @@ class Files : AppCompatActivity() {
         adapter = StorageAdapter(storageItems) { item -> handleItemClick(item) }
         recyclerView.adapter = adapter
 
-        treeAdapter = TreeViewAdapter(rootNodeList, this, currentRefTree)
+        treeAdapter = TreeViewAdapter(
+            rootNodeList,
+            this,
+            currentRefTree
+        )
         recycler_ViewDraw.layoutManager = LinearLayoutManager(this)
         recycler_ViewDraw.adapter = treeAdapter
 

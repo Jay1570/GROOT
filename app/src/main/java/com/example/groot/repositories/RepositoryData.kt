@@ -1,13 +1,16 @@
 package com.example.groot.repositories
 
 import android.util.Log
+import com.example.groot.model.Friends
 import com.example.groot.model.Repository
 import com.example.groot.model.StarredRepositories
 import com.example.groot.utility.REPOSITORY_COLLECTION
 import com.example.groot.utility.STARRED_REPOSITORY
+import com.example.groot.utility.USER_COLLECTION
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.tasks.await
@@ -25,6 +28,9 @@ class RepositoryData {
 
     private val _starredRepositories = MutableStateFlow(StarredRepositories())
     val starredRepositories: StateFlow<StarredRepositories> get() = _starredRepositories
+
+    private val _exploreRepositories = MutableStateFlow<List<Repository>>(emptyList())
+    val exploreRepositories: StateFlow<List<Repository>> get() = _exploreRepositories
 
     suspend fun getRepository (path: String) {
         val owner = path.substringBefore("/").trim()
@@ -88,6 +94,48 @@ class RepositoryData {
             if (snapshot != null && snapshot.exists()) {
                 _starredRepositories.value = snapshot.toObject(StarredRepositories::class.java) ?: StarredRepositories()
             }
+        }
+    }
+
+    fun fetchExplorerRepositories(friends: Friends) {
+        val followers = (friends.followers + friends.following).distinctBy { it }
+        var followedRepos: List<Repository> = emptyList()
+        fetchFollowedRepositories(followers) {
+            followedRepos = it
+        }
+        fireStore.collection(REPOSITORY_COLLECTION)
+            .whereEqualTo("private", false)
+            .orderBy("stars", Query.Direction.DESCENDING)
+            .limit(10)
+            .get()
+            .addOnSuccessListener { results ->
+                val trendingRepos = results.toObjects(Repository::class.java)
+                val repos = (trendingRepos + followedRepos).distinctBy { it.id }.shuffled()
+                _exploreRepositories.value = repos
+            }.addOnFailureListener {
+                Log.e("ExploreFragment", it.message.toString())
+            }
+    }
+
+    private fun fetchFollowedRepositories(friends: List<String>, callback: (List<Repository>) -> Unit) {
+        if (friends.isEmpty()) {
+            callback(emptyList())
+            return
+        }
+        fireStore.collection(USER_COLLECTION).whereIn("userId", friends).get().addOnSuccessListener { result ->
+            val followedUsernames = result.documents.mapNotNull { it.getString("userName") }
+            fireStore.collection(REPOSITORY_COLLECTION)
+                    .whereEqualTo("private", false)
+                    .whereIn("owner", followedUsernames)
+                    .get()
+                    .addOnSuccessListener { results ->
+                        val repo = results.toObjects(Repository::class.java)
+                        callback(repo)
+                    }.addOnFailureListener { e ->
+                        Log.e("ExploreFragment", e.message.toString())
+                    }
+        }.addOnFailureListener { e ->
+            Log.e("ExploreFragment", e.message.toString())
         }
     }
 }

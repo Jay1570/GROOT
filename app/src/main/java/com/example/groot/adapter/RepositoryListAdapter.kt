@@ -49,9 +49,11 @@ class RepositoryListAdapter(private var repo: List<Repository> = emptyList(), pr
 
     fun updateList(newList: List<Repository>) {
         repo = newList
+        notifyDataSetChanged()
     }
 
     fun updatePath(newList: List<String>) {
         repoPath = newList
+        notifyDataSetChanged()
     }
 }
