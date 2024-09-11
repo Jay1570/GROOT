@@ -34,29 +34,25 @@ class RepositorySearchActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_search_results)
 
-        window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
-        window.navigationBarColor = getColor(R.color.md_theme_surfaceContainer)
+        recyclerView = findViewById(R.id.recyclerViewSearch)
+        appBar = findViewById(R.id.topAppBar)
+        progressBar = findViewById(R.id.progressBar)
+        message = findViewById(R.id.message)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
             val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            val bottomPadding = if (!insets.isVisible(WindowInsetsCompat.Type.ime())) systemBarsInsets.bottom else 0
-            v.setPadding(
+            v.findViewById<MaterialToolbar>(R.id.topAppBar).setPadding(
                 systemBarsInsets.left,
                 systemBarsInsets.top,
                 systemBarsInsets.right,
-                bottomPadding
+                appBar.paddingBottom
             )
             v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 updateMargins(bottom = imeInsets.bottom)
             }
             WindowInsetsCompat.CONSUMED
         }
-
-        recyclerView = findViewById(R.id.recyclerViewSearch)
-        appBar = findViewById(R.id.topAppBar)
-        progressBar = findViewById(R.id.progressBar)
-        message = findViewById(R.id.message)
 
         val query = intent.getStringExtra("QUERY") ?: ""
         viewModel.onRepositorySearch(query)

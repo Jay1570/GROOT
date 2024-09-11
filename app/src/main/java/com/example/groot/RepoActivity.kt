@@ -23,6 +23,7 @@ class RepoActivity : AppCompatActivity() {
 
     private val TAG = "RepositoryListActivity"
     private lateinit var recyclerView: RecyclerView
+    private lateinit var toolbar: MaterialToolbar
     private val repositories = mutableListOf<Repository>()
     private lateinit var adapter: RepositoryListAdapter
     private lateinit var userStorageRef: StorageReference
@@ -34,15 +35,18 @@ class RepoActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_repo)
 
+        toolbar = findViewById(R.id.topAppBar)
+        recyclerView = findViewById(R.id.recyclerView)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
             val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             val bottomPadding = if (!insets.isVisible(WindowInsetsCompat.Type.ime())) systemBarsInsets.bottom else 0
-            v.setPadding(
+            v.findViewById<MaterialToolbar>(R.id.topAppBar).setPadding(
                 systemBarsInsets.left,
                 systemBarsInsets.top,
                 systemBarsInsets.right,
-                bottomPadding
+                toolbar.paddingBottom
             )
             v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 updateMargins(bottom = imeInsets.bottom)
@@ -50,15 +54,10 @@ class RepoActivity : AppCompatActivity() {
             WindowInsetsCompat.CONSUMED
         }
 
-        val toolbarRepo: MaterialToolbar = findViewById(R.id.topAppBar)
-        window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
-
-
-        toolbarRepo.setNavigationOnClickListener {
+        toolbar.setNavigationOnClickListener {
             finish()
         }
 
-        recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         adapter = RepositoryListAdapter(repo = repositories) { openRepository(it) }

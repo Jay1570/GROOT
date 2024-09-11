@@ -42,8 +42,6 @@ class StarredActivity : AppCompatActivity() {
         progressBar = findViewById(R.id.progressBar)
         message = findViewById(R.id.message)
 
-        window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
-
         recyclerView.layoutManager = LinearLayoutManager(this)
         val recyclerAdapter = RepositoryListAdapter(repoPath = emptyList()) { onItemClick(it) }
         recyclerView.adapter = recyclerAdapter
@@ -67,12 +65,11 @@ class StarredActivity : AppCompatActivity() {
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
             val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            val bottomPadding = if (!insets.isVisible(WindowInsetsCompat.Type.ime())) systemBarsInsets.bottom else 0
-            v.setPadding(
+            v.findViewById<MaterialToolbar>(R.id.topAppBar).setPadding(
                 systemBarsInsets.left,
                 systemBarsInsets.top,
                 systemBarsInsets.right,
-                bottomPadding
+                toolbar.paddingBottom
             )
             v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 updateMargins(bottom = imeInsets.bottom)

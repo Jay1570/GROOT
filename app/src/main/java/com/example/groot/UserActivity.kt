@@ -39,17 +39,23 @@ class UserActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_user)
 
-        window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
+        viewUsername = findViewById(R.id.viewUsername)
+        followersCount = findViewById(R.id.followersCount)
+        followingCount = findViewById(R.id.followingCount)
+        btnRepo = findViewById(R.id.btnRepository)
+        btnStarred = findViewById(R.id.btnStarred)
+        profileImage = findViewById(R.id.profileImage)
+        btnFollow = findViewById(R.id.btnFollow)
+        appBar = findViewById(R.id.topAppBar)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
             val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            val bottomPadding = if (!insets.isVisible(WindowInsetsCompat.Type.ime())) systemBarsInsets.bottom else 0
-            v.setPadding(
+            v.findViewById<MaterialToolbar>(R.id.topAppBar).setPadding(
                 systemBarsInsets.left,
                 systemBarsInsets.top,
                 systemBarsInsets.right,
-                bottomPadding
+                appBar.paddingBottom
             )
             v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 updateMargins(bottom = imeInsets.bottom)
@@ -60,15 +66,6 @@ class UserActivity : AppCompatActivity() {
         viewModel.getUserId(userId)
 
         var username = ""
-
-        viewUsername = findViewById(R.id.viewUsername)
-        followersCount = findViewById(R.id.followersCount)
-        followingCount = findViewById(R.id.followingCount)
-        btnRepo = findViewById(R.id.btnRepository)
-        btnStarred = findViewById(R.id.btnStarred)
-        profileImage = findViewById(R.id.profileImage)
-        btnFollow = findViewById(R.id.btnFollow)
-        appBar = findViewById(R.id.topAppBar)
 
         viewModel.profile.observe(this) { user ->
             username = user.userName + " "

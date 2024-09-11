@@ -25,17 +25,18 @@ class FriendsActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_friends)
 
-        window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
+        tabLayout = findViewById(R.id.tabLayout)
+        viewPager = findViewById(R.id.viewPager)
+        appBar = findViewById(R.id.topAppBar)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
             val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            val bottomPadding = if (!insets.isVisible(WindowInsetsCompat.Type.ime())) systemBarsInsets.bottom else 0
-            v.setPadding(
+            v.findViewById<MaterialToolbar>(R.id.topAppBar).setPadding(
                 systemBarsInsets.left,
                 systemBarsInsets.top,
                 systemBarsInsets.right,
-                bottomPadding
+                appBar.paddingBottom
             )
             v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 updateMargins(bottom = imeInsets.bottom)
@@ -44,11 +45,6 @@ class FriendsActivity : AppCompatActivity() {
         }
 
         val currentItem = intent.getIntExtra("position", 0)
-
-        tabLayout = findViewById(R.id.tabLayout)
-        viewPager = findViewById(R.id.viewPager)
-        appBar = findViewById(R.id.topAppBar)
-
         viewPager.adapter = FriendsViewPagerAdapter(this)
 
         viewPager.currentItem = currentItem

@@ -20,7 +20,7 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             app:navigationIcon="@drawable/arrow_back"
             android:background="@color/md_theme_surfaceContainer"
             android:minHeight="?attr/actionBarSize"
@@ -30,6 +30,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
+        android:clipToPadding="false"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"

@@ -1,5 +1,6 @@
 package com.example.groot
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.ViewGroup
@@ -111,22 +112,21 @@ class RepoDetailsActivity : AppCompatActivity() {
             }
         }
 
-        /*btnCode.setOnClickListener {
-            val intent = Intent(this@MainActivity5, MainActivity::class.java).apply {
+        btnCode.setOnClickListener {
+            val intent = Intent(this, Files::class.java).apply {
                 putExtra("path", path)
             }
             startActivity(intent)
-        }*/
+        }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
             val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            val bottomPadding = if (!insets.isVisible(WindowInsetsCompat.Type.ime())) systemBarsInsets.bottom else 0
-            v.setPadding(
+            v.findViewById<MaterialToolbar>(R.id.topAppBar).setPadding(
                 systemBarsInsets.left,
                 systemBarsInsets.top,
                 systemBarsInsets.right,
-                bottomPadding
+                toolbar.paddingBottom
             )
             v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 updateMargins(bottom = imeInsets.bottom)

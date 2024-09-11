@@ -31,16 +31,19 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_settings)
-        window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
+
+        btnSignout = findViewById(R.id.btnSignOut)
+        btnTheme = findViewById(R.id.btnTheme)
+        appBar = findViewById(R.id.topAppBar)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
             val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            val bottomPadding = if (!insets.isVisible(WindowInsetsCompat.Type.ime())) systemBarsInsets.bottom else 0
-            v.setPadding(
+            v.findViewById<MaterialToolbar>(R.id.topAppBar).setPadding(
                 systemBarsInsets.left,
                 systemBarsInsets.top,
                 systemBarsInsets.right,
-                bottomPadding
+                appBar.paddingBottom
             )
             v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
                 updateMargins(bottom = imeInsets.bottom)
@@ -49,10 +52,6 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         val themeUtils = ThemeUtils(applicationContext)
-
-        btnSignout = findViewById(R.id.btnSignOut)
-        btnTheme = findViewById(R.id.btnTheme)
-        appBar = findViewById(R.id.topAppBar)
 
         btnSignout.setOnClickListener {
             authViewModel.signOut()
