@@ -1,17 +1,11 @@
 package com.example.groot.adapter
 
-import android.content.ClipData
-import android.content.ClipboardManager
 import android.content.Context
 import android.graphics.Color
 import android.text.Spannable
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
-import android.view.ActionMode
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -126,11 +120,11 @@ class FileContentAdapter(
 
         // Update background color based on selection
         holder.itemView.setBackgroundColor(
-            if (selectedLines.contains(lineNumber)) Color.LTGRAY else Color.TRANSPARENT
+            if (selectedLines.contains(lineNumber)) context.getColor(R.color.md_theme_inversePrimary_mediumContrast) else Color.TRANSPARENT
         )
 
         // Set up long click listener to start ActionMode
-        holder.lineContent.setOnLongClickListener {
+        /*holder.lineContent.setOnLongClickListener {
             holder.lineContent.startActionMode(object : ActionMode.Callback {
                 override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
                     val inflater: MenuInflater = mode.menuInflater
@@ -163,7 +157,7 @@ class FileContentAdapter(
                 }
             })
             true
-        }
+        }*/
 
         // Set up click listener to toggle line selection
         holder.itemView.setOnClickListener {

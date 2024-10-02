@@ -5,6 +5,7 @@ import com.example.groot.utility.FRIENDS_COLLECTION
 import com.example.groot.utility.USER_COLLECTION
 import com.example.groot.model.Friends
 import com.example.groot.model.User
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
@@ -30,6 +31,15 @@ class AuthRepository {
 
     fun signOut() {
         auth.signOut()
+    }
+
+    suspend fun updatePassword(oldPass: String, newPass: String): Boolean {
+        val user = auth.currentUser ?: return false
+        val email = user.email ?: return false
+        val credential = EmailAuthProvider.getCredential(email, oldPass)
+        user.reauthenticate(credential).await()
+        user.updatePassword(newPass).await()
+        return true
     }
 
     suspend fun checkUsername(userName: String): Boolean {

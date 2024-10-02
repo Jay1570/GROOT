@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updatePadding
 import androidx.viewpager2.widget.ViewPager2
 import com.example.groot.adapter.HomeViewPagerAdapter
 import com.example.groot.adapter.SearchOptionAdapter
@@ -149,13 +148,16 @@ class HomeActivity : AppCompatActivity() {
             val orientation = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
             insets.getInsets(WindowInsetsCompat.Type.ime())
             val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
-            v.findViewById<MaterialToolbar>(R.id.topAppBar).updatePadding(
-                systemBarsInsets.left,
-                systemBarsInsets.top,
+            val bar = v.findViewById<MaterialToolbar>(R.id.topAppBar)
+            val layoutParams = bar.layoutParams as ViewGroup.MarginLayoutParams
+            layoutParams.setMargins(
+                layoutParams.leftMargin,
+                if (orientation) layoutParams.topMargin else systemBarsInsets.top,
                 systemBarsInsets.right,
-                if (orientation) systemBarsInsets.bottom/2 else toolbar.paddingBottom
+                layoutParams.bottomMargin
             )
-            v.findViewById<NavigationBarView>(R.id.navigation).updatePadding(
+            bar.layoutParams = layoutParams
+            v.findViewById<NavigationBarView>(R.id.navigation).setPadding(
                 systemBarsInsets.left,
                 if(orientation) systemBarsInsets.top else navView.paddingTop,
                 systemBarsInsets.right,

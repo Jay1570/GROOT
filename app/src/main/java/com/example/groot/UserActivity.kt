@@ -1,6 +1,7 @@
 package com.example.groot
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.TextView
@@ -10,8 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatToggleButton
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updateLayoutParams
-import androidx.core.view.updateMargins
 import coil.load
 import coil.transform.CircleCropTransformation
 import com.example.groot.viewmodel.UserViewModel
@@ -49,17 +48,19 @@ class UserActivity : AppCompatActivity() {
         appBar = findViewById(R.id.topAppBar)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
-            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.findViewById<MaterialToolbar>(R.id.topAppBar).setPadding(
-                systemBarsInsets.left,
-                systemBarsInsets.top,
+            insets.getInsets(WindowInsetsCompat.Type.ime())
+            val orientation = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+            insets.getInsets(WindowInsetsCompat.Type.ime())
+            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
+            val bar = v.findViewById<MaterialToolbar>(R.id.topAppBar)
+            val layoutParams = bar.layoutParams as ViewGroup.MarginLayoutParams
+            layoutParams.setMargins(
+                layoutParams.leftMargin,
+                if (orientation) layoutParams.topMargin else systemBarsInsets.top,
                 systemBarsInsets.right,
-                appBar.paddingBottom
+                layoutParams.bottomMargin
             )
-            v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                updateMargins(bottom = imeInsets.bottom)
-            }
+            bar.layoutParams = layoutParams
             WindowInsetsCompat.CONSUMED
         }
         val userId = intent.getStringExtra("userId") ?: ""

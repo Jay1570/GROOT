@@ -32,11 +32,16 @@
     <string name="Starred">Starred</string>
     <string name="Repositories">Repositories</string>
     <string name="my_work">My Work</string>
-    <string name="change_theme">Change Theme</string>
+    <string name="change_theme">App Theme</string>
     <string name="done">Done</string>
     <string name="cancel">Cancel</string>
     <string name="code">Code</string>
     <string name="languages">Languages</string>
     <string name="star">Star</string>
     <string name="README">README.md</string>
+    <string name="old_password">Old Password</string>
+    <string name="new_password">New Password</string>
+    <string name="update_password">Update Password</string>
+    <string name="same_password">Old and New Password are same</string>
+    <string name="share">Invite a Friend</string>
 </resources>

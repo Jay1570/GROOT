@@ -1,6 +1,7 @@
 package com.example.groot
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -9,8 +10,6 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.updateLayoutParams
-import androidx.core.view.updateMargins
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.groot.adapter.RepositoryListAdapter
@@ -39,18 +38,18 @@ class RepoActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerView)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val imeInsets = insets.getInsets(WindowInsetsCompat.Type.ime())
-            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            val bottomPadding = if (!insets.isVisible(WindowInsetsCompat.Type.ime())) systemBarsInsets.bottom else 0
-            v.findViewById<MaterialToolbar>(R.id.topAppBar).setPadding(
-                systemBarsInsets.left,
-                systemBarsInsets.top,
+            val orientation = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+            insets.getInsets(WindowInsetsCompat.Type.ime())
+            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
+            val bar = v.findViewById<MaterialToolbar>(R.id.topAppBar)
+            val layoutParams = bar.layoutParams as ViewGroup.MarginLayoutParams
+            layoutParams.setMargins(
+                layoutParams.leftMargin,
+                if (orientation) layoutParams.topMargin else systemBarsInsets.top,
                 systemBarsInsets.right,
-                toolbar.paddingBottom
+                layoutParams.bottomMargin
             )
-            v.updateLayoutParams<ViewGroup.MarginLayoutParams> {
-                updateMargins(bottom = imeInsets.bottom)
-            }
+            bar.layoutParams = layoutParams
             WindowInsetsCompat.CONSUMED
         }
 
