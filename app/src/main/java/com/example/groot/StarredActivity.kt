@@ -33,6 +33,7 @@ class StarredActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_starred)
 
+        window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
         val userId = intent.getStringExtra("userId") ?: ""
         if (userId.isEmpty()) viewModel.getStarRepo() else viewModel.getStarRepo(userId)
 

@@ -1,5 +1,6 @@
 package com.example.groot.repositories
 
+import android.net.Uri
 import android.util.Log
 import com.example.groot.utility.FRIENDS_COLLECTION
 import com.example.groot.utility.USER_COLLECTION
@@ -8,11 +9,13 @@ import com.example.groot.model.User
 import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.tasks.await
 
 class AuthRepository {
 
     private val auth = FirebaseAuth.getInstance()
+    private val storage = FirebaseStorage.getInstance()
     private val fireStore = FirebaseFirestore.getInstance()
     val hasUser: Boolean get() = auth.currentUser != null
 

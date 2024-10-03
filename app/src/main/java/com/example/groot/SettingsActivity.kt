@@ -3,6 +3,7 @@ package com.example.groot
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Configuration
+import android.net.Uri
 import android.os.Bundle
 import android.view.ViewGroup
 import android.widget.Button
@@ -24,6 +25,7 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var btnSignout: Button
     private lateinit var appBar: MaterialToolbar
     private lateinit var btnTheme: Button
+    private lateinit var btnShare: Button
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,8 +33,10 @@ class SettingsActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_settings)
 
+        window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
         btnSignout = findViewById(R.id.btnSignOut)
         btnTheme = findViewById(R.id.btnTheme)
+        btnShare = findViewById(R.id.btnShare)
         appBar = findViewById(R.id.topAppBar)
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -63,6 +67,17 @@ class SettingsActivity : AppCompatActivity() {
 
         appBar.setNavigationOnClickListener {
             finish()
+        }
+
+        btnShare.setOnClickListener {
+            val uri: Uri = Uri.parse("https://github.com/Jay1570/GROOT")
+            val invitationMessage = getString(R.string.invitation_message, uri)
+            val intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, invitationMessage)
+                type = "text/plain"
+            }
+            startActivity(Intent.createChooser(intent, getString(R.string.share)))
         }
 
         btnTheme.setOnClickListener {

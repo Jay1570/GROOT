@@ -33,7 +33,7 @@ class RepoActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_repo)
-
+        window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
         toolbar = findViewById(R.id.topAppBar)
         recyclerView = findViewById(R.id.recyclerView)
 

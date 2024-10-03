@@ -6,13 +6,19 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.isVisible
+import androidx.core.view.updatePadding
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +26,7 @@ import com.example.groot.adapter.StorageAdapter
 import com.example.groot.adapter.TreeViewAdapter
 import com.example.groot.model.StorageItem
 import com.example.groot.model.TreeNode
+import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 
@@ -31,11 +38,14 @@ class Files : AppCompatActivity() {
     private lateinit var repoRef: StorageReference
     private lateinit var currentRef: StorageReference
     private lateinit var currentRefTree: StorageReference
+    private lateinit var progressBar: CircularProgressIndicator
+    private lateinit var loadingOverlay: View
 
     private lateinit var drawerLayout: DrawerLayout
     private val rootNodeList = mutableListOf<TreeNode>()
     private lateinit var treeAdapter: TreeViewAdapter
     private lateinit var recycler_ViewDraw: RecyclerView
+    private lateinit var toolbar: Toolbar
 
     private lateinit var path: String
 
@@ -43,11 +53,14 @@ class Files : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         this.enableEdgeToEdge()
         setContentView(R.layout.activity_files)
+        window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
         path = intent.getStringExtra("path") ?: ""
+        progressBar = findViewById(R.id.progressBar)
+        loadingOverlay = findViewById(R.id.loadingOverlay)
 
         recycler_ViewDraw = findViewById(R.id.recycler_view)
         drawerLayout = findViewById(R.id.drawer_layout)
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
         supportActionBar?.apply {
@@ -55,10 +68,9 @@ class Files : AppCompatActivity() {
             setHomeAsUpIndicator(R.drawable.menu_alt_1_svgrepo_com)
         }
 
-        // Initialize StorageReference to point to repositoryName directory
         repoRef = FirebaseStorage.getInstance().reference.child(path)
         currentRef = repoRef
-        currentRefTree = FirebaseStorage.getInstance().reference.child(path.substringBefore("/"))
+        currentRefTree = FirebaseStorage.getInstance().reference.child(path)
 
         // Set up main RecyclerView
         recyclerView = findViewById(R.id.recyclerView)
@@ -90,6 +102,7 @@ class Files : AppCompatActivity() {
                 systemBarsInsets.right,
                 layoutParams.bottomMargin
             )
+            v.findViewById<LinearLayout>(R.id.drawerMenu).updatePadding(top = systemBarsInsets.top)
             bar.layoutParams = layoutParams
             WindowInsetsCompat.CONSUMED
         }
@@ -97,18 +110,30 @@ class Files : AppCompatActivity() {
     }
 
     private fun listFilesAndFolders(storageRef: StorageReference) {
+        progressBar.isVisible = true
+        loadingOverlay.isVisible = true
+        recyclerView.isEnabled = false
         storageItems.clear()
         storageRef.listAll()
             .addOnSuccessListener { listResult ->
                 listResult.prefixes.forEach { prefix ->
+                    if(prefix.name == ".groot" || prefix.name == ".git") {
+                        return@forEach
+                    }
                     storageItems.add(StorageItem(prefix.name, true))
                 }
                 listResult.items.forEach { item ->
                     storageItems.add(StorageItem(item.name, false))
                 }
+                progressBar.isVisible = false
+                loadingOverlay.isVisible = false
+                recyclerView.isEnabled = true
                 adapter.notifyDataSetChanged()
             }
             .addOnFailureListener { e ->
+                progressBar.isVisible = false
+                loadingOverlay.isVisible = false
+                recyclerView.isEnabled = true
                 Log.e(TAG, "Failed to list files and folders", e)
             }
     }
@@ -123,17 +148,41 @@ class Files : AppCompatActivity() {
     }
 
     private fun openFile(fileRef: StorageReference, fileName: String) {
-        fileRef.getBytes(Long.MAX_VALUE)
-            .addOnSuccessListener { bytes ->
+        progressBar.isVisible = true
+        loadingOverlay.isVisible = true
+        recyclerView.isEnabled = false
+        fileRef.metadata.addOnSuccessListener { meta ->
+            if (meta.contentType!!.contains("image") || meta.name!!.endsWith(".webp")) {
+                progressBar.isVisible = false
+                loadingOverlay.isVisible = false
+                recyclerView.isEnabled = true
+                Toast.makeText(this, "File Type Not Supported", Toast.LENGTH_SHORT).show()
+                return@addOnSuccessListener
+            }
+            fileRef.getBytes(meta.sizeBytes).addOnSuccessListener { bytes ->
                 val content = String(bytes)
+                progressBar.isVisible = false
+                loadingOverlay.isVisible = false
+                recyclerView.isEnabled = true
                 showFileContent(fileName, content)
+            }.addOnFailureListener { e ->
+                progressBar.isVisible = false
+                loadingOverlay.isVisible = false
+                recyclerView.isEnabled = true
+                Toast.makeText(this, "Failed to open file", Toast.LENGTH_SHORT).show()
+                Log.e(TAG, "Failed to Open File", e)
             }
-            .addOnFailureListener { e ->
-                Log.e(TAG, "Failed to open file", e)
-            }
+        }.addOnFailureListener { e ->
+            progressBar.isVisible = false
+            loadingOverlay.isVisible = false
+            recyclerView.isEnabled = true
+            Log.e(TAG, "Failed to Open File", e)
+            Toast.makeText(this, "Failed to open file", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun showFileContent(fileName: String, content: String) {
+
         val intent = Intent(this, FileContentActivity::class.java).apply {
             putExtra("FILE_NAME", fileName)
             putExtra("FILE_CONTENT", content)
@@ -153,7 +202,7 @@ class Files : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(R.menu.menu_main, menu)
+        menuInflater.inflate(R.menu.top_app_bar, menu)
         return true
     }
 
@@ -165,16 +214,20 @@ class Files : AppCompatActivity() {
                 }
                 true
             }
-            R.id.action_search -> {
-                // Handle search action
-                true
-            }
-            R.id.action_share -> {
-                // Handle share action
-                true
-            }
-            R.id.action_more -> {
-                // Handle more action
+            R.id.search -> {
+                val searchView = item.actionView as SearchView
+                searchView.queryHint = "Search"
+                searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+                    override fun onQueryTextSubmit(query: String?): Boolean {
+                        return true
+                    }
+
+                    override fun onQueryTextChange(newText: String?): Boolean {
+                        adapter.filter(newText!!)
+                        return true
+                    }
+
+                })
                 true
             }
             else -> super.onOptionsItemSelected(item)
@@ -182,20 +235,32 @@ class Files : AppCompatActivity() {
     }
 
     private fun fetchFirebaseData(reference: StorageReference, parentNodeList: MutableList<TreeNode>) {
+        progressBar.isVisible = true
+        loadingOverlay.isVisible = true
+        recyclerView.isEnabled = false
+        recycler_ViewDraw.isEnabled = false
         reference.listAll().addOnSuccessListener { listResult ->
             for (folderRef in listResult.prefixes) {
+                if (folderRef.name == ".groot" || folderRef.name == ".git") {
+                    continue
+                }
                 val folderNode = TreeNode(folderRef.name, true)
                 parentNodeList.add(folderNode)
                 fetchFirebaseData(folderRef, folderNode.children)
             }
-
             for (fileRef in listResult.items) {
                 val fileNode = TreeNode(fileRef.name, false)
                 parentNodeList.add(fileNode)
             }
-
+            progressBar.isVisible = false
+            loadingOverlay.isVisible = false
+            recyclerView.isEnabled = true
             treeAdapter.notifyDataSetChanged()
         }.addOnFailureListener { e ->
+            progressBar.isVisible = false
+            loadingOverlay.isVisible = false
+            recyclerView.isEnabled = true
+            recycler_ViewDraw.isEnabled = true
             Log.e(TAG, "Failed to fetch data from Firebase", e)
         }
     }
