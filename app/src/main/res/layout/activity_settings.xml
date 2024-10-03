@@ -22,7 +22,8 @@
             android:background="@color/md_theme_surfaceContainer"
             android:minHeight="?attr/actionBarSize"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="@string/settings" />
+            app:title="@string/settings"
+            android:paddingBottom="5dp"/>
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.button.MaterialButton
@@ -78,6 +79,7 @@
         android:layout_marginVertical="20dp"
         android:elevation="50dp"
         android:text="@string/signout"
+        android:padding="12dp"
         android:textColor="@color/md_theme_onPrimaryContainer"
         app:backgroundTint="@color/md_theme_primaryContainer"
         app:layout_constraintBottom_toBottomOf="parent"

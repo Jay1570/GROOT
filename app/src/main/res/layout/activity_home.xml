@@ -17,7 +17,8 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/viewPager"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingBottom="5dp">
 
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/topAppBar"

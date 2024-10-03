@@ -22,7 +22,8 @@
             android:layout_height="wrap_content"
             android:background="@color/md_theme_surfaceContainer"
             app:title="@string/profile"
-            app:navigationIcon="@drawable/arrow_back"/>
+            app:navigationIcon="@drawable/arrow_back"
+            android:paddingBottom="5dp"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 

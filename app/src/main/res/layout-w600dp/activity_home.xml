@@ -16,13 +16,14 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/viewPager"
         app:layout_constraintStart_toEndOf="@id/navigation"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/md_theme_surfaceContainer"
+        android:paddingBottom="5dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/md_theme_surfaceContainer"
             android:minHeight="?attr/actionBarSize"
             app:title="@string/home"
             app:menu="@menu/top_app_bar"/>

@@ -24,7 +24,8 @@
             app:navigationIcon="@drawable/arrow_back"
             android:background="@color/md_theme_surfaceContainer"
             android:minHeight="?attr/actionBarSize"
-            app:title="@string/Repositories" />
+            app:title="@string/Repositories"
+            android:paddingBottom="5dp"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
