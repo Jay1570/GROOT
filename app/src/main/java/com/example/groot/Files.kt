@@ -8,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -17,6 +18,7 @@ import androidx.core.view.GravityCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import androidx.core.view.updatePadding
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -100,6 +102,7 @@ class Files : AppCompatActivity() {
                 systemBarsInsets.right,
                 layoutParams.bottomMargin
             )
+            v.findViewById<LinearLayout>(R.id.drawerMenu).updatePadding(top = systemBarsInsets.top)
             bar.layoutParams = layoutParams
             WindowInsetsCompat.CONSUMED
         }
