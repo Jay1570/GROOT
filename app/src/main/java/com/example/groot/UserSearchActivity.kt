@@ -32,6 +32,7 @@ class UserSearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_search_results)
+        window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
         recyclerView = findViewById(R.id.recyclerViewSearch)
         appBar = findViewById(R.id.topAppBar)
         progressBar = findViewById(R.id.progressBar)

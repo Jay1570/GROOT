@@ -14,13 +14,15 @@ class StorageAdapter(
     private val onItemClickListener: (StorageItem) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    private var filteredItems = storageItems
+
     companion object {
         private const val VIEW_TYPE_FOLDER = 0
         private const val VIEW_TYPE_FILE = 1
     }
 
     override fun getItemViewType(position: Int): Int {
-        return if (storageItems[position].isFolder) VIEW_TYPE_FOLDER else VIEW_TYPE_FILE
+        return if (filteredItems[position].isFolder) VIEW_TYPE_FOLDER else VIEW_TYPE_FILE
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -35,7 +37,7 @@ class StorageAdapter(
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item = storageItems[position]
+        val item = filteredItems[position]
         if (getItemViewType(position) == VIEW_TYPE_FOLDER) {
             (holder as FolderViewHolder).bind(item)
         } else {
@@ -44,8 +46,13 @@ class StorageAdapter(
         holder.itemView.setOnClickListener { onItemClickListener(item) }
     }
 
+    fun filter(query: String) {
+        filteredItems = if(query.isEmpty()) storageItems else storageItems.filter { it.name.startsWith(query, ignoreCase = true) }
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int {
-        return storageItems.size
+        return filteredItems.size
     }
 
     class FolderViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

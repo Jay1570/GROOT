@@ -25,7 +25,7 @@ class FriendsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_friends)
-
+        window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
         tabLayout = findViewById(R.id.tabLayout)
         viewPager = findViewById(R.id.viewPager)
         appBar = findViewById(R.id.topAppBar)

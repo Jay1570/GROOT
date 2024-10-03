@@ -23,7 +23,7 @@ class FileContentActivity : AppCompatActivity() {
         setContentView(R.layout.activity_file_content)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-
+        window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
         supportActionBar?.apply {
             setDisplayHomeAsUpEnabled(true)
         }

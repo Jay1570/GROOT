@@ -29,7 +29,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_home)
-
+        window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
         navView=findViewById(R.id.navigation)
         viewPager=findViewById(R.id.viewPager)
 

@@ -38,6 +38,7 @@ class UserActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_user)
 
+        window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
         viewUsername = findViewById(R.id.viewUsername)
         followersCount = findViewById(R.id.followersCount)
         followingCount = findViewById(R.id.followingCount)

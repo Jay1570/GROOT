@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:background="#17181c"
+    android:background="@color/md_theme_background"
     android:layout_centerVertical="true"
     android:padding="17dp">
 
@@ -21,6 +21,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:text="File"
-        android:textColor="@color/white"
+        android:textColor="@color/md_theme_onBackground"
         android:textSize="20sp" />
 </LinearLayout>
