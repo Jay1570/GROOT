@@ -45,4 +45,8 @@
     <string name="same_password">Old and New Password are same</string>
     <string name="share">Invite a Friend</string>
     <string name="invitation_message">Hey! I’ve been using this amazing app and thought you might like it too.Check it out and download it here\n\n%1$s</string>
+    <string name="logo_nm">GROOT</string>
+    <string name="login_description">Groot is a powerful Version Control System (VCS) designed to streamline and simplify code management. It enables developers to efficiently track, manage, and collaborate on changes within their projects.</string>
+    <string name="note">Note :- \nHere the User-Name entered must be same as that you entered using the user command on the GROOT CLI application. </string>
+    <string name="register_des">Groot\'s robust architecture enables smooth collaboration, boosts productivity, and ensures secure version tracking, making it essential for modern development workflows.</string>
 </resources>

@@ -46,29 +46,90 @@
             android:layout_height="120dp"
             android:src="@drawable/logo"
             android:layout_marginTop="50dp"
-            app:layout_constraintHorizontal_bias="0.500"
-            app:layout_constraintVertical_bias="0.0"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toTopOf="@id/logo_nm"
+            android:layout_marginLeft="30dp"
+            />
+
+        <TextView
+            android:id="@+id/logo_nm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="monospace"
+            android:text="@string/logo_nm"
+            android:textAlignment="center"
+            android:textColor="@color/md_theme_onSurface"
+            android:textSize="32sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toTopOf="@id/login_des"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/logoImageView" />
+
+        <TextView
+            android:id="@+id/login_des"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="65dp"
+            android:fontFamily="monospace"
+            android:lineHeight="20dp"
+            android:maxWidth="350dp"
+            android:text="@string/register_des"
+            android:textAlignment="viewStart"
+            android:textColor="@color/md_theme_onSurface"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toTopOf="@id/note"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/logo_nm" />
+
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/note"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginBottom="20dp"
+            android:backgroundTint="@color/md_theme_surfaceContainer"
+            app:cardCornerRadius="12dp"
+            android:padding="20dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toTopOf="@id/cardRegistration"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:fontFamily="monospace"
+                android:text="@string/note"
+                android:textAlignment="viewStart"
+                android:textColor="@color/md_theme_onSurface"
+                android:textSize="16sp"
+                android:layout_margin="20dp"
+                android:lineHeight="20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/logo_nm" />
+
+        </androidx.cardview.widget.CardView>
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cardRegistration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/md_theme_surfaceContainer"
-            app:cardCornerRadius="50dp"
-            app:cardElevation="50dp"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
             android:layout_marginHorizontal="20dp"
-            android:layout_marginBottom="50dp"
+            android:layout_marginBottom="20dp"
             android:layout_marginTop="10dp"
-            app:layout_constraintHorizontal_bias="0.500"
-            app:layout_constraintVertical_bias="0.2"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logoImageView">
+            app:layout_constraintStart_toStartOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -82,11 +143,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
                     android:layout_marginTop="20dp"
                     android:fontFamily="monospace"
                     android:text="@string/registration"
                     android:textAlignment="center"
+                    android:layout_marginStart="20dp"
                     android:textSize="22sp"
                     android:textColor="@color/md_theme_onSurface"
                     android:textStyle="bold" />
@@ -96,7 +157,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="30dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
                     android:hint="@string/user_name"
                     android:padding="5dp"
@@ -120,7 +181,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
                     android:hint="@string/email"
                     android:padding="5dp"
@@ -146,7 +207,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginEnd="10dp"
                     android:hint="@string/password"
                     app:passwordToggleEnabled="true"
@@ -169,7 +230,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp"
+                    android:layout_marginTop="5dp"
                     android:layout_marginHorizontal="10dp"
                     android:hint="@string/conform_password"
                     app:passwordToggleEnabled="true"
@@ -192,14 +253,16 @@
                     style="@style/Widget.Material3.Button.ElevatedButton"
                     android:id="@+id/btnRegister"
                     android:layout_width="match_parent"
-                    android:layout_height="60dp"
+                    android:layout_height="wrap_content"
                     app:backgroundTint="@color/md_theme_primaryContainer"
                     android:textColor="@color/md_theme_onPrimaryContainer"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginHorizontal="16dp"
-                    android:layout_marginTop="50dp"
+                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="20dp"
                     android:elevation="50dp"
+                    android:padding="15dp"
+                    app:cornerRadius="10dp"
                     android:text="@string/register"
                     android:textSize="20sp" />
 

@@ -144,4 +144,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="default_color">#9E9E9E</color>
+    <color name="card_back">#101010</color>
 </resources>
