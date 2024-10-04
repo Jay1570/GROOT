@@ -11,7 +11,7 @@ GROOT is a project aimed at providing detailed repository management and user in
 - **Gradle**: For project build automation.
 
 ## Download From Here
-https://objects.githubusercontent.com/github-production-release-asset-2e65be/833581838/663981c8-e8c1-44ea-826e-05d470848147?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=releaseassetproduction%2F20241004%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20241004T060030Z&X-Amz-Expires=300&X-Amz-Signature=744cab56a12489785edd666f55c6adbb323f3a9b7542a0b4a4f3189b223e6bbf&X-Amz-SignedHeaders=host&response-content-disposition=attachment%3B%20filename%3Dapp-debug.apk&response-content-type=application%2Fvnd.android.package-archive
+https://github.com/Jay1570/GROOT/releases/tag/GROOT
 
 ## Activity Details
 
