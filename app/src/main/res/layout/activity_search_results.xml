@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SearchResultsActivity">
+    tools:context=".UserSearchActivity">
 
     <com.google.android.material.progressindicator.CircularProgressIndicator
         style="Widget.Material3.CircularProgressIndicator"
@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="100dp"
-        android:visibility="gone"
+        android:visibility="visible"
         android:indeterminate="true"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintVertical_bias="0.5"
@@ -44,16 +44,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toTopOf="@+id/recyclerViewSearch"
+        android:background="@color/md_theme_surfaceContainer"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:paddingBottom="5dp">
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/md_theme_surfaceContainer"
+            android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
             app:title="@string/Search"
             app:navigationIcon="@drawable/arrow_back"/>
@@ -62,6 +63,7 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewSearch"
+        android:clipToPadding="false"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"

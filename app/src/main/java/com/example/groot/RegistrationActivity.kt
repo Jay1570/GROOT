@@ -81,7 +81,7 @@ class RegistrationActivity : AppCompatActivity() {
         }
 
         btnRegister.setOnClickListener {
-            val email=txtEmail.text.toString().trim() // trimming for white spaces in beginning and end
+            val email=txtEmail.text.toString().trim()
             val password=txtPassword.text.toString().trim()
             val imgUrl=""
             val username=txtUsername.text.toString().trim()

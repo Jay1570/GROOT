@@ -9,12 +9,12 @@ plugins {
 
 android {
     namespace = "com.example.groot"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.groot"
         minSdk = 24
-        targetSdk = 34
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
 
@@ -54,6 +54,11 @@ dependencies {
     implementation(libs.firebase.perf)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.circleimageview)
+    implementation("io.noties.markwon:core:4.6.2")
+    implementation("io.noties.markwon:image:4.6.2")
+    implementation("io.noties.markwon:ext-strikethrough:4.6.2")
+    implementation("io.noties.markwon:ext-tables:4.6.2")
+    implementation("io.noties.markwon:ext-tasklist:4.6.2")
     implementation(libs.coil)
     implementation(libs.androidx.core.splashscreen)
     testImplementation(libs.junit)

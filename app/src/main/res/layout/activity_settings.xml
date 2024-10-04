@@ -18,23 +18,54 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:background="@color/md_theme_surfaceContainer"
             android:minHeight="?attr/actionBarSize"
             app:navigationIcon="@drawable/arrow_back"
-            app:title="@string/settings" />
+            app:title="@string/settings"
+            android:paddingBottom="5dp"/>
     </com.google.android.material.appbar.AppBarLayout>
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        style="@style/Widget.Material3.Button.TextButton"
+        style="@style/Widget.Material3.Button.TextButton.Icon"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="20dp"
         android:text="@string/change_theme"
+        app:icon="@drawable/theme"
+        app:iconTint="@color/md_theme_onBackground"
+        android:textColor="@color/md_theme_onBackground"
+        android:gravity="center_vertical"
+        app:iconPadding="16dp"
+        app:iconSize="32dp"
+        app:rippleColor="@color/md_theme_surfaceContainer"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
         app:layout_constraintVertical_bias="0.0"
         app:layout_constraintTop_toBottomOf="@id/appBar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnShare"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Widget.Material3.Button.TextButton.Icon"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="20dp"
+        android:text="@string/share"
+        app:icon="@drawable/share"
+        app:iconTint="@color/md_theme_onBackground"
+        android:textColor="@color/md_theme_onBackground"
+        android:gravity="center_vertical"
+        app:iconPadding="16dp"
+        app:iconSize="32dp"
+        app:rippleColor="@color/md_theme_surfaceContainer"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@id/btnTheme"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -48,11 +79,13 @@
         android:layout_marginVertical="20dp"
         android:elevation="50dp"
         android:text="@string/signout"
+        android:padding="12dp"
         android:textColor="@color/md_theme_onPrimaryContainer"
         app:backgroundTint="@color/md_theme_primaryContainer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btnTheme"
+        app:layout_constraintTop_toBottomOf="@id/btnShare"
         app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

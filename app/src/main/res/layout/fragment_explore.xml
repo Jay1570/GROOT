@@ -6,30 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".fragments.ExploreFragment">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/appBar"
+    <TextView
+        android:id="@+id/title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerViewFollowers"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        android:paddingTop="16dp"
+        android:paddingBottom="10dp"
+        android:paddingHorizontal="20dp"
+        android:text="Repositories You may Like"
+        android:background="@color/md_theme_surfaceContainerLow"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textStyle="bold"
+        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.5">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/topAppBar"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:background="@color/md_theme_surfaceContainer"
-            android:minHeight="?attr/actionBarSize"
-            app:menu="@menu/top_app_bar"
-            app:title="@string/explore" />
-
-    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewFollowers"
+        android:id="@+id/recyclerView"
+        android:clipToPadding="false"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_gravity="center"
@@ -38,5 +35,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBar" />
+        app:layout_constraintTop_toBottomOf="@id/title" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

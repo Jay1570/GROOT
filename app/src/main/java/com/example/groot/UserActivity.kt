@@ -1,7 +1,9 @@
 package com.example.groot
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -37,15 +39,6 @@ class UserActivity : AppCompatActivity() {
         setContentView(R.layout.activity_user)
 
         window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-        val userId = intent.getStringExtra("userId") ?: ""
-        viewModel.getUserId(userId)
-        var username = ""
         viewUsername = findViewById(R.id.viewUsername)
         followersCount = findViewById(R.id.followersCount)
         followingCount = findViewById(R.id.followingCount)
@@ -55,8 +48,30 @@ class UserActivity : AppCompatActivity() {
         btnFollow = findViewById(R.id.btnFollow)
         appBar = findViewById(R.id.topAppBar)
 
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            insets.getInsets(WindowInsetsCompat.Type.ime())
+            val orientation = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+            insets.getInsets(WindowInsetsCompat.Type.ime())
+            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
+            val bar = v.findViewById<MaterialToolbar>(R.id.topAppBar)
+            val layoutParams = bar.layoutParams as ViewGroup.MarginLayoutParams
+            layoutParams.setMargins(
+                layoutParams.leftMargin,
+                if (orientation) layoutParams.topMargin else systemBarsInsets.top,
+                systemBarsInsets.right,
+                layoutParams.bottomMargin
+            )
+            bar.layoutParams = layoutParams
+            WindowInsetsCompat.CONSUMED
+        }
+        val userId = intent.getStringExtra("userId") ?: ""
+        viewModel.getUserId(userId)
+
+        var username = ""
+
         viewModel.profile.observe(this) { user ->
             username = user.userName + " "
+
             viewUsername.text = user.userName
             if (user.imgUrl.isNotEmpty()){
                 profileImage.load(user.imgUrl) {
@@ -94,12 +109,14 @@ class UserActivity : AppCompatActivity() {
 
         btnRepo.setOnClickListener {
             val intent = Intent(this, RepoActivity::class.java)
-            intent.putExtra("path", username)
+            intent.putExtra("username", username)
             startActivity(intent)
         }
 
         btnStarred.setOnClickListener {
-            startActivity(Intent(this, StarredActivity::class.java))
+            val intent = Intent(this, StarredActivity::class.java)
+            intent.putExtra("userId", userId)
+            startActivity(intent)
         }
 
         appBar.setNavigationOnClickListener {

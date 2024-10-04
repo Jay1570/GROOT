@@ -1,8 +1,9 @@
 package com.example.groot
 
-import android.app.SearchManager
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
+import android.view.ViewGroup
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -18,7 +19,7 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.snackbar.Snackbar
 
-class SearchResultsActivity : AppCompatActivity() {
+class UserSearchActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var appBar: MaterialToolbar
@@ -31,20 +32,31 @@ class SearchResultsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_search_results)
-
         window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
-        window.navigationBarColor = getColor(R.color.md_theme_surfaceContainer)
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-
         recyclerView = findViewById(R.id.recyclerViewSearch)
         appBar = findViewById(R.id.topAppBar)
         progressBar = findViewById(R.id.progressBar)
         message = findViewById(R.id.message)
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            insets.getInsets(WindowInsetsCompat.Type.ime())
+            val orientation = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+            insets.getInsets(WindowInsetsCompat.Type.ime())
+            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
+            val bar = v.findViewById<MaterialToolbar>(R.id.topAppBar)
+            val layoutParams = bar.layoutParams as ViewGroup.MarginLayoutParams
+            layoutParams.setMargins(
+                layoutParams.leftMargin,
+                if (orientation) layoutParams.topMargin else systemBarsInsets.top,
+                systemBarsInsets.right,
+                layoutParams.bottomMargin
+            )
+            bar.layoutParams = layoutParams
+            WindowInsetsCompat.CONSUMED
+        }
+
+        val query = intent.getStringExtra("QUERY") ?: ""
+        viewModel.onUserSearch(query)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
         val recyclerAdapter = UserListRecyclerViewAdapter(emptyList()) { onItemClick(it) }
@@ -73,22 +85,5 @@ class SearchResultsActivity : AppCompatActivity() {
         val intent = Intent(this, UserActivity::class.java)
         intent.putExtra("userId", userId)
         startActivity(intent)
-    }
-
-    override fun onStart() {
-        super.onStart()
-        handleIntent(intent)
-    }
-
-    override fun onNewIntent(intent: Intent) {
-        super.onNewIntent(intent)
-        handleIntent(intent)
-    }
-
-    private fun handleIntent(intent: Intent) {
-        if (Intent.ACTION_SEARCH == intent.action) {
-            val query = intent.getStringExtra(SearchManager.QUERY) ?: ""
-            viewModel.onSearch(query)
-        }
     }
 }

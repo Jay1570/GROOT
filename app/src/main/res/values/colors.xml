@@ -141,4 +141,8 @@
     <color name="md_theme_surfaceContainer_highContrast">#EDEDF4</color>
     <color name="md_theme_surfaceContainerHigh_highContrast">#E8E7EE</color>
     <color name="md_theme_surfaceContainerHighest_highContrast">#E2E2E9</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="default_color">#9E9E9E</color>
+    <color name="card_back">#101010</color>
 </resources>

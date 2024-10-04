@@ -1,19 +1,19 @@
 package com.example.groot
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.TextView
+import android.view.ViewGroup
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
-import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.groot.adapter.Repository
-import com.example.groot.adapter.RepositoryAdapter
+import com.example.groot.adapter.RepositoryListAdapter
+import com.example.groot.model.Repository
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -22,88 +22,74 @@ class RepoActivity : AppCompatActivity() {
 
     private val TAG = "RepositoryListActivity"
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: RepositoryAdapter
+    private lateinit var toolbar: MaterialToolbar
     private val repositories = mutableListOf<Repository>()
+    private lateinit var adapter: RepositoryListAdapter
     private lateinit var userStorageRef: StorageReference
-    private lateinit var path: String
+    private lateinit var username: String
     private lateinit var progressBar: View
-    private lateinit var message: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_repo)
-
-        val toolbarRepo: MaterialToolbar = findViewById(R.id.topAppBar)
         window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
+        toolbar = findViewById(R.id.topAppBar)
+        recyclerView = findViewById(R.id.recyclerView)
 
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
+            val orientation = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+            insets.getInsets(WindowInsetsCompat.Type.ime())
+            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
+            val bar = v.findViewById<MaterialToolbar>(R.id.topAppBar)
+            val layoutParams = bar.layoutParams as ViewGroup.MarginLayoutParams
+            layoutParams.setMargins(
+                layoutParams.leftMargin,
+                if (orientation) layoutParams.topMargin else systemBarsInsets.top,
+                systemBarsInsets.right,
+                layoutParams.bottomMargin
+            )
+            bar.layoutParams = layoutParams
+            WindowInsetsCompat.CONSUMED
+        }
 
-        toolbarRepo.setNavigationOnClickListener {
+        toolbar.setNavigationOnClickListener {
             finish()
         }
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
-        recyclerView = findViewById(R.id.recyclerView)
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        message = findViewById(R.id.message)
 
-        adapter = RepositoryAdapter(this, repositories, onRepoClick = { openRepository(it) }, onFileClick =  {openFile(it)})
+        recyclerView.layoutManager = LinearLayoutManager(this)
+
+        adapter = RepositoryListAdapter(repo = repositories) { openRepository(it) }
         recyclerView.adapter = adapter
 
         progressBar = findViewById(R.id.progressBar)
 
-        path = intent.getStringExtra("path") ?: ""
-        Log.i(TAG,path)
-        userStorageRef = FirebaseStorage.getInstance().reference.child(path)
+        username = intent.getStringExtra("username") ?: ""
+        userStorageRef = FirebaseStorage.getInstance().reference.child(username)
         fetchRepositories()
     }
 
     private fun fetchRepositories() {
-        progressBar.isVisible = true
+        progressBar.visibility = View.VISIBLE
         userStorageRef.listAll()
             .addOnSuccessListener { listResult ->
                 repositories.clear()
-                if (listResult.prefixes.isEmpty() && listResult.items.isEmpty()) {
-                    progressBar.isVisible = false
-                    message.isVisible = true
-                    return@addOnSuccessListener
-                }
                 listResult.prefixes.forEach { prefix ->
-                    repositories.add(Repository(prefix.name, userStorageRef.name))
-                }
-                listResult.items.forEach { item ->
-                    repositories.add(Repository(item.name, userStorageRef.name, true))
+                    repositories.add(Repository(name = prefix.name.trim(), owner = username.trim()))
                 }
                 adapter.notifyDataSetChanged()
-                progressBar.isVisible = false
+                progressBar.visibility = View.GONE
             }
             .addOnFailureListener { e ->
                 Log.e(TAG, "Failed to fetch repositories", e)
-                progressBar.isVisible = false
+                progressBar.visibility = View.GONE
             }
     }
 
-    private fun openRepository(repository: Repository) {
-        val nextPath = path + "/" + repository.name
-        val intent = Intent(this, RepoActivity::class.java).apply {
-            putExtra("path", nextPath)
+    private fun openRepository(path: String) {
+        val intent = Intent(this, RepoDetailsActivity::class.java).apply {
+            putExtra("path", path)
         }
         startActivity(intent)
-    }
-
-    private fun openFile(repository: Repository) {
-        val nextPath = path + "/" + repository.name
-        val intent = Intent(this, FileContentActivity::class.java).apply {
-            putExtra("path", nextPath)
-        }
-        startActivity(intent)
-    }
-
-    override fun onRestart() {
-        super.onRestart()
-        Log.i(TAG, path)
     }
 }

@@ -11,7 +11,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:targetApi="34">
+        tools:targetApi="35">
+        <activity
+            android:name=".FileContentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Files"
+            android:exported="false" />
+        <activity
+            android:name=".RepoDetailsActivity"
+            android:exported="false" />
         <activity
             android:name=".FileContentActivity"
             android:exported="false" />
@@ -25,19 +34,11 @@
             android:name=".UserActivity"
             android:exported="false" />
         <activity
-            android:name=".SearchResultsActivity"
+            android:name=".UserSearchActivity"
             android:exported="false"
             android:launchMode="singleTop"
             android:parentActivityName=".HomeActivity"
-            android:windowSoftInputMode="adjustResize">
-            <intent-filter>
-                <action android:name="android.intent.action.SEARCH" />
-            </intent-filter>
-
-            <meta-data
-                android:name="android.app.searchable"
-                android:resource="@xml/searchable" />
-        </activity>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".FriendsActivity"
             android:exported="false" />
@@ -72,6 +73,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".RepositorySearchActivity"
+            android:exported="false" />
     </application>
 
 </manifest>

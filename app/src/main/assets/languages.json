@@ -1,0 +1,3302 @@
+{
+  ".bsl": [
+    "1C Enterprise",
+    "#814CCC"
+  ],
+  ".os": [
+    "1C Enterprise",
+    "#814CCC"
+  ],
+  ".4dm": [
+    "4D",
+    "#004289"
+  ],
+  ".abap": [
+    "ABAP",
+    "#E8274B"
+  ],
+  ".asddls": [
+    "ABAP CDS",
+    "#555e25"
+  ],
+  ".asc": [
+    "AGS Script",
+    "#B9D9FF"
+  ],
+  ".ash": [
+    "AGS Script",
+    "#B9D9FF"
+  ],
+  ".aidl": [
+    "AIDL",
+    "#34EB6B"
+  ],
+  ".al": [
+    "Perl",
+    "#0298c3"
+  ],
+  ".ampl": [
+    "AMPL",
+    "#E6EFBB"
+  ],
+  ".mod": [
+    "NMODL",
+    "#00356B"
+  ],
+  ".g4": [
+    "ANTLR",
+    "#9DC3FF"
+  ],
+  ".apl": [
+    "APL",
+    "#5A8164"
+  ],
+  ".dyalog": [
+    "APL",
+    "#5A8164"
+  ],
+  ".asax": [
+    "ASP.NET",
+    "#9400ff"
+  ],
+  ".ascx": [
+    "ASP.NET",
+    "#9400ff"
+  ],
+  ".ashx": [
+    "ASP.NET",
+    "#9400ff"
+  ],
+  ".asmx": [
+    "ASP.NET",
+    "#9400ff"
+  ],
+  ".aspx": [
+    "ASP.NET",
+    "#9400ff"
+  ],
+  ".axd": [
+    "ASP.NET",
+    "#9400ff"
+  ],
+  ".dats": [
+    "ATS",
+    "#1ac620"
+  ],
+  ".hats": [
+    "ATS",
+    "#1ac620"
+  ],
+  ".sats": [
+    "ATS",
+    "#1ac620"
+  ],
+  ".as": [
+    "AngelScript",
+    "#C7D7DC"
+  ],
+  ".adb": [
+    "Ada",
+    "#02f88c"
+  ],
+  ".ada": [
+    "Ada",
+    "#02f88c"
+  ],
+  ".ads": [
+    "Ada",
+    "#02f88c"
+  ],
+  ".agda": [
+    "Agda",
+    "#315665"
+  ],
+  ".als": [
+    "Alloy",
+    "#64C800"
+  ],
+  ".angelscript": [
+    "AngelScript",
+    "#C7D7DC"
+  ],
+  ".cls": [
+    "Visual Basic 6.0",
+    "#2c6353"
+  ],
+  ".trigger": [
+    "Shell",
+    "#89e051"
+  ],
+  ".agc": [
+    "Apollo Guidance Computer",
+    "#0B3D91"
+  ],
+  ".applescript": [
+    "AppleScript",
+    "#101F1F"
+  ],
+  ".scpt": [
+    "AppleScript",
+    "#101F1F"
+  ],
+  ".arc": [
+    "Arc",
+    "#aa2afe"
+  ],
+  ".aj": [
+    "AspectJ",
+    "#a957b0"
+  ],
+  ".asm": [
+    "Motorola 68K Assembly",
+    "#005daa"
+  ],
+  ".a51": [
+    "Assembly",
+    "#6E4C13"
+  ],
+  ".i": [
+    "Motorola 68K Assembly",
+    "#005daa"
+  ],
+  ".inc": [
+    "SourcePawn",
+    "#f69e1d"
+  ],
+  ".nas": [
+    "Nasal",
+    "#1d2c4e"
+  ],
+  ".nasm": [
+    "Assembly",
+    "#6E4C13"
+  ],
+  ".asy": [
+    "Asymptote",
+    "#ff0000"
+  ],
+  ".aug": [
+    "Augeas",
+    "#9CC134"
+  ],
+  ".ahk": [
+    "AutoHotkey",
+    "#6594b9"
+  ],
+  ".ahkl": [
+    "AutoHotkey",
+    "#6594b9"
+  ],
+  ".au3": [
+    "AutoIt",
+    "#1C3552"
+  ],
+  ".awk": [
+    "Awk",
+    "#c30e9b"
+  ],
+  ".auk": [
+    "Awk",
+    "#c30e9b"
+  ],
+  ".gawk": [
+    "Awk",
+    "#c30e9b"
+  ],
+  ".mawk": [
+    "Awk",
+    "#c30e9b"
+  ],
+  ".nawk": [
+    "Awk",
+    "#c30e9b"
+  ],
+  ".bas": [
+    "Visual Basic 6.0",
+    "#2c6353"
+  ],
+  ".bqn": [
+    "BQN",
+    "#2b7067"
+  ],
+  ".bal": [
+    "Ballerina",
+    "#FF5000"
+  ],
+  ".bat": [
+    "Batchfile",
+    "#C1F12E"
+  ],
+  ".cmd": [
+    "Batchfile",
+    "#C1F12E"
+  ],
+  ".bf": [
+    "Brainfuck",
+    "#2F2530"
+  ],
+  ".be": [
+    "Berry",
+    "#15A13C"
+  ],
+  ".bicep": [
+    "Bicep",
+    "#519aba"
+  ],
+  ".bicepparam": [
+    "Bicep",
+    "#519aba"
+  ],
+  ".bison": [
+    "Bison",
+    "#6A463F"
+  ],
+  ".bb": [
+    "Clojure",
+    "#db5855"
+  ],
+  ".bbappend": [
+    "BitBake",
+    "#00bce4"
+  ],
+  ".bbclass": [
+    "BitBake",
+    "#00bce4"
+  ],
+  ".decls": [
+    "BlitzBasic",
+    "#00FFAE"
+  ],
+  ".bmx": [
+    "BlitzMax",
+    "#cd6400"
+  ],
+  ".bsv": [
+    "Bluespec",
+    "#12223c"
+  ],
+  ".bs": [
+    "BrighterScript",
+    "#66AABB"
+  ],
+  ".boo": [
+    "Boo",
+    "#d4bec1"
+  ],
+  ".bpl": [
+    "Boogie",
+    "#c80fa0"
+  ],
+  ".b": [
+    "Brainfuck",
+    "#2F2530"
+  ],
+  ".brs": [
+    "Brightscript",
+    "#662D91"
+  ],
+  ".c": [
+    "C",
+    "#555555"
+  ],
+  ".cats": [
+    "C",
+    "#555555"
+  ],
+  ".h": [
+    "Objective-C",
+    "#438eff"
+  ],
+  ".idc": [
+    "C",
+    "#555555"
+  ],
+  ".cs": [
+    "Smalltalk",
+    "#596706"
+  ],
+  ".cake": [
+    "CoffeeScript",
+    "#244776"
+  ],
+  ".cs.pp": [
+    "C#",
+    "#178600"
+  ],
+  ".csx": [
+    "C#",
+    "#178600"
+  ],
+  ".linq": [
+    "C#",
+    "#178600"
+  ],
+  ".cpp": [
+    "C++",
+    "#f34b7d"
+  ],
+  ".c++": [
+    "C++",
+    "#f34b7d"
+  ],
+  ".cc": [
+    "C++",
+    "#f34b7d"
+  ],
+  ".cp": [
+    "Component Pascal",
+    "#B0CE4E"
+  ],
+  ".cppm": [
+    "C++",
+    "#f34b7d"
+  ],
+  ".cxx": [
+    "C++",
+    "#f34b7d"
+  ],
+  ".h++": [
+    "C++",
+    "#f34b7d"
+  ],
+  ".hh": [
+    "Hack",
+    "#878787"
+  ],
+  ".hpp": [
+    "C++",
+    "#f34b7d"
+  ],
+  ".hxx": [
+    "C++",
+    "#f34b7d"
+  ],
+  ".inl": [
+    "C++",
+    "#f34b7d"
+  ],
+  ".ino": [
+    "C++",
+    "#f34b7d"
+  ],
+  ".ipp": [
+    "C++",
+    "#f34b7d"
+  ],
+  ".ixx": [
+    "C++",
+    "#f34b7d"
+  ],
+  ".re": [
+    "Reason",
+    "#ff5847"
+  ],
+  ".tcc": [
+    "C++",
+    "#f34b7d"
+  ],
+  ".tpp": [
+    "C++",
+    "#f34b7d"
+  ],
+  ".txx": [
+    "C++",
+    "#f34b7d"
+  ],
+  ".cds": [
+    "CAP CDS",
+    "#0092d1"
+  ],
+  ".clp": [
+    "CLIPS",
+    "#00A300"
+  ],
+  ".cmake": [
+    "CMake",
+    "#DA3434"
+  ],
+  ".cmake.in": [
+    "CMake",
+    "#DA3434"
+  ],
+  ".cue": [
+    "CUE",
+    "#5886E1"
+  ],
+  ".w": [
+    "OpenEdge ABL",
+    "#5ce600"
+  ],
+  ".cdc": [
+    "Cadence",
+    "#00ef8b"
+  ],
+  ".cairo": [
+    "Cairo Zero",
+    "#ff4a48"
+  ],
+  ".mligo": [
+    "CameLIGO",
+    "#3be133"
+  ],
+  ".capnp": [
+    "Cap'n Proto",
+    "#c42727"
+  ],
+  ".carbon": [
+    "Carbon",
+    "#222222"
+  ],
+  ".ceylon": [
+    "Ceylon",
+    "#dfa535"
+  ],
+  ".chpl": [
+    "Chapel",
+    "#8dc63f"
+  ],
+  ".ck": [
+    "ChucK",
+    "#3f8000"
+  ],
+  ".circom": [
+    "Circom",
+    "#707575"
+  ],
+  ".cirru": [
+    "Cirru",
+    "#ccccff"
+  ],
+  ".clw": [
+    "Clarion",
+    "#db901e"
+  ],
+  ".clar": [
+    "Clarity",
+    "#5546ff"
+  ],
+  ".asp": [
+    "Classic ASP",
+    "#6a40fd"
+  ],
+  ".icl": [
+    "Clean",
+    "#3F85AF"
+  ],
+  ".dcl": [
+    "Clean",
+    "#3F85AF"
+  ],
+  ".click": [
+    "Click",
+    "#E4E6F3"
+  ],
+  ".clj": [
+    "Clojure",
+    "#db5855"
+  ],
+  ".boot": [
+    "Clojure",
+    "#db5855"
+  ],
+  ".cl2": [
+    "Clojure",
+    "#db5855"
+  ],
+  ".cljc": [
+    "Clojure",
+    "#db5855"
+  ],
+  ".cljs": [
+    "Clojure",
+    "#db5855"
+  ],
+  ".cljs.hl": [
+    "Clojure",
+    "#db5855"
+  ],
+  ".cljscm": [
+    "Clojure",
+    "#db5855"
+  ],
+  ".cljx": [
+    "Clojure",
+    "#db5855"
+  ],
+  ".hic": [
+    "Clojure",
+    "#db5855"
+  ],
+  ".ql": [
+    "CodeQL",
+    "#140f46"
+  ],
+  ".qll": [
+    "CodeQL",
+    "#140f46"
+  ],
+  ".coffee": [
+    "CoffeeScript",
+    "#244776"
+  ],
+  "._coffee": [
+    "CoffeeScript",
+    "#244776"
+  ],
+  ".cjsx": [
+    "CoffeeScript",
+    "#244776"
+  ],
+  ".iced": [
+    "CoffeeScript",
+    "#244776"
+  ],
+  ".cfm": [
+    "ColdFusion",
+    "#ed2cd6"
+  ],
+  ".cfml": [
+    "ColdFusion",
+    "#ed2cd6"
+  ],
+  ".cfc": [
+    "ColdFusion CFC",
+    "#ed2cd6"
+  ],
+  ".lisp": [
+    "NewLisp",
+    "#87AED7"
+  ],
+  ".asd": [
+    "Common Lisp",
+    "#3fb68b"
+  ],
+  ".cl": [
+    "OpenCL",
+    "#ed2e2d"
+  ],
+  ".l": [
+    "PicoLisp",
+    "#6067af"
+  ],
+  ".lsp": [
+    "NewLisp",
+    "#87AED7"
+  ],
+  ".ny": [
+    "Common Lisp",
+    "#3fb68b"
+  ],
+  ".podsl": [
+    "Common Lisp",
+    "#3fb68b"
+  ],
+  ".sexp": [
+    "Common Lisp",
+    "#3fb68b"
+  ],
+  ".cwl": [
+    "Common Workflow Language",
+    "#B5314C"
+  ],
+  ".cps": [
+    "Component Pascal",
+    "#B0CE4E"
+  ],
+  ".coq": [
+    "Coq",
+    "#d0b68c"
+  ],
+  ".v": [
+    "Verilog",
+    "#b2b7f8"
+  ],
+  ".cr": [
+    "Crystal",
+    "#000100"
+  ],
+  ".orc": [
+    "Csound",
+    "#1a1a1a"
+  ],
+  ".udo": [
+    "Csound",
+    "#1a1a1a"
+  ],
+  ".csd": [
+    "Csound Document",
+    "#1a1a1a"
+  ],
+  ".sco": [
+    "Csound Score",
+    "#1a1a1a"
+  ],
+  ".cu": [
+    "Cuda",
+    "#3A4E3A"
+  ],
+  ".cuh": [
+    "Cuda",
+    "#3A4E3A"
+  ],
+  ".curry": [
+    "Curry",
+    "#531242"
+  ],
+  ".cyp": [
+    "Cypher",
+    "#34c0eb"
+  ],
+  ".cypher": [
+    "Cypher",
+    "#34c0eb"
+  ],
+  ".pyx": [
+    "Cython",
+    "#fedf5b"
+  ],
+  ".pxd": [
+    "Cython",
+    "#fedf5b"
+  ],
+  ".pxi": [
+    "Cython",
+    "#fedf5b"
+  ],
+  ".d": [
+    "Makefile",
+    "#427819"
+  ],
+  ".di": [
+    "D",
+    "#ba595e"
+  ],
+  ".dm": [
+    "DM",
+    "#447265"
+  ],
+  ".dfy": [
+    "Dafny",
+    "#FFEC25"
+  ],
+  ".dart": [
+    "Dart",
+    "#00B4AB"
+  ],
+  ".dwl": [
+    "DataWeave",
+    "#003a52"
+  ],
+  ".dsc": [
+    "DenizenScript",
+    "#FBEE96"
+  ],
+  ".dhall": [
+    "Dhall",
+    "#dfafff"
+  ],
+  ".dockerfile": [
+    "Dockerfile",
+    "#384d54"
+  ],
+  ".djs": [
+    "Dogescript",
+    "#cca760"
+  ],
+  ".dylan": [
+    "Dylan",
+    "#6c616e"
+  ],
+  ".dyl": [
+    "Dylan",
+    "#6c616e"
+  ],
+  ".intr": [
+    "Dylan",
+    "#6c616e"
+  ],
+  ".lid": [
+    "Dylan",
+    "#6c616e"
+  ],
+  ".e": [
+    "Euphoria",
+    "#FF790B"
+  ],
+  ".ecl": [
+    "ECLiPSe",
+    "#001d9d"
+  ],
+  ".eclxml": [
+    "ECL",
+    "#8a1267"
+  ],
+  ".eq": [
+    "EQ",
+    "#a78649"
+  ],
+  ".edgeql": [
+    "EdgeQL",
+    "#31A7FF"
+  ],
+  ".esdl": [
+    "EdgeQL",
+    "#31A7FF"
+  ],
+  ".ex": [
+    "Euphoria",
+    "#FF790B"
+  ],
+  ".exs": [
+    "Elixir",
+    "#6e4a7e"
+  ],
+  ".elm": [
+    "Elm",
+    "#60B5CC"
+  ],
+  ".elv": [
+    "Elvish",
+    "#55BB55"
+  ],
+  ".el": [
+    "Emacs Lisp",
+    "#c065db"
+  ],
+  ".emacs": [
+    "Emacs Lisp",
+    "#c065db"
+  ],
+  ".emacs.desktop": [
+    "Emacs Lisp",
+    "#c065db"
+  ],
+  ".em": [
+    "EmberScript",
+    "#FFF4F3"
+  ],
+  ".emberscript": [
+    "EmberScript",
+    "#FFF4F3"
+  ],
+  ".erl": [
+    "Erlang",
+    "#B83998"
+  ],
+  ".app": [
+    "Erlang",
+    "#B83998"
+  ],
+  ".app.src": [
+    "Erlang",
+    "#B83998"
+  ],
+  ".es": [
+    "JavaScript",
+    "#f1e05a"
+  ],
+  ".escript": [
+    "Erlang",
+    "#B83998"
+  ],
+  ".hrl": [
+    "Erlang",
+    "#B83998"
+  ],
+  ".xrl": [
+    "Erlang",
+    "#B83998"
+  ],
+  ".yrl": [
+    "Erlang",
+    "#B83998"
+  ],
+  ".fs": [
+    "GLSL",
+    "#5686a5"
+  ],
+  ".fsi": [
+    "F#",
+    "#b845fc"
+  ],
+  ".fsx": [
+    "F#",
+    "#b845fc"
+  ],
+  ".fst": [
+    "F*",
+    "#572e30"
+  ],
+  ".fsti": [
+    "F*",
+    "#572e30"
+  ],
+  ".fir": [
+    "FIRRTL",
+    "#2f632f"
+  ],
+  ".fx": [
+    "HLSL",
+    "#aace60"
+  ],
+  ".flux": [
+    "FLUX",
+    "#88ccff"
+  ],
+  ".factor": [
+    "Factor",
+    "#636746"
+  ],
+  ".fy": [
+    "Fancy",
+    "#7b9db4"
+  ],
+  ".fancypack": [
+    "Fancy",
+    "#7b9db4"
+  ],
+  ".fan": [
+    "Fantom",
+    "#14253c"
+  ],
+  ".dsp": [
+    "Faust",
+    "#c37240"
+  ],
+  ".fnl": [
+    "Fennel",
+    "#fff3d7"
+  ],
+  ".f": [
+    "Fortran",
+    "#4d41b1"
+  ],
+  ".ftl": [
+    "FreeMarker",
+    "#0050b2"
+  ],
+  ".fth": [
+    "Forth",
+    "#341708"
+  ],
+  ".4th": [
+    "Forth",
+    "#341708"
+  ],
+  ".for": [
+    "Fortran",
+    "#4d41b1"
+  ],
+  ".forth": [
+    "Forth",
+    "#341708"
+  ],
+  ".fr": [
+    "Frege",
+    "#00cafe"
+  ],
+  ".frt": [
+    "Forth",
+    "#341708"
+  ],
+  ".f77": [
+    "Fortran",
+    "#4d41b1"
+  ],
+  ".fpp": [
+    "Fortran",
+    "#4d41b1"
+  ],
+  ".f90": [
+    "Fortran Free Form",
+    "#4d41b1"
+  ],
+  ".f03": [
+    "Fortran Free Form",
+    "#4d41b1"
+  ],
+  ".f08": [
+    "Fortran Free Form",
+    "#4d41b1"
+  ],
+  ".f95": [
+    "Fortran Free Form",
+    "#4d41b1"
+  ],
+  ".bi": [
+    "FreeBasic",
+    "#141AC9"
+  ],
+  ".fut": [
+    "Futhark",
+    "#5f021f"
+  ],
+  ".g": [
+    "GAP",
+    "#0000cc"
+  ],
+  ".cnc": [
+    "G-code",
+    "#D08CF2"
+  ],
+  ".gco": [
+    "G-code",
+    "#D08CF2"
+  ],
+  ".gcode": [
+    "G-code",
+    "#D08CF2"
+  ],
+  ".gaml": [
+    "GAML",
+    "#FFC766"
+  ],
+  ".gms": [
+    "GAMS",
+    "#f49a22"
+  ],
+  ".gap": [
+    "GAP",
+    "#0000cc"
+  ],
+  ".gd": [
+    "GDScript",
+    "#355570"
+  ],
+  ".gi": [
+    "GAP",
+    "#0000cc"
+  ],
+  ".tst": [
+    "Scilab",
+    "#ca0f21"
+  ],
+  ".md": [
+    "GCC Machine Description",
+    "#FFCFAB"
+  ],
+  ".glsl": [
+    "GLSL",
+    "#5686a5"
+  ],
+  ".fp": [
+    "GLSL",
+    "#5686a5"
+  ],
+  ".frag": [
+    "JavaScript",
+    "#f1e05a"
+  ],
+  ".frg": [
+    "GLSL",
+    "#5686a5"
+  ],
+  ".fsh": [
+    "GLSL",
+    "#5686a5"
+  ],
+  ".fshader": [
+    "GLSL",
+    "#5686a5"
+  ],
+  ".geo": [
+    "GLSL",
+    "#5686a5"
+  ],
+  ".geom": [
+    "GLSL",
+    "#5686a5"
+  ],
+  ".glslf": [
+    "GLSL",
+    "#5686a5"
+  ],
+  ".glslv": [
+    "GLSL",
+    "#5686a5"
+  ],
+  ".gs": [
+    "JavaScript",
+    "#f1e05a"
+  ],
+  ".gshader": [
+    "GLSL",
+    "#5686a5"
+  ],
+  ".rchit": [
+    "GLSL",
+    "#5686a5"
+  ],
+  ".rmiss": [
+    "GLSL",
+    "#5686a5"
+  ],
+  ".shader": [
+    "ShaderLab",
+    "#222c37"
+  ],
+  ".tesc": [
+    "GLSL",
+    "#5686a5"
+  ],
+  ".tese": [
+    "GLSL",
+    "#5686a5"
+  ],
+  ".vert": [
+    "GLSL",
+    "#5686a5"
+  ],
+  ".vrx": [
+    "GLSL",
+    "#5686a5"
+  ],
+  ".vs": [
+    "GLSL",
+    "#5686a5"
+  ],
+  ".vsh": [
+    "GLSL",
+    "#5686a5"
+  ],
+  ".vshader": [
+    "GLSL",
+    "#5686a5"
+  ],
+  ".gsc": [
+    "GSC",
+    "#FF6800"
+  ],
+  ".csc": [
+    "GSC",
+    "#FF6800"
+  ],
+  ".gsh": [
+    "GSC",
+    "#FF6800"
+  ],
+  ".gml": [
+    "Game Maker Language",
+    "#71b417"
+  ],
+  ".4gl": [
+    "Genero 4gl",
+    "#63408e"
+  ],
+  ".kid": [
+    "Genshi",
+    "#951531"
+  ],
+  ".ebuild": [
+    "Gentoo Ebuild",
+    "#9400ff"
+  ],
+  ".eclass": [
+    "Gentoo Eclass",
+    "#9400ff"
+  ],
+  ".feature": [
+    "Gherkin",
+    "#5B2063"
+  ],
+  ".story": [
+    "Gherkin",
+    "#5B2063"
+  ],
+  ".gleam": [
+    "Gleam",
+    "#ffaff3"
+  ],
+  ".gjs": [
+    "Glimmer JS",
+    "#F5835F"
+  ],
+  ".gts": [
+    "Glimmer TS",
+    "#3178c6"
+  ],
+  ".glf": [
+    "Glyph",
+    "#c1ac7f"
+  ],
+  ".gp": [
+    "Gnuplot",
+    "#f0a9f0"
+  ],
+  ".gnu": [
+    "Gnuplot",
+    "#f0a9f0"
+  ],
+  ".gnuplot": [
+    "Gnuplot",
+    "#f0a9f0"
+  ],
+  ".p": [
+    "OpenEdge ABL",
+    "#5ce600"
+  ],
+  ".plot": [
+    "Gnuplot",
+    "#f0a9f0"
+  ],
+  ".plt": [
+    "Prolog",
+    "#74283c"
+  ],
+  ".go": [
+    "Go",
+    "#00ADD8"
+  ],
+  ".golo": [
+    "Golo",
+    "#88562A"
+  ],
+  ".gst": [
+    "Gosu",
+    "#82937f"
+  ],
+  ".gsx": [
+    "Gosu",
+    "#82937f"
+  ],
+  ".vark": [
+    "Gosu",
+    "#82937f"
+  ],
+  ".grace": [
+    "Grace",
+    "#615f8b"
+  ],
+  ".gf": [
+    "Grammatical Framework",
+    "#ff0000"
+  ],
+  ".groovy": [
+    "Groovy",
+    "#4298b8"
+  ],
+  ".grt": [
+    "Groovy",
+    "#4298b8"
+  ],
+  ".gtpl": [
+    "Groovy",
+    "#4298b8"
+  ],
+  ".gvy": [
+    "Groovy",
+    "#4298b8"
+  ],
+  ".gsp": [
+    "Groovy Server Pages",
+    "#4298b8"
+  ],
+  ".hcl": [
+    "HCL",
+    "#844FBA"
+  ],
+  ".nomad": [
+    "HCL",
+    "#844FBA"
+  ],
+  ".tf": [
+    "HCL",
+    "#844FBA"
+  ],
+  ".tfvars": [
+    "HCL",
+    "#844FBA"
+  ],
+  ".workflow": [
+    "HCL",
+    "#844FBA"
+  ],
+  ".hlsl": [
+    "HLSL",
+    "#aace60"
+  ],
+  ".cginc": [
+    "HLSL",
+    "#aace60"
+  ],
+  ".fxh": [
+    "HLSL",
+    "#aace60"
+  ],
+  ".hlsli": [
+    "HLSL",
+    "#aace60"
+  ],
+  ".hack": [
+    "Hack",
+    "#878787"
+  ],
+  ".hhi": [
+    "Hack",
+    "#878787"
+  ],
+  ".php": [
+    "PHP",
+    "#4F5D95"
+  ],
+  ".hb": [
+    "Harbour",
+    "#0e60e3"
+  ],
+  ".hs": [
+    "Haskell",
+    "#5e5086"
+  ],
+  ".hs-boot": [
+    "Haskell",
+    "#5e5086"
+  ],
+  ".hsc": [
+    "Haskell",
+    "#5e5086"
+  ],
+  ".hx": [
+    "Haxe",
+    "#df7900"
+  ],
+  ".hxsl": [
+    "Haxe",
+    "#df7900"
+  ],
+  ".q": [
+    "q",
+    "#0040cd"
+  ],
+  ".hql": [
+    "HiveQL",
+    "#dce200"
+  ],
+  ".hc": [
+    "HolyC",
+    "#ffefaf"
+  ],
+  ".hy": [
+    "Hy",
+    "#7790B2"
+  ],
+  ".pro": [
+    "Prolog",
+    "#74283c"
+  ],
+  ".dlm": [
+    "IDL",
+    "#a3522f"
+  ],
+  ".ipf": [
+    "IGOR Pro",
+    "#0000cc"
+  ],
+  ".idr": [
+    "Idris",
+    "#b30000"
+  ],
+  ".lidr": [
+    "Idris",
+    "#b30000"
+  ],
+  ".ijm": [
+    "ImageJ Macro",
+    "#99AAFF"
+  ],
+  ".imba": [
+    "Imba",
+    "#16cec6"
+  ],
+  ".iss": [
+    "Inno Setup",
+    "#264b99"
+  ],
+  ".isl": [
+    "Inno Setup",
+    "#264b99"
+  ],
+  ".io": [
+    "Io",
+    "#a9188d"
+  ],
+  ".ik": [
+    "Ioke",
+    "#078193"
+  ],
+  ".thy": [
+    "Isabelle",
+    "#FEFE00"
+  ],
+  ".ijs": [
+    "J",
+    "#9EEDFF"
+  ],
+  ".jcl": [
+    "JCL",
+    "#d90e09"
+  ],
+  ".flex": [
+    "JFlex",
+    "#DBCA00"
+  ],
+  ".jflex": [
+    "JFlex",
+    "#DBCA00"
+  ],
+  ".jq": [
+    "jq",
+    "#c7254e"
+  ],
+  ".janet": [
+    "Janet",
+    "#0886a5"
+  ],
+  ".j": [
+    "Objective-J",
+    "#ff0c5a"
+  ],
+  ".java": [
+    "Java",
+    "#b07219"
+  ],
+  ".jav": [
+    "Java",
+    "#b07219"
+  ],
+  ".jsh": [
+    "Java",
+    "#b07219"
+  ],
+  ".jsp": [
+    "Java Server Pages",
+    "#2A6277"
+  ],
+  ".tag": [
+    "Java Server Pages",
+    "#2A6277"
+  ],
+  ".jte": [
+    "Java Template Engine",
+    "#2A6277"
+  ],
+  ".js": [
+    "JavaScript",
+    "#f1e05a"
+  ],
+  "._js": [
+    "JavaScript",
+    "#f1e05a"
+  ],
+  ".bones": [
+    "JavaScript",
+    "#f1e05a"
+  ],
+  ".cjs": [
+    "JavaScript",
+    "#f1e05a"
+  ],
+  ".es6": [
+    "JavaScript",
+    "#f1e05a"
+  ],
+  ".jake": [
+    "JavaScript",
+    "#f1e05a"
+  ],
+  ".javascript": [
+    "JavaScript",
+    "#f1e05a"
+  ],
+  ".jsb": [
+    "JavaScript",
+    "#f1e05a"
+  ],
+  ".jscad": [
+    "JavaScript",
+    "#f1e05a"
+  ],
+  ".jsfl": [
+    "JavaScript",
+    "#f1e05a"
+  ],
+  ".jslib": [
+    "JavaScript",
+    "#f1e05a"
+  ],
+  ".jsm": [
+    "JavaScript",
+    "#f1e05a"
+  ],
+  ".jspre": [
+    "JavaScript",
+    "#f1e05a"
+  ],
+  ".jss": [
+    "JavaScript",
+    "#f1e05a"
+  ],
+  ".jsx": [
+    "JavaScript",
+    "#f1e05a"
+  ],
+  ".mjs": [
+    "JavaScript",
+    "#f1e05a"
+  ],
+  ".njs": [
+    "JavaScript",
+    "#f1e05a"
+  ],
+  ".pac": [
+    "JavaScript",
+    "#f1e05a"
+  ],
+  ".sjs": [
+    "JavaScript",
+    "#f1e05a"
+  ],
+  ".ssjs": [
+    "JavaScript",
+    "#f1e05a"
+  ],
+  ".xsjs": [
+    "JavaScript",
+    "#f1e05a"
+  ],
+  ".xsjslib": [
+    "JavaScript",
+    "#f1e05a"
+  ],
+  ".js.erb": [
+    "JavaScript+ERB",
+    "#f1e05a"
+  ],
+  ".mps": [
+    "JetBrains MPS",
+    "#21D789"
+  ],
+  ".mpl": [
+    "JetBrains MPS",
+    "#21D789"
+  ],
+  ".msd": [
+    "JetBrains MPS",
+    "#21D789"
+  ],
+  ".jison": [
+    "Jison",
+    "#56b3cb"
+  ],
+  ".jisonlex": [
+    "Jison Lex",
+    "#56b3cb"
+  ],
+  ".ol": [
+    "Jolie",
+    "#843179"
+  ],
+  ".iol": [
+    "Jolie",
+    "#843179"
+  ],
+  ".jsonnet": [
+    "Jsonnet",
+    "#0064bd"
+  ],
+  ".libsonnet": [
+    "Jsonnet",
+    "#0064bd"
+  ],
+  ".jl": [
+    "Julia",
+    "#a270ba"
+  ],
+  ".just": [
+    "Just",
+    "#384d54"
+  ],
+  ".krl": [
+    "KRL",
+    "#28430A"
+  ],
+  ".ksy": [
+    "Kaitai Struct",
+    "#773b37"
+  ],
+  ".kak": [
+    "KakouneScript",
+    "#6f8042"
+  ],
+  ".ks": [
+    "KerboScript",
+    "#41adf0"
+  ],
+  ".kt": [
+    "Kotlin",
+    "#A97BFF"
+  ],
+  ".ktm": [
+    "Kotlin",
+    "#A97BFF"
+  ],
+  ".kts": [
+    "Kotlin",
+    "#A97BFF"
+  ],
+  ".lfe": [
+    "LFE",
+    "#4C3023"
+  ],
+  ".ll": [
+    "LLVM",
+    "#185619"
+  ],
+  ".lol": [
+    "LOLCODE",
+    "#cc9900"
+  ],
+  ".lsl": [
+    "LSL",
+    "#3d9970"
+  ],
+  ".lslp": [
+    "LSL",
+    "#3d9970"
+  ],
+  ".lvproj": [
+    "LabVIEW",
+    "#fede06"
+  ],
+  ".lvclass": [
+    "LabVIEW",
+    "#fede06"
+  ],
+  ".lvlib": [
+    "LabVIEW",
+    "#fede06"
+  ],
+  ".lasso": [
+    "Lasso",
+    "#999999"
+  ],
+  ".las": [
+    "Lasso",
+    "#999999"
+  ],
+  ".lasso8": [
+    "Lasso",
+    "#999999"
+  ],
+  ".lasso9": [
+    "Lasso",
+    "#999999"
+  ],
+  ".lex": [
+    "Lex",
+    "#DBCA00"
+  ],
+  ".ligo": [
+    "LigoLANG",
+    "#0e74ff"
+  ],
+  ".ly": [
+    "LilyPond",
+    "#9ccc7c"
+  ],
+  ".ily": [
+    "LilyPond",
+    "#9ccc7c"
+  ],
+  ".lagda": [
+    "Literate Agda",
+    "#315665"
+  ],
+  ".litcoffee": [
+    "Literate CoffeeScript",
+    "#244776"
+  ],
+  ".coffee.md": [
+    "Literate CoffeeScript",
+    "#244776"
+  ],
+  ".lhs": [
+    "Literate Haskell",
+    "#5e5086"
+  ],
+  ".livecodescript": [
+    "LiveCode Script",
+    "#0c5ba5"
+  ],
+  ".ls": [
+    "LiveScript",
+    "#499886"
+  ],
+  "._ls": [
+    "LiveScript",
+    "#499886"
+  ],
+  ".lgt": [
+    "Logtalk",
+    "#295b9a"
+  ],
+  ".logtalk": [
+    "Logtalk",
+    "#295b9a"
+  ],
+  ".lkml": [
+    "LookML",
+    "#652B81"
+  ],
+  ".lookml": [
+    "LookML",
+    "#652B81"
+  ],
+  ".lua": [
+    "Lua",
+    "#000080"
+  ],
+  ".fcgi": [
+    "Shell",
+    "#89e051"
+  ],
+  ".nse": [
+    "Lua",
+    "#000080"
+  ],
+  ".p8": [
+    "Lua",
+    "#000080"
+  ],
+  ".pd_lua": [
+    "Lua",
+    "#000080"
+  ],
+  ".rbxs": [
+    "Lua",
+    "#000080"
+  ],
+  ".rockspec": [
+    "Lua",
+    "#000080"
+  ],
+  ".wlua": [
+    "Lua",
+    "#000080"
+  ],
+  ".luau": [
+    "Luau",
+    "#00A2FF"
+  ],
+  ".matlab": [
+    "MATLAB",
+    "#e16737"
+  ],
+  ".m": [
+    "Objective-C",
+    "#438eff"
+  ],
+  ".ms": [
+    "MAXScript",
+    "#00a6a6"
+  ],
+  ".mcr": [
+    "MAXScript",
+    "#00a6a6"
+  ],
+  ".mlir": [
+    "MLIR",
+    "#5EC8DB"
+  ],
+  ".mq4": [
+    "MQL4",
+    "#62A8D6"
+  ],
+  ".mqh": [
+    "MQL5",
+    "#4A76B8"
+  ],
+  ".mq5": [
+    "MQL5",
+    "#4A76B8"
+  ],
+  ".m2": [
+    "Macaulay2",
+    "#d8ffff"
+  ],
+  ".mak": [
+    "Makefile",
+    "#427819"
+  ],
+  ".make": [
+    "Makefile",
+    "#427819"
+  ],
+  ".makefile": [
+    "Makefile",
+    "#427819"
+  ],
+  ".mk": [
+    "Makefile",
+    "#427819"
+  ],
+  ".mkfile": [
+    "Makefile",
+    "#427819"
+  ],
+  ".mako": [
+    "Mako",
+    "#7e858d"
+  ],
+  ".mao": [
+    "Mako",
+    "#7e858d"
+  ],
+  ".mathematica": [
+    "Mathematica",
+    "#dd1100"
+  ],
+  ".cdf": [
+    "Mathematica",
+    "#dd1100"
+  ],
+  ".ma": [
+    "Mathematica",
+    "#dd1100"
+  ],
+  ".mt": [
+    "Mathematica",
+    "#dd1100"
+  ],
+  ".nb": [
+    "Mathematica",
+    "#dd1100"
+  ],
+  ".nbp": [
+    "Mathematica",
+    "#dd1100"
+  ],
+  ".wl": [
+    "Mathematica",
+    "#dd1100"
+  ],
+  ".wlt": [
+    "Mathematica",
+    "#dd1100"
+  ],
+  ".maxpat": [
+    "Max",
+    "#c4a79c"
+  ],
+  ".maxhelp": [
+    "Max",
+    "#c4a79c"
+  ],
+  ".maxproj": [
+    "Max",
+    "#c4a79c"
+  ],
+  ".mxt": [
+    "Max",
+    "#c4a79c"
+  ],
+  ".pat": [
+    "Max",
+    "#c4a79c"
+  ],
+  ".moo": [
+    "Mercury",
+    "#ff2b2b"
+  ],
+  ".metal": [
+    "Metal",
+    "#8f14e9"
+  ],
+  ".mint": [
+    "Mint",
+    "#02b046"
+  ],
+  ".druby": [
+    "Mirah",
+    "#c7a938"
+  ],
+  ".duby": [
+    "Mirah",
+    "#c7a938"
+  ],
+  ".mirah": [
+    "Mirah",
+    "#c7a938"
+  ],
+  ".mo": [
+    "Motoko",
+    "#fbb03b"
+  ],
+  ".i3": [
+    "Modula-3",
+    "#223388"
+  ],
+  ".ig": [
+    "Modula-3",
+    "#223388"
+  ],
+  ".m3": [
+    "Modula-3",
+    "#223388"
+  ],
+  ".mg": [
+    "Modula-3",
+    "#223388"
+  ],
+  ".mojo": [
+    "Mojo",
+    "#ff4c1f"
+  ],
+  ".mc": [
+    "Monkey C",
+    "#8D6747"
+  ],
+  ".moon": [
+    "MoonScript",
+    "#ff4585"
+  ],
+  ".s": [
+    "Motorola 68K Assembly",
+    "#005daa"
+  ],
+  ".x68": [
+    "Motorola 68K Assembly",
+    "#005daa"
+  ],
+  ".move": [
+    "Move",
+    "#4a137a"
+  ],
+  ".ncl": [
+    "NCL",
+    "#28431f"
+  ],
+  ".nss": [
+    "NWScript",
+    "#111522"
+  ],
+  ".ne": [
+    "Nearley",
+    "#990000"
+  ],
+  ".nearley": [
+    "Nearley",
+    "#990000"
+  ],
+  ".n": [
+    "Nemerle",
+    "#3d3c6e"
+  ],
+  ".axs": [
+    "NetLinx",
+    "#0aa0ff"
+  ],
+  ".axi": [
+    "NetLinx",
+    "#0aa0ff"
+  ],
+  ".axs.erb": [
+    "NetLinx+ERB",
+    "#747faa"
+  ],
+  ".axi.erb": [
+    "NetLinx+ERB",
+    "#747faa"
+  ],
+  ".nlogo": [
+    "NetLogo",
+    "#ff6375"
+  ],
+  ".nl": [
+    "NewLisp",
+    "#87AED7"
+  ],
+  ".nf": [
+    "Nextflow",
+    "#3ac486"
+  ],
+  ".nim": [
+    "Nim",
+    "#ffc200"
+  ],
+  ".nim.cfg": [
+    "Nim",
+    "#ffc200"
+  ],
+  ".nimble": [
+    "Nim",
+    "#ffc200"
+  ],
+  ".nimrod": [
+    "Nim",
+    "#ffc200"
+  ],
+  ".nims": [
+    "Nim",
+    "#ffc200"
+  ],
+  ".nit": [
+    "Nit",
+    "#009917"
+  ],
+  ".nix": [
+    "Nix",
+    "#7e7eff"
+  ],
+  ".nr": [
+    "Noir",
+    "#2f1f49"
+  ],
+  ".nu": [
+    "Nushell",
+    "#4E9906"
+  ],
+  ".numpy": [
+    "NumPy",
+    "#9C8AF9"
+  ],
+  ".numpyw": [
+    "NumPy",
+    "#9C8AF9"
+  ],
+  ".numsc": [
+    "NumPy",
+    "#9C8AF9"
+  ],
+  ".ml": [
+    "Standard ML",
+    "#dc566d"
+  ],
+  ".eliom": [
+    "OCaml",
+    "#ef7a08"
+  ],
+  ".eliomi": [
+    "OCaml",
+    "#ef7a08"
+  ],
+  ".ml4": [
+    "OCaml",
+    "#ef7a08"
+  ],
+  ".mli": [
+    "OCaml",
+    "#ef7a08"
+  ],
+  ".mll": [
+    "OCaml",
+    "#ef7a08"
+  ],
+  ".mly": [
+    "OCaml",
+    "#ef7a08"
+  ],
+  ".mm": [
+    "Objective-C++",
+    "#6866fb"
+  ],
+  ".sj": [
+    "Objective-J",
+    "#ff0c5a"
+  ],
+  ".odin": [
+    "Odin",
+    "#60AFFE"
+  ],
+  ".omgrofl": [
+    "Omgrofl",
+    "#cabbff"
+  ],
+  ".opal": [
+    "Opal",
+    "#f7ede0"
+  ],
+  ".rego": [
+    "Open Policy Agent",
+    "#7d9199"
+  ],
+  ".opencl": [
+    "OpenCL",
+    "#ed2e2d"
+  ],
+  ".qasm": [
+    "OpenQASM",
+    "#AA70FF"
+  ],
+  ".scad": [
+    "OpenSCAD",
+    "#e5cd45"
+  ],
+  ".oxygene": [
+    "Oxygene",
+    "#cdd0e3"
+  ],
+  ".oz": [
+    "Oz",
+    "#fab738"
+  ],
+  ".p4": [
+    "P4",
+    "#7055b5"
+  ],
+  ".pddl": [
+    "PDDL",
+    "#0d00ff"
+  ],
+  ".pegjs": [
+    "PEG.js",
+    "#234d6b"
+  ],
+  ".peggy": [
+    "PEG.js",
+    "#234d6b"
+  ],
+  ".aw": [
+    "PHP",
+    "#4F5D95"
+  ],
+  ".ctp": [
+    "PHP",
+    "#4F5D95"
+  ],
+  ".php3": [
+    "PHP",
+    "#4F5D95"
+  ],
+  ".php4": [
+    "PHP",
+    "#4F5D95"
+  ],
+  ".php5": [
+    "PHP",
+    "#4F5D95"
+  ],
+  ".phps": [
+    "PHP",
+    "#4F5D95"
+  ],
+  ".phpt": [
+    "PHP",
+    "#4F5D95"
+  ],
+  ".pls": [
+    "PLSQL",
+    "#dad8d8"
+  ],
+  ".bdy": [
+    "PLSQL",
+    "#dad8d8"
+  ],
+  ".ddl": [
+    "PLSQL",
+    "#dad8d8"
+  ],
+  ".fnc": [
+    "PLSQL",
+    "#dad8d8"
+  ],
+  ".pck": [
+    "PLSQL",
+    "#dad8d8"
+  ],
+  ".pkb": [
+    "PLSQL",
+    "#dad8d8"
+  ],
+  ".pks": [
+    "PLSQL",
+    "#dad8d8"
+  ],
+  ".plb": [
+    "PLSQL",
+    "#dad8d8"
+  ],
+  ".plsql": [
+    "PLSQL",
+    "#dad8d8"
+  ],
+  ".prc": [
+    "PLSQL",
+    "#dad8d8"
+  ],
+  ".spc": [
+    "PLSQL",
+    "#dad8d8"
+  ],
+  ".sql": [
+    "TSQL",
+    "#e38c00"
+  ],
+  ".tpb": [
+    "PLSQL",
+    "#dad8d8"
+  ],
+  ".tps": [
+    "PLSQL",
+    "#dad8d8"
+  ],
+  ".trg": [
+    "PLSQL",
+    "#dad8d8"
+  ],
+  ".vw": [
+    "PLSQL",
+    "#dad8d8"
+  ],
+  ".pgsql": [
+    "PLpgSQL",
+    "#336790"
+  ],
+  ".pov": [
+    "POV-Ray SDL",
+    "#6bac65"
+  ],
+  ".pact": [
+    "Pact",
+    "#F7A8B8"
+  ],
+  ".pan": [
+    "Pan",
+    "#cc0000"
+  ],
+  ".psc": [
+    "Papyrus",
+    "#6600cc"
+  ],
+  ".parrot": [
+    "Parrot",
+    "#f3ca0a"
+  ],
+  ".pas": [
+    "Pascal",
+    "#E3F171"
+  ],
+  ".dfm": [
+    "Pascal",
+    "#E3F171"
+  ],
+  ".dpr": [
+    "Pascal",
+    "#E3F171"
+  ],
+  ".lpr": [
+    "Pascal",
+    "#E3F171"
+  ],
+  ".pascal": [
+    "Pascal",
+    "#E3F171"
+  ],
+  ".pp": [
+    "Puppet",
+    "#302B6D"
+  ],
+  ".pwn": [
+    "Pawn",
+    "#dbb284"
+  ],
+  ".sma": [
+    "Pawn",
+    "#dbb284"
+  ],
+  ".pep": [
+    "Pep8",
+    "#C76F5B"
+  ],
+  ".pl": [
+    "Raku",
+    "#0000fb"
+  ],
+  ".cgi": [
+    "Shell",
+    "#89e051"
+  ],
+  ".perl": [
+    "Perl",
+    "#0298c3"
+  ],
+  ".ph": [
+    "Perl",
+    "#0298c3"
+  ],
+  ".plx": [
+    "Perl",
+    "#0298c3"
+  ],
+  ".pm": [
+    "Raku",
+    "#0000fb"
+  ],
+  ".psgi": [
+    "Perl",
+    "#0298c3"
+  ],
+  ".t": [
+    "Turing",
+    "#cf142b"
+  ],
+  ".pig": [
+    "PigLatin",
+    "#fcd7de"
+  ],
+  ".pike": [
+    "Pike",
+    "#005390"
+  ],
+  ".pmod": [
+    "Pike",
+    "#005390"
+  ],
+  ".pkl": [
+    "Pkl",
+    "#6b9543"
+  ],
+  ".pogo": [
+    "PogoScript",
+    "#d80074"
+  ],
+  ".polar": [
+    "Polar",
+    "#ae81ff"
+  ],
+  ".por": [
+    "Portugol",
+    "#f8bd00"
+  ],
+  ".pbt": [
+    "PowerBuilder",
+    "#8f0f8d"
+  ],
+  ".sra": [
+    "PowerBuilder",
+    "#8f0f8d"
+  ],
+  ".sru": [
+    "PowerBuilder",
+    "#8f0f8d"
+  ],
+  ".srw": [
+    "PowerBuilder",
+    "#8f0f8d"
+  ],
+  ".ps1": [
+    "PowerShell",
+    "#012456"
+  ],
+  ".psd1": [
+    "PowerShell",
+    "#012456"
+  ],
+  ".psm1": [
+    "PowerShell",
+    "#012456"
+  ],
+  ".praat": [
+    "Praat",
+    "#c8506d"
+  ],
+  ".pde": [
+    "Processing",
+    "#0096D8"
+  ],
+  ".prolog": [
+    "Prolog",
+    "#74283c"
+  ],
+  ".yap": [
+    "Prolog",
+    "#74283c"
+  ],
+  ".pml": [
+    "Promela",
+    "#de0000"
+  ],
+  ".spin": [
+    "Propeller Spin",
+    "#7fa2a7"
+  ],
+  ".pb": [
+    "PureBasic",
+    "#5a6986"
+  ],
+  ".pbi": [
+    "PureBasic",
+    "#5a6986"
+  ],
+  ".purs": [
+    "PureScript",
+    "#1D222D"
+  ],
+  ".arr": [
+    "Pyret",
+    "#ee1e10"
+  ],
+  ".py": [
+    "Python",
+    "#3572A5"
+  ],
+  ".gyp": [
+    "Python",
+    "#3572A5"
+  ],
+  ".gypi": [
+    "Python",
+    "#3572A5"
+  ],
+  ".lmi": [
+    "Python",
+    "#3572A5"
+  ],
+  ".py3": [
+    "Python",
+    "#3572A5"
+  ],
+  ".pyde": [
+    "Python",
+    "#3572A5"
+  ],
+  ".pyi": [
+    "Python",
+    "#3572A5"
+  ],
+  ".pyp": [
+    "Python",
+    "#3572A5"
+  ],
+  ".pyt": [
+    "Python",
+    "#3572A5"
+  ],
+  ".pyw": [
+    "Python",
+    "#3572A5"
+  ],
+  ".rpy": [
+    "Ren'Py",
+    "#ff7f7f"
+  ],
+  ".spec": [
+    "Ruby",
+    "#701516"
+  ],
+  ".tac": [
+    "Python",
+    "#3572A5"
+  ],
+  ".wsgi": [
+    "Python",
+    "#3572A5"
+  ],
+  ".xpy": [
+    "Python",
+    "#3572A5"
+  ],
+  ".qs": [
+    "Qt Script",
+    "#00b841"
+  ],
+  ".qml": [
+    "QML",
+    "#44a51c"
+  ],
+  ".qbs": [
+    "QML",
+    "#44a51c"
+  ],
+  ".r": [
+    "Rez",
+    "#FFDAB3"
+  ],
+  ".rd": [
+    "R",
+    "#198CE7"
+  ],
+  ".rsx": [
+    "R",
+    "#198CE7"
+  ],
+  ".rexx": [
+    "REXX",
+    "#d90e09"
+  ],
+  ".pprx": [
+    "REXX",
+    "#d90e09"
+  ],
+  ".rex": [
+    "REXX",
+    "#d90e09"
+  ],
+  ".rpgle": [
+    "RPGLE",
+    "#2BDE21"
+  ],
+  ".sqlrpgle": [
+    "RPGLE",
+    "#2BDE21"
+  ],
+  ".rkt": [
+    "Racket",
+    "#3c5caa"
+  ],
+  ".rktd": [
+    "Racket",
+    "#3c5caa"
+  ],
+  ".rktl": [
+    "Racket",
+    "#3c5caa"
+  ],
+  ".scrbl": [
+    "Racket",
+    "#3c5caa"
+  ],
+  ".rl": [
+    "Ragel",
+    "#9d5200"
+  ],
+  ".6pl": [
+    "Raku",
+    "#0000fb"
+  ],
+  ".6pm": [
+    "Raku",
+    "#0000fb"
+  ],
+  ".nqp": [
+    "Raku",
+    "#0000fb"
+  ],
+  ".p6": [
+    "Raku",
+    "#0000fb"
+  ],
+  ".p6l": [
+    "Raku",
+    "#0000fb"
+  ],
+  ".p6m": [
+    "Raku",
+    "#0000fb"
+  ],
+  ".pl6": [
+    "Raku",
+    "#0000fb"
+  ],
+  ".pm6": [
+    "Raku",
+    "#0000fb"
+  ],
+  ".raku": [
+    "Raku",
+    "#0000fb"
+  ],
+  ".rakumod": [
+    "Raku",
+    "#0000fb"
+  ],
+  ".rsc": [
+    "RouterOS Script",
+    "#DE3941"
+  ],
+  ".res": [
+    "ReScript",
+    "#ed5051"
+  ],
+  ".rei": [
+    "Reason",
+    "#ff5847"
+  ],
+  ".religo": [
+    "ReasonLIGO",
+    "#ff5847"
+  ],
+  ".reb": [
+    "Rebol",
+    "#358a5b"
+  ],
+  ".r2": [
+    "Rebol",
+    "#358a5b"
+  ],
+  ".r3": [
+    "Rebol",
+    "#358a5b"
+  ],
+  ".rebol": [
+    "Rebol",
+    "#358a5b"
+  ],
+  ".red": [
+    "Red",
+    "#f50000"
+  ],
+  ".reds": [
+    "Red",
+    "#f50000"
+  ],
+  ".ring": [
+    "Ring",
+    "#2D54CB"
+  ],
+  ".robot": [
+    "RobotFramework",
+    "#00c0b5"
+  ],
+  ".roc": [
+    "Roc",
+    "#7c38f5"
+  ],
+  ".rg": [
+    "Rouge",
+    "#cc0088"
+  ],
+  ".rb": [
+    "Ruby",
+    "#701516"
+  ],
+  ".builder": [
+    "Ruby",
+    "#701516"
+  ],
+  ".eye": [
+    "Ruby",
+    "#701516"
+  ],
+  ".gemspec": [
+    "Ruby",
+    "#701516"
+  ],
+  ".god": [
+    "Ruby",
+    "#701516"
+  ],
+  ".jbuilder": [
+    "Ruby",
+    "#701516"
+  ],
+  ".mspec": [
+    "Ruby",
+    "#701516"
+  ],
+  ".pluginspec": [
+    "Ruby",
+    "#701516"
+  ],
+  ".podspec": [
+    "Ruby",
+    "#701516"
+  ],
+  ".prawn": [
+    "Ruby",
+    "#701516"
+  ],
+  ".rabl": [
+    "Ruby",
+    "#701516"
+  ],
+  ".rake": [
+    "Ruby",
+    "#701516"
+  ],
+  ".rbi": [
+    "Ruby",
+    "#701516"
+  ],
+  ".rbuild": [
+    "Ruby",
+    "#701516"
+  ],
+  ".rbw": [
+    "Ruby",
+    "#701516"
+  ],
+  ".rbx": [
+    "Ruby",
+    "#701516"
+  ],
+  ".ru": [
+    "Ruby",
+    "#701516"
+  ],
+  ".ruby": [
+    "Ruby",
+    "#701516"
+  ],
+  ".thor": [
+    "Ruby",
+    "#701516"
+  ],
+  ".watchr": [
+    "Ruby",
+    "#701516"
+  ],
+  ".rs": [
+    "Rust",
+    "#dea584"
+  ],
+  ".rs.in": [
+    "Rust",
+    "#dea584"
+  ],
+  ".sas": [
+    "SAS",
+    "#B34936"
+  ],
+  ".sqf": [
+    "SQF",
+    "#3F3F3F"
+  ],
+  ".hqf": [
+    "SQF",
+    "#3F3F3F"
+  ],
+  ".db2": [
+    "SQLPL",
+    "#e38c00"
+  ],
+  ".sls": [
+    "Scheme",
+    "#1e4aec"
+  ],
+  ".scala": [
+    "Scala",
+    "#c22d40"
+  ],
+  ".kojo": [
+    "Scala",
+    "#c22d40"
+  ],
+  ".sbt": [
+    "Scala",
+    "#c22d40"
+  ],
+  ".sc": [
+    "SuperCollider",
+    "#46390b"
+  ],
+  ".scenic": [
+    "Scenic",
+    "#fdc700"
+  ],
+  ".scm": [
+    "Scheme",
+    "#1e4aec"
+  ],
+  ".sch": [
+    "Scheme",
+    "#1e4aec"
+  ],
+  ".sld": [
+    "Scheme",
+    "#1e4aec"
+  ],
+  ".sps": [
+    "Scheme",
+    "#1e4aec"
+  ],
+  ".ss": [
+    "Scheme",
+    "#1e4aec"
+  ],
+  ".sci": [
+    "Scilab",
+    "#ca0f21"
+  ],
+  ".sce": [
+    "Scilab",
+    "#ca0f21"
+  ],
+  ".self": [
+    "Self",
+    "#0579aa"
+  ],
+  ".sh": [
+    "Shell",
+    "#89e051"
+  ],
+  ".bash": [
+    "Shell",
+    "#89e051"
+  ],
+  ".bats": [
+    "Shell",
+    "#89e051"
+  ],
+  ".command": [
+    "Shell",
+    "#89e051"
+  ],
+  ".ksh": [
+    "Shell",
+    "#89e051"
+  ],
+  ".sh.in": [
+    "Shell",
+    "#89e051"
+  ],
+  ".tmux": [
+    "Shell",
+    "#89e051"
+  ],
+  ".tool": [
+    "Shell",
+    "#89e051"
+  ],
+  ".zsh": [
+    "Shell",
+    "#89e051"
+  ],
+  ".zsh-theme": [
+    "Shell",
+    "#89e051"
+  ],
+  ".shen": [
+    "Shen",
+    "#120F14"
+  ],
+  ".sl": [
+    "Slash",
+    "#007eff"
+  ],
+  ".ice": [
+    "Slice",
+    "#003fa2"
+  ],
+  ".cocci": [
+    "SmPL",
+    "#c94949"
+  ],
+  ".st": [
+    "Smalltalk",
+    "#596706"
+  ],
+  ".tpl": [
+    "Smarty",
+    "#f0c040"
+  ],
+  ".smithy": [
+    "Smithy",
+    "#c44536"
+  ],
+  ".smk": [
+    "Snakemake",
+    "#419179"
+  ],
+  ".snakefile": [
+    "Snakemake",
+    "#419179"
+  ],
+  ".sol": [
+    "Solidity",
+    "#AA6746"
+  ],
+  ".sp": [
+    "SourcePawn",
+    "#f69e1d"
+  ],
+  ".nut": [
+    "Squirrel",
+    "#800000"
+  ],
+  ".stan": [
+    "Stan",
+    "#b2011d"
+  ],
+  ".fun": [
+    "Standard ML",
+    "#dc566d"
+  ],
+  ".sig": [
+    "Standard ML",
+    "#dc566d"
+  ],
+  ".sml": [
+    "Standard ML",
+    "#dc566d"
+  ],
+  ".bzl": [
+    "Starlark",
+    "#76d275"
+  ],
+  ".star": [
+    "Starlark",
+    "#76d275"
+  ],
+  ".do": [
+    "Stata",
+    "#1a5f91"
+  ],
+  ".ado": [
+    "Stata",
+    "#1a5f91"
+  ],
+  ".doh": [
+    "Stata",
+    "#1a5f91"
+  ],
+  ".ihlp": [
+    "Stata",
+    "#1a5f91"
+  ],
+  ".mata": [
+    "Stata",
+    "#1a5f91"
+  ],
+  ".matah": [
+    "Stata",
+    "#1a5f91"
+  ],
+  ".sthlp": [
+    "Stata",
+    "#1a5f91"
+  ],
+  ".scd": [
+    "SuperCollider",
+    "#46390b"
+  ],
+  ".sw": [
+    "Sway",
+    "#00F58C"
+  ],
+  ".swift": [
+    "Swift",
+    "#F05138"
+  ],
+  ".sv": [
+    "SystemVerilog",
+    "#DAE1C2"
+  ],
+  ".svh": [
+    "SystemVerilog",
+    "#DAE1C2"
+  ],
+  ".vh": [
+    "SystemVerilog",
+    "#DAE1C2"
+  ],
+  ".8xp": [
+    "TI Program",
+    "#A0AA87"
+  ],
+  ".8xp.txt": [
+    "TI Program",
+    "#A0AA87"
+  ],
+  ".tlv": [
+    "TL-Verilog",
+    "#C40023"
+  ],
+  ".tla": [
+    "TLA",
+    "#4b0079"
+  ],
+  ".tsx": [
+    "TSX",
+    "#3178c6"
+  ],
+  ".txl": [
+    "TXL",
+    "#0178b8"
+  ],
+  ".talon": [
+    "Talon",
+    "#333333"
+  ],
+  ".tcl": [
+    "Tcl",
+    "#e4cc98"
+  ],
+  ".adp": [
+    "Tcl",
+    "#e4cc98"
+  ],
+  ".sdc": [
+    "Tcl",
+    "#e4cc98"
+  ],
+  ".tcl.in": [
+    "Tcl",
+    "#e4cc98"
+  ],
+  ".tm": [
+    "Tcl",
+    "#e4cc98"
+  ],
+  ".xdc": [
+    "Tcl",
+    "#e4cc98"
+  ],
+  ".thrift": [
+    "Thrift",
+    "#D12127"
+  ],
+  ".toit": [
+    "Toit",
+    "#c2c9fb"
+  ],
+  ".tu": [
+    "Turing",
+    "#cf142b"
+  ],
+  ".ts": [
+    "TypeScript",
+    "#3178c6"
+  ],
+  ".cts": [
+    "TypeScript",
+    "#3178c6"
+  ],
+  ".mts": [
+    "TypeScript",
+    "#3178c6"
+  ],
+  ".typ": [
+    "Typst",
+    "#239dad"
+  ],
+  ".upc": [
+    "Unified Parallel C",
+    "#4e3617"
+  ],
+  ".uno": [
+    "Uno",
+    "#9933cc"
+  ],
+  ".uc": [
+    "UnrealScript",
+    "#a54c4d"
+  ],
+  ".ur": [
+    "UrWeb",
+    "#ccccee"
+  ],
+  ".urs": [
+    "UrWeb",
+    "#ccccee"
+  ],
+  ".frm": [
+    "Visual Basic 6.0",
+    "#2c6353"
+  ],
+  ".vba": [
+    "Vim Script",
+    "#199f4b"
+  ],
+  ".vbs": [
+    "VBScript",
+    "#15dcdc"
+  ],
+  ".vcl": [
+    "VCL",
+    "#148AA8"
+  ],
+  ".vhdl": [
+    "VHDL",
+    "#adb2cb"
+  ],
+  ".vhd": [
+    "VHDL",
+    "#adb2cb"
+  ],
+  ".vhf": [
+    "VHDL",
+    "#adb2cb"
+  ],
+  ".vhi": [
+    "VHDL",
+    "#adb2cb"
+  ],
+  ".vho": [
+    "VHDL",
+    "#adb2cb"
+  ],
+  ".vhs": [
+    "VHDL",
+    "#adb2cb"
+  ],
+  ".vht": [
+    "VHDL",
+    "#adb2cb"
+  ],
+  ".vhw": [
+    "VHDL",
+    "#adb2cb"
+  ],
+  ".vala": [
+    "Vala",
+    "#a56de2"
+  ],
+  ".vapi": [
+    "Vala",
+    "#a56de2"
+  ],
+  ".veo": [
+    "Verilog",
+    "#b2b7f8"
+  ],
+  ".vim": [
+    "Vim Script",
+    "#199f4b"
+  ],
+  ".vimrc": [
+    "Vim Script",
+    "#199f4b"
+  ],
+  ".vmb": [
+    "Vim Script",
+    "#199f4b"
+  ],
+  ".vb": [
+    "Visual Basic .NET",
+    "#945db7"
+  ],
+  ".vbhtml": [
+    "Visual Basic .NET",
+    "#945db7"
+  ],
+  ".ctl": [
+    "Visual Basic 6.0",
+    "#2c6353"
+  ],
+  ".Dsr": [
+    "Visual Basic 6.0",
+    "#2c6353"
+  ],
+  ".volt": [
+    "Volt",
+    "#1F1F1F"
+  ],
+  ".vy": [
+    "Vyper",
+    "#2980b9"
+  ],
+  ".wdl": [
+    "WDL",
+    "#42f1f4"
+  ],
+  ".wgsl": [
+    "WGSL",
+    "#1a5e9a"
+  ],
+  ".wast": [
+    "WebAssembly",
+    "#04133b"
+  ],
+  ".wat": [
+    "WebAssembly",
+    "#04133b"
+  ],
+  ".whiley": [
+    "Whiley",
+    "#d5c397"
+  ],
+  ".ws": [
+    "Witcher Script",
+    "#ff0000"
+  ],
+  ".wlk": [
+    "Wollok",
+    "#a23738"
+  ],
+  ".wren": [
+    "Wren",
+    "#383838"
+  ],
+  ".x10": [
+    "X10",
+    "#4B6BEF"
+  ],
+  ".xc": [
+    "XC",
+    "#99DA07"
+  ],
+  ".xquery": [
+    "XQuery",
+    "#5232e7"
+  ],
+  ".xq": [
+    "XQuery",
+    "#5232e7"
+  ],
+  ".xql": [
+    "XQuery",
+    "#5232e7"
+  ],
+  ".xqm": [
+    "XQuery",
+    "#5232e7"
+  ],
+  ".xqy": [
+    "XQuery",
+    "#5232e7"
+  ],
+  ".xslt": [
+    "XSLT",
+    "#EB8CEB"
+  ],
+  ".xsl": [
+    "XSLT",
+    "#EB8CEB"
+  ],
+  ".xojo_code": [
+    "Xojo",
+    "#81bd41"
+  ],
+  ".xojo_menu": [
+    "Xojo",
+    "#81bd41"
+  ],
+  ".xojo_report": [
+    "Xojo",
+    "#81bd41"
+  ],
+  ".xojo_script": [
+    "Xojo",
+    "#81bd41"
+  ],
+  ".xojo_toolbar": [
+    "Xojo",
+    "#81bd41"
+  ],
+  ".xojo_window": [
+    "Xojo",
+    "#81bd41"
+  ],
+  ".xsh": [
+    "Xonsh",
+    "#285EEF"
+  ],
+  ".xtend": [
+    "Xtend",
+    "#24255d"
+  ],
+  ".yar": [
+    "YARA",
+    "#220000"
+  ],
+  ".yara": [
+    "YARA",
+    "#220000"
+  ],
+  ".y": [
+    "Yacc",
+    "#4B6C4B"
+  ],
+  ".yacc": [
+    "Yacc",
+    "#4B6C4B"
+  ],
+  ".yy": [
+    "Yacc",
+    "#4B6C4B"
+  ],
+  ".yul": [
+    "Yul",
+    "#794932"
+  ],
+  ".zap": [
+    "ZAP",
+    "#0d665e"
+  ],
+  ".xzap": [
+    "ZAP",
+    "#0d665e"
+  ],
+  ".zil": [
+    "ZIL",
+    "#dc75e5"
+  ],
+  ".mud": [
+    "ZIL",
+    "#dc75e5"
+  ],
+  ".zs": [
+    "ZenScript",
+    "#00BCD1"
+  ],
+  ".zep": [
+    "Zephir",
+    "#118f9e"
+  ],
+  ".zig": [
+    "Zig",
+    "#ec915c"
+  ],
+  ".zig.zon": [
+    "Zig",
+    "#ec915c"
+  ],
+  ".zimpl": [
+    "Zimpl",
+    "#d67711"
+  ],
+  ".zmpl": [
+    "Zimpl",
+    "#d67711"
+  ],
+  ".zpl": [
+    "Zimpl",
+    "#d67711"
+  ],
+  ".ec": [
+    "eC",
+    "#913960"
+  ],
+  ".eh": [
+    "eC",
+    "#913960"
+  ],
+  ".fish": [
+    "fish",
+    "#4aae47"
+  ],
+  ".hoon": [
+    "hoon",
+    "#00b171"
+  ],
+  ".mrc": [
+    "mIRC Script",
+    "#3d57c3"
+  ],
+  ".mcfunction": [
+    "mcfunction",
+    "#E22837"
+  ],
+  ".mu": [
+    "mupad",
+    "#244963"
+  ],
+  ".nc": [
+    "nesC",
+    "#94B0C7"
+  ],
+  ".ooc": [
+    "ooc",
+    "#b0b77e"
+  ],
+  ".sed": [
+    "sed",
+    "#64b970"
+  ],
+  ".wisp": [
+    "wisp",
+    "#7582D1"
+  ],
+  ".prg": [
+    "xBase",
+    "#403a40"
+  ],
+  ".ch": [
+    "xBase",
+    "#403a40"
+  ],
+  ".prw": [
+    "xBase",
+    "#403a40"
+  ]
+}

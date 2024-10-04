@@ -2,7 +2,10 @@ package com.example.groot
 
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.res.Configuration
+import android.net.Uri
 import android.os.Bundle
+import android.view.ViewGroup
 import android.widget.Button
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -22,24 +25,38 @@ class SettingsActivity : AppCompatActivity() {
     private lateinit var btnSignout: Button
     private lateinit var appBar: MaterialToolbar
     private lateinit var btnTheme: Button
+    private lateinit var btnShare: Button
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_settings)
+
         window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
+        btnSignout = findViewById(R.id.btnSignOut)
+        btnTheme = findViewById(R.id.btnTheme)
+        btnShare = findViewById(R.id.btnShare)
+        appBar = findViewById(R.id.topAppBar)
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+            insets.getInsets(WindowInsetsCompat.Type.ime())
+            val orientation = resources.configuration.orientation == Configuration.ORIENTATION_LANDSCAPE
+            insets.getInsets(WindowInsetsCompat.Type.ime())
+            val systemBarsInsets = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
+            val bar = v.findViewById<MaterialToolbar>(R.id.topAppBar)
+            val layoutParams = bar.layoutParams as ViewGroup.MarginLayoutParams
+            layoutParams.setMargins(
+                layoutParams.leftMargin,
+                if (orientation) layoutParams.topMargin else systemBarsInsets.top,
+                systemBarsInsets.right,
+                layoutParams.bottomMargin
+            )
+            bar.layoutParams = layoutParams
+            WindowInsetsCompat.CONSUMED
         }
 
         val themeUtils = ThemeUtils(applicationContext)
-
-        btnSignout = findViewById(R.id.btnSignOut)
-        btnTheme = findViewById(R.id.btnTheme)
-        appBar = findViewById(R.id.topAppBar)
 
         btnSignout.setOnClickListener {
             authViewModel.signOut()
@@ -50,6 +67,17 @@ class SettingsActivity : AppCompatActivity() {
 
         appBar.setNavigationOnClickListener {
             finish()
+        }
+
+        btnShare.setOnClickListener {
+            val uri: Uri = Uri.parse("https://github.com/Jay1570/GROOT")
+            val invitationMessage = getString(R.string.invitation_message, uri)
+            val intent = Intent().apply {
+                action = Intent.ACTION_SEND
+                putExtra(Intent.EXTRA_TEXT, invitationMessage)
+                type = "text/plain"
+            }
+            startActivity(Intent.createChooser(intent, getString(R.string.share)))
         }
 
         btnTheme.setOnClickListener {

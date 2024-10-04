@@ -19,10 +19,11 @@
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/topAppBar"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:background="@color/md_theme_surfaceContainer"
             app:title="@string/profile"
-            app:navigationIcon="@drawable/arrow_back"/>
+            app:navigationIcon="@drawable/arrow_back"
+            android:paddingBottom="5dp"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -118,7 +119,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/md_theme_onBackground"
             app:iconTint="@color/md_theme_onBackground"
-            app:icon="@drawable/repo"
+            app:icon="@drawable/repository"
             android:text="@string/Repositories"
             app:iconPadding="16dp"
             app:iconSize="32dp"
@@ -152,5 +153,6 @@
             app:layout_constraintTop_toBottomOf="@+id/btnRepository" />
 
     </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
