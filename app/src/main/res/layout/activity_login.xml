@@ -7,6 +7,7 @@
     android:id="@+id/main"
     android:background="@color/md_theme_background"
     android:fillViewport="true"
+    android:scrollbars="none"
     tools:context=".LoginActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
