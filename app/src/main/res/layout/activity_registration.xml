@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/main"
     android:fillViewport="true"
+    android:scrollbars="none"
     tools:context=".RegistrationActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
