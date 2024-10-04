@@ -11,7 +11,7 @@ GROOT is a project aimed at providing detailed repository management and user in
 - **Gradle**: For project build automation.
 
 ## Download From Here
-https://github.com/Jay1570/GROOT/releases/tag/GROOT
+https://github.com/Jay1570/GROOT/releases/tag/1.0
 
 ## Activity Details
 
