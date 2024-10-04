@@ -214,6 +214,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="12dp"
+                app:cornerRadius="5dp"
                 android:text="@string/update_password"
                 android:backgroundTint="@color/md_theme_primaryContainer"
                 android:textColor="@color/md_theme_onPrimaryContainer"
