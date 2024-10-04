@@ -11,7 +11,11 @@ GROOT is a project aimed at providing detailed repository management and user in
 - **Gradle**: For project build automation.
 
 ## Download From Here
+### For Android App
 https://github.com/Jay1570/GROOT/releases/tag/1.0
+
+### For CLI
+https://github.com/Diffusity/groot_vcs_cli
 
 ## Activity Details
 
