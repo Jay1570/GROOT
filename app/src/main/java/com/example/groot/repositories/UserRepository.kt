@@ -24,7 +24,7 @@ class UserRepository {
     private val fireStore = FirebaseFirestore.getInstance()
     private val currentUserId get() = auth.currentUser?.uid ?: ""
 
-    private val _profile = MutableStateFlow(User()) // this is for the use who has logged in
+    private val _profile = MutableStateFlow(User())
     val profile: StateFlow<User> get() = _profile
 
     private val _friends = MutableStateFlow(Friends())

@@ -118,48 +118,10 @@ class FileContentAdapter(
         holder.lineNumber.text = lineNumber.toString()
         holder.lineContent.text = getHighlightedText(content)
 
-        // Update background color based on selection
         holder.itemView.setBackgroundColor(
             if (selectedLines.contains(lineNumber)) context.getColor(R.color.md_theme_inversePrimary_mediumContrast) else Color.TRANSPARENT
         )
 
-        // Set up long click listener to start ActionMode
-        /*holder.lineContent.setOnLongClickListener {
-            holder.lineContent.startActionMode(object : ActionMode.Callback {
-                override fun onCreateActionMode(mode: ActionMode, menu: Menu): Boolean {
-                    val inflater: MenuInflater = mode.menuInflater
-                    inflater.inflate(R.menu.copy_menu, menu)
-                    return true
-                }
-
-                override fun onPrepareActionMode(mode: ActionMode, menu: Menu): Boolean {
-                    return false
-                }
-
-                override fun onActionItemClicked(mode: ActionMode, item: MenuItem): Boolean {
-                    return when (item.itemId) {
-                        R.id.action_copy -> {
-                            // Copy selected lines to clipboard
-                            val clipboard = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                            val selectedContent = lines.filter { selectedLines.contains(it.first) }
-                                .joinToString("\n") { it.second }
-                            val clip = ClipData.newPlainText("copied_text", selectedContent)
-                            clipboard.setPrimaryClip(clip)
-                            mode.finish() // Close ActionMode
-                            true
-                        }
-                        else -> false
-                    }
-                }
-
-                override fun onDestroyActionMode(mode: ActionMode) {
-                    // No-op
-                }
-            })
-            true
-        }*/
-
-        // Set up click listener to toggle line selection
         holder.itemView.setOnClickListener {
             if (selectedLines.contains(lineNumber)) {
                 selectedLines.remove(lineNumber)
@@ -182,7 +144,6 @@ class FileContentAdapter(
     private fun getHighlightedText(text: String): SpannableStringBuilder {
         val spannable = SpannableStringBuilder(text)
 
-        // Highlight keywords from multiple languages
         for (pattern in keywordPatterns) {
             val matcher = pattern.matcher(text)
             while (matcher.find()) {
@@ -195,7 +156,6 @@ class FileContentAdapter(
             }
         }
 
-        // Highlight text inside quotes
         highlightText(spannable, text, TRIPLE_QUOTE_PATTERN, Color.rgb(122, 149, 193))
         highlightText(spannable, text, DOUBLE_QUOTE_PATTERN, Color.rgb(122, 149, 193))
         highlightText(spannable, text, SINGLE_QUOTE_PATTERN, Color.rgb(122, 149, 193))
