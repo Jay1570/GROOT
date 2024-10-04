@@ -69,7 +69,6 @@ class RepoDetailsActivity : AppCompatActivity() {
         val username = path.substringBefore("/").trim()
         val repoName = path.substringAfter("/").trim()
 
-        toolbar.title = repoName
         txtUsername.text = username
         txtReponame.text = repoName
 
