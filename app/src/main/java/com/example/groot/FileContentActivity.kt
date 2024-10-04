@@ -15,10 +15,12 @@ import com.example.groot.adapter.FileContentAdapter
 import com.google.android.material.appbar.MaterialToolbar
 
 class FileContentActivity : AppCompatActivity() {
+
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: FileContentAdapter
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        lateinit var recyclerView: RecyclerView
-        lateinit var adapter: FileContentAdapter
         enableEdgeToEdge()
         setContentView(R.layout.activity_file_content)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
@@ -37,7 +39,6 @@ class FileContentActivity : AppCompatActivity() {
         val content = intent.getStringExtra("FILE_CONTENT") ?: ""
         val lines = content.lines().mapIndexed { index, line -> Pair(index + 1, line) }
 
-        // Pass the context to the adapter
         adapter = FileContentAdapter(this, lines)
         recyclerView.adapter = adapter
 

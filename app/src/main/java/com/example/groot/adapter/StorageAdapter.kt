@@ -10,7 +10,7 @@ import com.example.groot.R
 import com.example.groot.model.StorageItem
 
 class StorageAdapter(
-    private val storageItems: List<StorageItem>,
+    private var storageItems: List<StorageItem>,
     private val onItemClickListener: (StorageItem) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -71,7 +71,7 @@ class StorageAdapter(
 
         fun bind(item: StorageItem) {
             name.text = item.name
-            icon.setImageResource(R.drawable.files_interface_svgrepo_com) // Ensure you have ic_file drawable
+            icon.setImageResource(R.drawable.files_interface_svgrepo_com)
         }
     }
 }

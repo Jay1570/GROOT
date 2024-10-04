@@ -72,7 +72,6 @@ class Files : AppCompatActivity() {
         currentRef = repoRef
         currentRefTree = FirebaseStorage.getInstance().reference.child(path)
 
-        // Set up main RecyclerView
         recyclerView = findViewById(R.id.recyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
         adapter = StorageAdapter(storageItems) { item -> handleItemClick(item) }
@@ -86,7 +85,6 @@ class Files : AppCompatActivity() {
         recycler_ViewDraw.layoutManager = LinearLayoutManager(this)
         recycler_ViewDraw.adapter = treeAdapter
 
-        // Fetch data for main RecyclerView
         listFilesAndFolders(repoRef)
         fetchFirebaseData(currentRefTree, rootNodeList)
 
@@ -112,7 +110,7 @@ class Files : AppCompatActivity() {
     private fun listFilesAndFolders(storageRef: StorageReference) {
         progressBar.isVisible = true
         loadingOverlay.isVisible = true
-        recyclerView.isEnabled = false
+        recyclerView.isVisible = false
         storageItems.clear()
         storageRef.listAll()
             .addOnSuccessListener { listResult ->
@@ -123,17 +121,18 @@ class Files : AppCompatActivity() {
                     storageItems.add(StorageItem(prefix.name, true))
                 }
                 listResult.items.forEach { item ->
+                    if (item.name == "user.txt") return@forEach
                     storageItems.add(StorageItem(item.name, false))
                 }
+                adapter.notifyDataSetChanged()
                 progressBar.isVisible = false
                 loadingOverlay.isVisible = false
-                recyclerView.isEnabled = true
-                adapter.notifyDataSetChanged()
+                recyclerView.isVisible = true
             }
             .addOnFailureListener { e ->
                 progressBar.isVisible = false
                 loadingOverlay.isVisible = false
-                recyclerView.isEnabled = true
+                recyclerView.isVisible = true
                 Log.e(TAG, "Failed to list files and folders", e)
             }
     }
@@ -150,12 +149,12 @@ class Files : AppCompatActivity() {
     private fun openFile(fileRef: StorageReference, fileName: String) {
         progressBar.isVisible = true
         loadingOverlay.isVisible = true
-        recyclerView.isEnabled = false
+        recyclerView.isVisible = false
         fileRef.metadata.addOnSuccessListener { meta ->
             if (meta.contentType!!.contains("image") || meta.name!!.endsWith(".webp")) {
                 progressBar.isVisible = false
                 loadingOverlay.isVisible = false
-                recyclerView.isEnabled = true
+                recyclerView.isVisible = true
                 Toast.makeText(this, "File Type Not Supported", Toast.LENGTH_SHORT).show()
                 return@addOnSuccessListener
             }
@@ -163,19 +162,19 @@ class Files : AppCompatActivity() {
                 val content = String(bytes)
                 progressBar.isVisible = false
                 loadingOverlay.isVisible = false
-                recyclerView.isEnabled = true
+                recyclerView.isVisible = true
                 showFileContent(fileName, content)
             }.addOnFailureListener { e ->
                 progressBar.isVisible = false
                 loadingOverlay.isVisible = false
-                recyclerView.isEnabled = true
+                recyclerView.isVisible = true
                 Toast.makeText(this, "Failed to open file", Toast.LENGTH_SHORT).show()
                 Log.e(TAG, "Failed to Open File", e)
             }
         }.addOnFailureListener { e ->
             progressBar.isVisible = false
             loadingOverlay.isVisible = false
-            recyclerView.isEnabled = true
+            recyclerView.isVisible = true
             Log.e(TAG, "Failed to Open File", e)
             Toast.makeText(this, "Failed to open file", Toast.LENGTH_SHORT).show()
         }
@@ -237,8 +236,8 @@ class Files : AppCompatActivity() {
     private fun fetchFirebaseData(reference: StorageReference, parentNodeList: MutableList<TreeNode>) {
         progressBar.isVisible = true
         loadingOverlay.isVisible = true
-        recyclerView.isEnabled = false
-        recycler_ViewDraw.isEnabled = false
+        recyclerView.isVisible = false
+        recycler_ViewDraw.isVisible = false
         reference.listAll().addOnSuccessListener { listResult ->
             for (folderRef in listResult.prefixes) {
                 if (folderRef.name == ".groot" || folderRef.name == ".git") {
@@ -249,18 +248,20 @@ class Files : AppCompatActivity() {
                 fetchFirebaseData(folderRef, folderNode.children)
             }
             for (fileRef in listResult.items) {
+                if (fileRef.name == "user.txt") continue
                 val fileNode = TreeNode(fileRef.name, false)
                 parentNodeList.add(fileNode)
             }
+            treeAdapter.notifyDataSetChanged()
             progressBar.isVisible = false
             loadingOverlay.isVisible = false
-            recyclerView.isEnabled = true
-            treeAdapter.notifyDataSetChanged()
+            recyclerView.isVisible = true
+            recycler_ViewDraw.isVisible = true
         }.addOnFailureListener { e ->
             progressBar.isVisible = false
             loadingOverlay.isVisible = false
-            recyclerView.isEnabled = true
-            recycler_ViewDraw.isEnabled = true
+            recyclerView.isVisible = true
+            recycler_ViewDraw.isVisible = true
             Log.e(TAG, "Failed to fetch data from Firebase", e)
         }
     }
