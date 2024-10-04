@@ -85,6 +85,7 @@
             android:textAlignment="viewStart"
             android:textColor="@color/md_theme_onSurface"
             android:textSize="16sp"
+            android:layout_marginBottom="5dp"
             app:layout_constraintBottom_toTopOf="@id/note"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/logo_nm" />
