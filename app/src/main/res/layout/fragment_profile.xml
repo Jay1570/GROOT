@@ -30,7 +30,7 @@
         android:id="@+id/card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/md_theme_surfaceContainer"
+        android:backgroundTint="@color/md_theme_background"
         android:paddingHorizontal="16dp"
         android:paddingVertical="20dp"
         app:layout_constraintVertical_bias="0.0"
@@ -111,7 +111,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/md_theme_surfaceContainer"
+        android:backgroundTint="@color/md_theme_background"
         app:layout_constraintTop_toBottomOf="@+id/card"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintVertical_bias="0.1">
