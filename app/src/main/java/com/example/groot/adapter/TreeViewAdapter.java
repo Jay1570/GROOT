@@ -41,21 +41,21 @@ public class TreeViewAdapter extends RecyclerView.Adapter<TreeViewAdapter.TreeVi
     @Override
     public void onBindViewHolder(@NonNull TreeViewHolder holder, int position) {
         TreeNode node = nodes.get(position);
-        holder.textView.setText(node.name);
-        holder.imageView.setImageResource(node.isFolder ? R.drawable.folder_svgrepo_com : R.drawable.files_interface_svgrepo_com);
+        holder.textView.setText(node.getName());
+        holder.imageView.setImageResource(node.isFolder() ? R.drawable.folder_svgrepo_com : R.drawable.files_interface_svgrepo_com);
 
         holder.itemView.setOnClickListener(v -> {
-            if (node.isFolder) {
-                node.isExpanded = !node.isExpanded;
+            if (node.isFolder()) {
+                node.setExpanded(!node.isExpanded());
                 notifyDataSetChanged();
             } else {
-                openFile(currentRef.child(node.name), node.name);
+                openFile(currentRef.child(node.getName()), node.getName());
             }
         });
 
-        if (node.isExpanded && node.children.size() > 0) {
+        if (node.isExpanded() && !node.getChildren().isEmpty()) {
             holder.childrenRecyclerView.setVisibility(View.VISIBLE);
-            TreeViewAdapter childAdapter = new TreeViewAdapter(node.children, context, currentRef.child(node.name));
+            TreeViewAdapter childAdapter = new TreeViewAdapter(node.getChildren(), context, currentRef.child(node.getName()));
             holder.childrenRecyclerView.setAdapter(childAdapter);
             holder.childrenRecyclerView.setLayoutManager(new LinearLayoutManager(context));
         } else {
@@ -65,7 +65,8 @@ public class TreeViewAdapter extends RecyclerView.Adapter<TreeViewAdapter.TreeVi
 
     @Override
     public int getItemCount() {
-        return nodes.size();
+        if (nodes == null) return 0;
+        else return nodes.size();
     }
 
     public class TreeViewHolder extends RecyclerView.ViewHolder {
@@ -88,6 +89,11 @@ public class TreeViewAdapter extends RecyclerView.Adapter<TreeViewAdapter.TreeVi
                     showFileContent(fileName, content);
                 })
                 .addOnFailureListener(e -> Log.e(TAG, "Failed to open file", e));
+    }
+
+    public void update(List<TreeNode> list) {
+        this.nodes = list;
+        notifyDataSetChanged();
     }
 
     private void showFileContent(String fileName, String content) {

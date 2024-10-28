@@ -22,9 +22,6 @@
             android:name=".RepoDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".FileContentActivity"
-            android:exported="false" />
-        <activity
             android:name=".SettingsActivity"
             android:exported="false" />
         <activity

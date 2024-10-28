@@ -7,11 +7,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.groot.R
-import com.example.groot.model.StorageItem
+import com.example.groot.model.TreeNode
 
 class StorageAdapter(
-    private var storageItems: List<StorageItem>,
-    private val onItemClickListener: (StorageItem) -> Unit
+    private var storageItems: List<TreeNode>,
+    private val onItemClickListener: (TreeNode) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private var filteredItems = storageItems
@@ -51,6 +51,12 @@ class StorageAdapter(
         notifyDataSetChanged()
     }
 
+    fun update(list: List<TreeNode>) {
+        storageItems = list
+        filteredItems = storageItems
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int {
         return filteredItems.size
     }
@@ -59,7 +65,7 @@ class StorageAdapter(
         private val name: TextView = itemView.findViewById(R.id.name)
         private val icon: ImageView = itemView.findViewById(R.id.icon)
 
-        fun bind(item: StorageItem) {
+        fun bind(item: TreeNode) {
             name.text = item.name
             icon.setImageResource(R.drawable.folder_svgrepo_com)
         }
@@ -69,7 +75,7 @@ class StorageAdapter(
         private val name: TextView = itemView.findViewById(R.id.name)
         private val icon: ImageView = itemView.findViewById(R.id.icon)
 
-        fun bind(item: StorageItem) {
+        fun bind(item: TreeNode) {
             name.text = item.name
             icon.setImageResource(R.drawable.files_interface_svgrepo_com)
         }

@@ -1,5 +1,5 @@
 [versions]
-agp = "8.6.0"
+agp = "8.7.1"
 kotlin = "2.0.0"
 coreKtx = "1.13.1"
 junit = "4.13.2"
@@ -7,20 +7,16 @@ junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 appcompat = "1.7.0"
 material = "1.12.0"
-activity = "1.9.2"
+activity = "1.9.3"
 constraintlayout = "2.1.4"
 googleGmsGoogleServices = "4.4.2"
-firebaseBom = "33.4.0"
-playServicesAuth = "21.2.0"
+firebaseBom = "33.5.1"
 firebaseAnalytics = "22.1.2"
-firebaseCrashlytics = "19.2.0"
-firebasePerf = "21.0.1"
-firebaseConfig = "22.0.0"
-firebaseFirestoreKtx = "25.0.0"
+firebaseCrashlytics = "19.2.1"
+firebasePerf = "21.0.2"
+firebaseFirestoreKtx = "25.1.1"
 #noinspection GradleDeprecated
-playServicesAppindexing = "9.8.0"
-firebaseAuth = "23.0.0"
-firebaseFirestore = "25.1.0"
+firebaseAuth = "23.1.0"
 firebaseStorage = "21.0.1"
 lifecycleViewmodelKtx = "2.8.6"
 circleimageview = "3.1.0"
@@ -36,20 +32,13 @@ androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
-firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseBom" }
-firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseBom" }
-firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebaseBom" }
+firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
+firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
+firebase-storage = { group = "com.google.firebase", name = "firebase-storage-ktx", version.ref = "firebaseStorage" }
 firebase-bom = { group = "com.google.firebase", name = "firebase-bom", version.ref = "firebaseBom" }
-play-services-auth = { group = "com.google.android.gms", name = "play-services-auth", version.ref = "playServicesAuth" }
 firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics", version.ref = "firebaseAnalytics" }
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics", version.ref = "firebaseCrashlytics" }
 firebase-perf = { group = "com.google.firebase", name = "firebase-perf", version.ref = "firebasePerf" }
-firebase-config = { group = "com.google.firebase", name = "firebase-config", version.ref = "firebaseConfig" }
-firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
-play-services-appindexing = { group = "com.google.android.gms", name = "play-services-appindexing", version.ref = "playServicesAppindexing" }
-google-firebase-auth = { group = "com.google.firebase", name = "firebase-auth", version.ref = "firebaseAuth" }
-google-firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore", version.ref = "firebaseFirestore" }
-google-firebase-storage = { group = "com.google.firebase", name = "firebase-storage", version.ref = "firebaseStorage" }
 androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 circleimageview = { group = "de.hdodenhof", name = "circleimageview", version.ref = "circleimageview" }
 coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
