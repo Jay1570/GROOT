@@ -20,62 +20,49 @@ class FilesViewModel : ViewModel() {
     private val _fileList = MutableLiveData<List<TreeNode>>()
     val fileList: LiveData<List<TreeNode>> get() = _fileList
 
-    private val _rootList = MutableLiveData<List<TreeNode>>()
-    val rootList: LiveData<List<TreeNode>> get() = _rootList
-
     private val _isLoading = MutableLiveData<Boolean>()
     val isLoading: LiveData<Boolean> get() = _isLoading
 
     private val _error = MutableLiveData<String?>()
     val error: LiveData<String?> get() = _error
 
-    private val _fileContent = MutableLiveData<String>()
-    val fileContent: LiveData<String> get() = _fileContent
+    private val _fileContent = MutableLiveData<String?>()
+    val fileContent: LiveData<String?> get() = _fileContent
 
     var fileName: String = ""
 
     private val parents = Stack<TreeNode>()
     var isParentsEmpty: Boolean = true
     private var currNode: TreeNode? = null
-    private var activeCalls = 0
 
     fun initializeRoot(path: String) {
+        if(currNode != null || parents.isNotEmpty()) return
         _isLoading.value = true
         rootRef = firebaseStorage.reference.child(path)
         currNode = TreeNode(name = path, isFolder = true, isExpanded = false, path = path)
         viewModelScope.launch {
-            fetchFirebaseData(rootRef, currNode!!, 0)
+            fetchList(rootRef, currNode!!)
         }
     }
 
-    private fun fetchFirebaseData(reference: StorageReference, node: TreeNode, callStack: Int) {
-        activeCalls++
-        if(callStack == 0) _isLoading.value = true
-        Log.d(TAG, activeCalls.toString())
+    private fun fetchList(reference: StorageReference, node: TreeNode) {
         reference.listAll().addOnSuccessListener { listResult ->
             for (folderRef in listResult.prefixes) {
                 if (folderRef.name == ".groot" || folderRef.name == ".git") continue
                 val folderNode = TreeNode(name = folderRef.name, isFolder = true, path = folderRef.path)
                 node.children.add(folderNode)
-                fetchFirebaseData(folderRef, folderNode, callStack+1)
             }
             for (fileRef in listResult.items) {
                 if (fileRef.name == "user.txt") continue
                 val fileNode = TreeNode(name = fileRef.name, isFolder = false, path = fileRef.path)
                 node.children.add(fileNode)
             }
-            if (callStack == 0) {
-                _fileList.value = node.children
-                _rootList.value = node.children
-            }
-            activeCalls--
-            if (activeCalls == 0) _isLoading.value = false
+            _fileList.value = node.children
+            _isLoading.value = false
         }.addOnFailureListener { e ->
             Log.e(TAG, e.message.toString())
-            activeCalls--
-            if (activeCalls == 0) _isLoading.value = false
+            _isLoading.value = false
         }
-        Log.d(TAG, activeCalls.toString())
     }
 
     fun clearError() {
@@ -111,9 +98,12 @@ class FilesViewModel : ViewModel() {
         _isLoading.value = true
         parents.push(currNode)
         currNode = node
-        _fileList.value = currNode?.children
+        if (currNode!!.children.isEmpty()) {
+            viewModelScope.launch {
+                fetchList(firebaseStorage.reference.child(currNode!!.path), currNode!!)
+            }
+        }
         isParentsEmpty = false
-        _isLoading.value = false
     }
 
     fun navigateBack() {
