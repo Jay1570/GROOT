@@ -44,7 +44,7 @@ class FileContentActivity : AppCompatActivity() {
         val fileName = intent.getStringExtra("FILE_NAME") ?: "Untitled"
         val filePath = intent.getStringExtra("PATH") ?: ""
 
-        viewModel.openFile(filePath, fileName)
+        viewModel.openFile(filePath)
         supportActionBar?.title = fileName
 
         recyclerView = findViewById(R.id.recyclerView)

@@ -7,7 +7,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.groot.model.TreeNode
 import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
 import kotlinx.coroutines.launch
 import java.util.Stack
 
@@ -15,7 +14,6 @@ class FilesViewModel : ViewModel() {
 
     private val TAG = "FilesViewModel"
     private val firebaseStorage = FirebaseStorage.getInstance()
-    private lateinit var rootRef: StorageReference
 
     private val _fileList = MutableLiveData<List<TreeNode>>()
     val fileList: LiveData<List<TreeNode>> get() = _fileList
@@ -29,7 +27,8 @@ class FilesViewModel : ViewModel() {
     private val _fileContent = MutableLiveData<String?>()
     val fileContent: LiveData<String?> get() = _fileContent
 
-    var fileName: String = ""
+    private val _title = MutableLiveData<String>()
+    val title: LiveData<String> get() = _title
 
     private val parents = Stack<TreeNode>()
     var isParentsEmpty: Boolean = true
@@ -38,14 +37,15 @@ class FilesViewModel : ViewModel() {
     fun initializeRoot(path: String) {
         if(currNode != null || parents.isNotEmpty()) return
         _isLoading.value = true
-        rootRef = firebaseStorage.reference.child(path)
-        currNode = TreeNode(name = path, isFolder = true, isExpanded = false, path = path)
+        currNode = TreeNode(name = path.substringAfterLast("/"), isFolder = true, isExpanded = false, path = path)
+        _title.value = currNode!!.name
         viewModelScope.launch {
-            fetchList(rootRef, currNode!!)
+            fetchList(currNode!!)
         }
     }
 
-    private fun fetchList(reference: StorageReference, node: TreeNode) {
+    private fun fetchList(node: TreeNode) {
+        val reference = firebaseStorage.reference.child(node.path)
         reference.listAll().addOnSuccessListener { listResult ->
             for (folderRef in listResult.prefixes) {
                 if (folderRef.name == ".groot" || folderRef.name == ".git") continue
@@ -69,9 +69,8 @@ class FilesViewModel : ViewModel() {
         _error.value = null
     }
 
-    fun openFile(path: String, fileName: String) {
+    fun openFile(path: String) {
         _isLoading.value = true
-        this.fileName = fileName
         val fileRef = FirebaseStorage.getInstance().reference.child(path)
         fileRef.metadata.addOnSuccessListener { meta ->
             if (meta.contentType!!.contains("image") || meta.name!!.endsWith(".webp")) {
@@ -98,9 +97,10 @@ class FilesViewModel : ViewModel() {
         _isLoading.value = true
         parents.push(currNode)
         currNode = node
+        _title.value = currNode!!.name
         if (currNode!!.children.isEmpty()) {
             viewModelScope.launch {
-                fetchList(firebaseStorage.reference.child(currNode!!.path), currNode!!)
+                fetchList(currNode!!)
             }
         }
         isParentsEmpty = false
@@ -112,6 +112,7 @@ class FilesViewModel : ViewModel() {
             currNode = parents.pop()
             _fileList.value = currNode?.children
         }
+        _title.value = currNode!!.name
         isParentsEmpty = parents.isEmpty()
         _isLoading.value = false
     }

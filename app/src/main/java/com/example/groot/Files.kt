@@ -58,6 +58,9 @@ class Files : AppCompatActivity() {
 
         viewModel.initializeRoot(path)
 
+        viewModel.title.observe(this) { title ->
+            toolbar.title = title
+        }
         viewModel.fileList.observe(this) { list ->
             adapter.update(list)
         }
