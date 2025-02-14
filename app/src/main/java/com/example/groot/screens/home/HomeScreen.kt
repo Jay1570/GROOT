@@ -23,9 +23,11 @@ import com.example.groot.ExploreScreen
 import com.example.groot.HomeScreen
 import com.example.groot.ProfileScreen
 import com.example.groot.R
+import com.example.groot.RepoSearch
 import com.example.groot.RepositoryList
 import com.example.groot.Routes
 import com.example.groot.StarredRepoList
+import com.example.groot.UserSearch
 
 @Composable
 fun HomeScreen(
@@ -75,8 +77,12 @@ fun HomeScreen(
                 HomeContent(
                     navigateToRepoList = { navControllerMain.navigate(RepositoryList) },
                     navigateToStarredList = { navControllerMain.navigate(StarredRepoList) },
-                    navigateToRepoSearch = {},
-                    navigateToUserSearch = {}
+                    navigateToRepoSearch = {
+                        navControllerMain.navigate(RepoSearch(it))
+                    },
+                    navigateToUserSearch = {
+                        navControllerMain.navigate(UserSearch(it))
+                    }
                 )
             }
 

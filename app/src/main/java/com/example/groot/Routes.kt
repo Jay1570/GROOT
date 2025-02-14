@@ -26,4 +26,19 @@ data object ProfileScreen : Routes
 data object RepositoryList : Routes
 
 @Serializable
-data object StarredRepoList: Routes
+data class Repository(
+    val id: String
+) : Routes
+
+@Serializable
+data object StarredRepoList : Routes
+
+@Serializable
+data class UserSearch(
+    val query: String
+) : Routes
+
+@Serializable
+data class RepoSearch(
+    val query: String
+) : Routes

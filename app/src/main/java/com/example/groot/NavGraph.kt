@@ -8,6 +8,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.groot.screens.auth.LoginScreen
 import com.example.groot.screens.auth.RegistrationScreen
 import com.example.groot.screens.home.HomeScreen
+import com.example.groot.screens.search.RepoSearchScreen
+import com.example.groot.screens.search.UserSearchScreen
 
 @Composable
 fun Navigation(
@@ -56,8 +58,30 @@ fun Navigation(
 
         }
 
+        composable<Repository> {
+
+        }
+
         composable<StarredRepoList> {
 
+        }
+
+        composable<UserSearch> {
+            UserSearchScreen(
+                navigateBack = { navController.popBackStack() },
+                navigateToUser = {}
+            )
+        }
+
+        composable<RepoSearch> {
+            RepoSearchScreen(
+                navigateBack = { navController.popBackStack() },
+                navigateToRepository = {
+                    navController.navigate(Repository(it)) {
+                        launchSingleTop = true
+                    }
+                }
+            )
         }
     }
 }
