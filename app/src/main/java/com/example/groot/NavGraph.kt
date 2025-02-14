@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.groot.screens.auth.LoginScreen
 import com.example.groot.screens.auth.RegistrationScreen
+import com.example.groot.screens.home.HomeScreen
 
 @Composable
 fun Navigation(
@@ -46,6 +47,16 @@ fun Navigation(
         }
 
         composable<Home> {
+            HomeScreen(
+                navControllerMain = navController,
+            )
+        }
+
+        composable<RepositoryList> {
+
+        }
+
+        composable<StarredRepoList> {
 
         }
     }

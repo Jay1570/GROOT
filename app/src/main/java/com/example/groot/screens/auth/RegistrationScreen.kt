@@ -35,7 +35,6 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -65,7 +64,7 @@ fun RegistrationScreen(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         contentWindowInsets = WindowInsets.safeDrawing
-    ) {
+    ) { innerPadding ->
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
         RegistrationContent(
@@ -77,7 +76,7 @@ fun RegistrationScreen(
             onPasswordVisibilityChange = viewModel::onPasswordVisibilityChange,
             onRegisterClick = { viewModel.signup(navigateToHome) },
             modifier = Modifier
-                .padding(it)
+                .padding(innerPadding)
                 .fillMaxSize()
         )
     }

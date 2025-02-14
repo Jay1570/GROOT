@@ -65,7 +65,7 @@ fun LoginScreen(
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         contentWindowInsets = WindowInsets.safeDrawing
-    ) {
+    ) { innerPadding ->
         LoginScreenContent(
             uiState = uiState,
             onLoginClick = { viewModel.onLoginClick(navigateToHome) },
@@ -74,7 +74,7 @@ fun LoginScreen(
             onPasswordVisibilityChange = viewModel::onPasswordVisibilityChange,
             navigateToRegister = navigateToRegister,
             modifier = Modifier
-                .padding(it)
+                .padding(innerPadding)
                 .fillMaxSize()
         )
     }
