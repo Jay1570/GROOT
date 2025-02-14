@@ -6,6 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.groot.screens.auth.LoginScreen
+import com.example.groot.screens.auth.RegistrationScreen
 
 @Composable
 fun Navigation(
@@ -34,7 +35,14 @@ fun Navigation(
         }
 
         composable<Registration> {
-
+            RegistrationScreen(
+                navigateToHome = {
+                    navController.navigate(Home) {
+                        launchSingleTop = true
+                        popUpTo(0) { inclusive = true }
+                    }
+                }
+            )
         }
 
         composable<Home> {
