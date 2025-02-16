@@ -1,4 +1,4 @@
-package com.example.groot
+package com.example.groot.activity
 
 import android.content.Intent
 import android.content.res.Configuration
@@ -19,6 +19,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.groot.R
 import com.example.groot.adapter.StorageAdapter
 import com.example.groot.model.TreeNode
 import com.example.groot.viewmodel.FilesViewModel

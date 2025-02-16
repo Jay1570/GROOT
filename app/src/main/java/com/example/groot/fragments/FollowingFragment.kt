@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.groot.R
-import com.example.groot.UserActivity
+import com.example.groot.activity.UserActivity
 import com.example.groot.adapter.UserListRecyclerViewAdapter
 import com.example.groot.viewmodel.ProfileViewModel
 

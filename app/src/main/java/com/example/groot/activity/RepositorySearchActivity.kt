@@ -1,4 +1,4 @@
-package com.example.groot
+package com.example.groot.activity
 
 import android.content.Intent
 import android.content.res.Configuration
@@ -13,13 +13,14 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.groot.adapter.UserListRecyclerViewAdapter
+import com.example.groot.R
+import com.example.groot.adapter.RepositoryListAdapter
 import com.example.groot.viewmodel.SearchResultsActivityViewModel
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.snackbar.Snackbar
 
-class UserSearchActivity : AppCompatActivity() {
+class RepositorySearchActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
     private lateinit var appBar: MaterialToolbar
@@ -32,6 +33,7 @@ class UserSearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_search_results)
+
         window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
         recyclerView = findViewById(R.id.recyclerViewSearch)
         appBar = findViewById(R.id.topAppBar)
@@ -56,14 +58,14 @@ class UserSearchActivity : AppCompatActivity() {
         }
 
         val query = intent.getStringExtra("QUERY") ?: ""
-        viewModel.onUserSearch(query)
+        viewModel.onRepositorySearch(query)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
-        val recyclerAdapter = UserListRecyclerViewAdapter(emptyList()) { onItemClick(it) }
+        val recyclerAdapter = RepositoryListAdapter(emptyList()) { onItemClick(it) }
         recyclerView.adapter = recyclerAdapter
 
-        viewModel.userList.observe(this) { users ->
-            recyclerAdapter.updateUsers(users)
+        viewModel.repoList.observe(this) { repoList ->
+            recyclerAdapter.updateList(repoList)
             recyclerAdapter.notifyDataSetChanged()
         }
 
@@ -73,17 +75,17 @@ class UserSearchActivity : AppCompatActivity() {
 
         viewModel.isLoading.observe(this) { isLoading ->
             progressBar.isVisible = isLoading
-            message.isVisible = !isLoading && viewModel.userList.value?.isEmpty() ?: true
+            message.isVisible = !isLoading && viewModel.repoList.value?.isEmpty() ?: true
         }
 
         appBar.setNavigationOnClickListener {
-            onNavigateUp()
+            finish()
         }
     }
 
-    private fun onItemClick(userId: String) {
-        val intent = Intent(this, UserActivity::class.java)
-        intent.putExtra("userId", userId)
+    private fun onItemClick(path: String) {
+        val intent = Intent(this, RepoDetailsActivity::class.java)
+        intent.putExtra("path", path)
         startActivity(intent)
     }
 }

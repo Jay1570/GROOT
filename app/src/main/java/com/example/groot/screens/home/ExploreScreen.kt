@@ -1,5 +1,6 @@
 package com.example.groot.screens.home
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -11,8 +12,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
@@ -24,7 +23,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
@@ -42,32 +40,36 @@ import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.groot.R
+import com.example.groot.common.RepositoryItem
 import com.example.groot.common.TopBar
-import com.example.groot.ui.theme.GROOTTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeContent(
-    navigateToRepoList: () -> Unit,
-    navigateToStarredList: () -> Unit,
+fun ExploreScreen(
+    navigateToRepository: (String) -> Unit,
+    navigateToUserSearch: (String) -> Unit,
     navigateToRepoSearch: (String) -> Unit,
-    navigateToUserSearch: (String) -> Unit
+    viewModel: ExploreViewModel = viewModel()
 ) {
     var searchQuery by rememberSaveable { mutableStateOf("") }
     var isSearching by rememberSaveable { mutableStateOf(false) }
     val suggestions = remember { mutableStateListOf<String>() }
     val focusRequester = remember { FocusRequester() }
 
+    LaunchedEffect(Unit) {
+        viewModel.fetchRepo()
+    }
+
     Scaffold(
         topBar = {
             TopBar(
-                title = if (isSearching) "" else "Home",
+                title = stringResource(R.string.explore),
                 canNavigateBack = false,
                 actions = {
                     if (isSearching) {
@@ -113,6 +115,8 @@ fun HomeContent(
         },
         contentWindowInsets = WindowInsets.safeDrawing
     ) { innerPadding ->
+
+        val repositories by viewModel.exploreRepository.collectAsStateWithLifecycle()
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -125,10 +129,12 @@ fun HomeContent(
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(horizontal = 16.dp)
+                    .background(MaterialTheme.colorScheme.surfaceContainerLow)
             ) {
                 if (isSearching && suggestions.isNotEmpty()) {
-                    LazyColumn {
+                    LazyColumn(
+                        Modifier.background(MaterialTheme.colorScheme.background).fillMaxSize().padding(horizontal = 16.dp)
+                    ) {
                         items(suggestions) { suggestion ->
                             TextButton(
                                 onClick = {
@@ -154,74 +160,23 @@ fun HomeContent(
                 } else {
                     Spacer(Modifier.height(10.dp))
                     Text(
-                        text = stringResource(id = R.string.my_work),
+                        text = "Repositories You may Like",
                         style = MaterialTheme.typography.headlineMedium,
                         fontWeight = FontWeight.Bold,
-                        modifier = Modifier.padding(bottom = 16.dp)
+                        modifier = Modifier.padding(bottom = 16.dp).background(MaterialTheme.colorScheme.surfaceContainerLow)
                     )
 
-                    TextButton(
-                        onClick = navigateToRepoList,
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = MaterialTheme.colorScheme.background,
-                            contentColor = MaterialTheme.colorScheme.onBackground,
-                        ),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 8.dp),
-                    ) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.repository),
-                            contentDescription = null,
-                            modifier = Modifier.size(32.dp),
-                            tint = MaterialTheme.colorScheme.onSurface,
-                        )
-                        Spacer(modifier = Modifier.width(ButtonDefaults.IconSpacing))
-                        Text(
-                            text = stringResource(id = R.string.Repositories),
-                            modifier = Modifier.weight(1f)
-                        )
-                    }
-
-                    TextButton(
-                        onClick = navigateToStarredList,
-                        colors = ButtonDefaults.buttonColors(
-                            containerColor = MaterialTheme.colorScheme.background,
-                            contentColor = MaterialTheme.colorScheme.onBackground,
-                        ),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(vertical = 8.dp)
-                    ) {
-                        Icon(
-                            painter = painterResource(id = R.drawable.starred),
-                            contentDescription = null,
-                            modifier = Modifier.size(32.dp),
-                            tint = MaterialTheme.colorScheme.onSurface
-                        )
-                        Spacer(modifier = Modifier.width(ButtonDefaults.IconSpacing))
-                        Text(
-                            text = stringResource(id = R.string.Starred),
-                            modifier = Modifier.weight(1f)
-                        )
+                    LazyColumn {
+                        items(repositories) { repository ->
+                            RepositoryItem(
+                                owner = repository.owner,
+                                name = repository.name,
+                                onClick = { navigateToRepository("${repository.owner} / ${repository.name}") }
+                            )
+                        }
                     }
                 }
             }
-        }
-    }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun HomeContentPreview() {
-    GROOTTheme {
-        Surface {
-            HomeContent(
-                navigateToRepoList = {},
-                navigateToStarredList = {},
-                navigateToRepoSearch = {},
-                navigateToUserSearch = {}
-            )
         }
     }
 }

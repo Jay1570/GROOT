@@ -7,7 +7,7 @@
     android:id="@+id/main"
     android:fillViewport="true"
     android:scrollbars="none"
-    tools:context=".RegistrationActivity">
+    tools:context=".activity.RegistrationActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

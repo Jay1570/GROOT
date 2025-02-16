@@ -1,4 +1,4 @@
-package com.example.groot
+package com.example.groot.activity
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.groot.R
 import com.example.groot.utility.ThemeUtils
 import com.example.groot.viewmodel.AuthViewModel
 import com.google.android.material.appbar.MaterialToolbar

@@ -25,59 +25,55 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FileContentActivity"
+            android:name=".activity.FileContentActivity"
             android:exported="false" />
         <activity
-            android:name=".Files"
+            android:name=".activity.Files"
             android:exported="false" />
         <activity
-            android:name=".RepoDetailsActivity"
+            android:name=".activity.RepoDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".SettingsActivity"
+            android:name=".activity.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".StarredActivity"
+            android:name=".activity.StarredActivity"
             android:exported="false" />
         <activity
-            android:name=".UserActivity"
+            android:name=".activity.UserActivity"
             android:exported="false" />
         <activity
-            android:name=".UserSearchActivity"
+            android:name=".activity.UserSearchActivity"
             android:exported="false"
             android:launchMode="singleTop"
-            android:parentActivityName=".HomeActivity"
+            android:parentActivityName=".activity.HomeActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".FriendsActivity"
+            android:name=".activity.FriendsActivity"
             android:exported="false" />
         <activity
-            android:name=".IntroActivity"
+            android:name=".activity.RepoActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".RepoActivity"
+            android:name=".activity.HomeActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".activity.RegistrationActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".RegistrationActivity"
+            android:name=".activity.LoginActivity"
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".LoginActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".RoutingActivity"
+            android:name=".activity.RoutingActivity"
             android:exported="true"
             android:theme="@style/Theme.App.Starting"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".RepositorySearchActivity"
+            android:name=".activity.RepositorySearchActivity"
             android:exported="false" />
     </application>
 

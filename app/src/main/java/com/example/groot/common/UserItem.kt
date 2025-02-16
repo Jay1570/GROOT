@@ -1,4 +1,4 @@
-package com.example.groot
+package com.example.groot.common
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -23,6 +23,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.groot.R
 import com.example.groot.model.User
 
 @Composable
@@ -48,7 +49,7 @@ fun UserItem(
                     .size(50.dp)
                     .clip(CircleShape),
                 placeholder = painterResource(R.drawable.user),
-                contentScale = ContentScale.Fit
+                contentScale = ContentScale.Crop
             )
         } else {
             Image(
@@ -57,7 +58,7 @@ fun UserItem(
                 modifier = Modifier
                     .size(50.dp)
                     .clip(CircleShape),
-                contentScale = ContentScale.Fit
+                contentScale = ContentScale.Crop
             )
         }
 

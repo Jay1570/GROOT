@@ -15,6 +15,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 
@@ -28,13 +29,21 @@ class UserRepository {
     val profile: StateFlow<User> get() = _profile
 
     private val _friends = MutableStateFlow(Friends())
-    val friends: StateFlow<Friends> get() = _friends
+    val friends: StateFlow<Friends> get() = _friends.asStateFlow()
 
     private val _followerProfiles = MutableStateFlow<List<User>>(emptyList())
     val followerProfiles: StateFlow<List<User>> get() = _followerProfiles
 
     private val _followingProfiles = MutableStateFlow<List<User>>(emptyList())
     val followingProfiles: StateFlow<List<User>> = _followingProfiles
+
+    fun getUserId(): String {
+        return currentUserId
+    }
+
+    suspend fun getUsername(): String {
+        return fireStore.collection(USER_COLLECTION).document(currentUserId).get().await().toObject(User::class.java)?.userName ?: ""
+    }
 
     fun getProfile() {
         if (currentUserId.isNotEmpty()) {

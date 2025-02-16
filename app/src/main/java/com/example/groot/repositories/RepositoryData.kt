@@ -11,8 +11,13 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.callbackFlow
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.tasks.await
 
 class RepositoryData {
@@ -25,9 +30,6 @@ class RepositoryData {
 
     private val _repository = MutableStateFlow(Repository())
     val repository: StateFlow<Repository> get() =  _repository
-
-    private val _starredRepositories = MutableStateFlow(StarredRepositories())
-    val starredRepositories: StateFlow<StarredRepositories> get() = _starredRepositories
 
     private val _exploreRepositories = MutableStateFlow<List<Repository>>(emptyList())
     val exploreRepositories: StateFlow<List<Repository>> get() = _exploreRepositories
@@ -77,25 +79,37 @@ class RepositoryData {
         }
     }
 
-    fun getStarredRepositories(userId: String = currentUserId) {
-        val docRef = fireStore.collection(STARRED_REPOSITORY).document(userId)
-        docRef.get().addOnSuccessListener {
-            if (!it.exists()) {
-                val star = StarredRepositories(userId = currentUserId, repositories = emptyList())
-                docRef.set(star)
-                _starredRepositories.value = star
+    fun getStarredRepositories(userId: String = currentUserId): Flow<StarredRepositories> = callbackFlow {
+        val listener = fireStore.collection(STARRED_REPOSITORY).document(userId)
+            .addSnapshotListener { result, e ->
+                if (e != null) {
+                    Log.e("RepositoryData", "Error fetching repositories: ${e.message}")
+                    close(e)
+                    return@addSnapshotListener
+                }
+                if (result != null) {
+                    val starRepo = result.toObject(StarredRepositories::class.java) ?: StarredRepositories()
+                    trySend(starRepo)
+                }
             }
-        }
-        docRef.addSnapshotListener { snapshot, e ->
-            if (e != null) {
-                Log.e("UserRepository", e.message.toString())
-                return@addSnapshotListener
+        awaitClose { listener.remove() }
+    }.flowOn(Dispatchers.IO)
+
+    fun fetchRepositories(username: String): Flow<List<Repository>> = callbackFlow {
+        val listener = fireStore.collection(REPOSITORY_COLLECTION)
+            .whereEqualTo("owner", username)
+            .addSnapshotListener { result, e ->
+                if (e != null) {
+                    Log.e("RepositoryData", "Error fetching repositories: ${e.message}")
+                    close(e)
+                    return@addSnapshotListener
+                }
+                if (result != null) {
+                    trySend(result.toObjects(Repository::class.java))
+                }
             }
-            if (snapshot != null && snapshot.exists()) {
-                _starredRepositories.value = snapshot.toObject(StarredRepositories::class.java) ?: StarredRepositories()
-            }
-        }
-    }
+        awaitClose { listener.remove() }
+    }.flowOn(Dispatchers.IO)
 
     fun fetchExplorerRepositories(friends: Friends) {
         val followers = (friends.followers + friends.following).distinctBy { it }

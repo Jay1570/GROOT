@@ -1,4 +1,4 @@
-package com.example.groot
+package com.example.groot.activity
 
 import android.content.Intent
 import android.content.res.Configuration
@@ -12,6 +12,7 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.groot.R
 import com.example.groot.adapter.RepositoryListAdapter
 import com.example.groot.model.Repository
 import com.google.android.material.appbar.MaterialToolbar

@@ -1,9 +1,10 @@
-package com.example.groot.screens.search
+package com.example.groot.screens.repository
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -25,32 +26,30 @@ import com.example.groot.common.TopBar
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RepoSearchScreen(
+fun RepositoryListScreen(
     navigateBack: () -> Unit,
-    navigateToRepository: (String) -> Unit,
-    viewModel: RepoSearchViewModel = viewModel(factory = AppViewModelProvider.factory)
+    navigateToRepoDetails: (String) -> Unit,
+    viewModel: RepositoryListViewModel = viewModel(factory = AppViewModelProvider.factory)
 ) {
     val repoList by viewModel.repoList.collectAsStateWithLifecycle()
     val inProcess by viewModel.inProcess.collectAsStateWithLifecycle()
     Scaffold(
         topBar = {
             TopBar(
-                title = stringResource(R.string.Search),
+                title = stringResource(R.string.Repositories),
                 canNavigateBack = true,
-                navigateUp = navigateBack,
+                navigateUp = navigateBack
             )
         },
         contentWindowInsets = WindowInsets.safeDrawing
     ) { innerPadding ->
-        Box(modifier = Modifier.fillMaxSize()) {
-            LazyColumn(
-                contentPadding = innerPadding
-            ) {
+        Box(Modifier.fillMaxSize().padding(innerPadding)) {
+            LazyColumn {
                 items(repoList) { repository ->
                     RepositoryItem(
                         owner = repository.owner,
                         name = repository.name,
-                        onClick = { navigateToRepository("${repository.owner} / ${repository.name}") }
+                        onClick = { navigateToRepoDetails("${repository.owner} / ${repository.name}") }
                     )
                 }
             }

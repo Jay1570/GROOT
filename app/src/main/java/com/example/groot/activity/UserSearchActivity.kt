@@ -1,10 +1,9 @@
-package com.example.groot
+package com.example.groot.activity
 
 import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.ViewGroup
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
@@ -14,53 +13,31 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.groot.adapter.RepositoryListAdapter
-import com.example.groot.viewmodel.StarRepoViewModel
+import com.example.groot.R
+import com.example.groot.adapter.UserListRecyclerViewAdapter
+import com.example.groot.viewmodel.SearchResultsActivityViewModel
 import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.progressindicator.CircularProgressIndicator
+import com.google.android.material.snackbar.Snackbar
 
-class StarredActivity : AppCompatActivity() {
-
-    private val viewModel: StarRepoViewModel by viewModels()
+class UserSearchActivity : AppCompatActivity() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var toolbar: MaterialToolbar
-    private lateinit var progressBar: ProgressBar
+    private lateinit var appBar: MaterialToolbar
+    private lateinit var progressBar: CircularProgressIndicator
     private lateinit var message: TextView
-    private var isEmpty = true
+
+    private val viewModel: SearchResultsActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_starred)
-
+        setContentView(R.layout.activity_search_results)
         window.statusBarColor = getColor(R.color.md_theme_surfaceContainer)
-        val userId = intent.getStringExtra("userId") ?: ""
-        if (userId.isEmpty()) viewModel.getStarRepo() else viewModel.getStarRepo(userId)
-
-        toolbar = findViewById(R.id.topAppBar)
-        recyclerView = findViewById(R.id.recyclerView)
+        recyclerView = findViewById(R.id.recyclerViewSearch)
+        appBar = findViewById(R.id.topAppBar)
         progressBar = findViewById(R.id.progressBar)
         message = findViewById(R.id.message)
-
-        recyclerView.layoutManager = LinearLayoutManager(this)
-        val recyclerAdapter = RepositoryListAdapter(repoPath = emptyList()) { onItemClick(it) }
-        recyclerView.adapter = recyclerAdapter
-
-        toolbar.setNavigationOnClickListener {
-            finish()
-        }
-
-        viewModel.starredRepositories.observe(this) { repo ->
-            isEmpty = repo.repositories.isEmpty()
-            recyclerAdapter.updatePath(repo.repositories)
-            recyclerAdapter.notifyDataSetChanged()
-            message.isVisible = isEmpty && !viewModel.isLoading.value!!
-        }
-
-        viewModel.isLoading.observe(this) { isLoading ->
-            progressBar.isVisible = isLoading
-            message.isVisible = !isLoading && isEmpty
-        }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             insets.getInsets(WindowInsetsCompat.Type.ime())
@@ -78,11 +55,36 @@ class StarredActivity : AppCompatActivity() {
             bar.layoutParams = layoutParams
             WindowInsetsCompat.CONSUMED
         }
+
+        val query = intent.getStringExtra("QUERY") ?: ""
+        viewModel.onUserSearch(query)
+
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        val recyclerAdapter = UserListRecyclerViewAdapter(emptyList()) { onItemClick(it) }
+        recyclerView.adapter = recyclerAdapter
+
+        viewModel.userList.observe(this) { users ->
+            recyclerAdapter.updateUsers(users)
+            recyclerAdapter.notifyDataSetChanged()
+        }
+
+        viewModel.error.observe(this) { error ->
+            Snackbar.make(findViewById(R.id.main), error, Snackbar.LENGTH_SHORT).show()
+        }
+
+        viewModel.isLoading.observe(this) { isLoading ->
+            progressBar.isVisible = isLoading
+            message.isVisible = !isLoading && viewModel.userList.value?.isEmpty() ?: true
+        }
+
+        appBar.setNavigationOnClickListener {
+            onNavigateUp()
+        }
     }
 
-    private fun onItemClick(path: String) {
-        val intent = Intent(this, RepoDetailsActivity::class.java)
-        intent.putExtra("path", path)
+    private fun onItemClick(userId: String) {
+        val intent = Intent(this, UserActivity::class.java)
+        intent.putExtra("userId", userId)
         startActivity(intent)
     }
 }

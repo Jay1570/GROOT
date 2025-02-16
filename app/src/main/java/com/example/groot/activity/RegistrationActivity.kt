@@ -1,4 +1,4 @@
-package com.example.groot
+package com.example.groot.activity
 
 import android.content.Intent
 import android.os.Bundle
@@ -14,6 +14,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMargins
+import com.example.groot.R
 import com.example.groot.utility.isValidEmail
 import com.example.groot.utility.isValidPassword
 import com.example.groot.viewmodel.AuthViewModel

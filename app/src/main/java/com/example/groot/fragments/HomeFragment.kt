@@ -8,8 +8,8 @@
     import androidx.fragment.app.Fragment
     import androidx.lifecycle.ViewModelProvider
     import com.example.groot.R
-    import com.example.groot.RepoActivity
-    import com.example.groot.StarredActivity
+    import com.example.groot.activity.RepoActivity
+    import com.example.groot.activity.StarredActivity
     import com.example.groot.viewmodel.ProfileViewModel
     import com.google.android.material.button.MaterialButton
 

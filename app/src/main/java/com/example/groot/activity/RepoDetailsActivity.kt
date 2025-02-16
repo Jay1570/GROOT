@@ -1,4 +1,4 @@
-package com.example.groot
+package com.example.groot.activity
 
 import android.content.Intent
 import android.content.res.Configuration
@@ -15,6 +15,7 @@ import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isVisible
+import com.example.groot.R
 import com.example.groot.viewmodel.RepoDetailsViewModel
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
@@ -99,7 +100,9 @@ class RepoDetailsActivity : AppCompatActivity() {
         viewModel.isStarred.observe(this) {
             isStarred = it
             btnStar.text = if (isStarred) getString(R.string.Starred) else getString(R.string.star)
-            btnStar.icon = if (isStarred) AppCompatResources.getDrawable(this, R.drawable.filled_star) else AppCompatResources.getDrawable(this, R.drawable.starred)
+            btnStar.icon = if (isStarred) AppCompatResources.getDrawable(this,
+                R.drawable.filled_star
+            ) else AppCompatResources.getDrawable(this, R.drawable.starred)
         }
 
         btnStar.setOnClickListener {

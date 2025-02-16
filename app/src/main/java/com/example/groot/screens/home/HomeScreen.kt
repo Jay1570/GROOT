@@ -11,6 +11,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavDestination.Companion.hasRoute
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -20,12 +21,15 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.example.groot.ExploreScreen
+import com.example.groot.Friends
 import com.example.groot.HomeScreen
 import com.example.groot.ProfileScreen
 import com.example.groot.R
 import com.example.groot.RepoSearch
+import com.example.groot.Repository
 import com.example.groot.RepositoryList
 import com.example.groot.Routes
+import com.example.groot.Settings
 import com.example.groot.StarredRepoList
 import com.example.groot.UserSearch
 
@@ -33,6 +37,7 @@ import com.example.groot.UserSearch
 fun HomeScreen(
     navControllerMain: NavHostController,
     navControllerBottomBar: NavHostController = rememberNavController(),
+    viewModel: HomeViewModel = viewModel()
 ) {
     val items = listOf(
         NavigationItem(stringResource(R.string.home), HomeScreen, R.drawable.home_outlined, R.drawable.home_filled),
@@ -75,23 +80,62 @@ fun HomeScreen(
         ) {
             composable<HomeScreen> {
                 HomeContent(
-                    navigateToRepoList = { navControllerMain.navigate(RepositoryList) },
-                    navigateToStarredList = { navControllerMain.navigate(StarredRepoList) },
+                    navigateToRepoList = {
+                        navControllerMain.navigate(RepositoryList(viewModel.username.value)) {
+                            launchSingleTop = true
+                        }
+                    },
+                    navigateToStarredList = {
+                        navControllerMain.navigate(StarredRepoList(viewModel.getUserId())) {
+                            launchSingleTop = true
+                        }
+                    },
                     navigateToRepoSearch = {
-                        navControllerMain.navigate(RepoSearch(it))
+                        navControllerMain.navigate(RepoSearch(it)) {
+                            launchSingleTop = true
+                        }
                     },
                     navigateToUserSearch = {
-                        navControllerMain.navigate(UserSearch(it))
+                        navControllerMain.navigate(UserSearch(it)) {
+                            launchSingleTop = true
+                        }
                     }
                 )
             }
 
             composable<ExploreScreen> {
-
+                ExploreScreen(
+                    navigateToRepository = {
+                        navControllerMain.navigate(Repository(it)) {
+                            launchSingleTop = true
+                        }
+                    },
+                    navigateToUserSearch = {
+                        navControllerMain.navigate(UserSearch(it)) {
+                            launchSingleTop = true
+                        }
+                    },
+                    navigateToRepoSearch = {
+                        navControllerMain.navigate(RepoSearch(it)) {
+                            launchSingleTop = true
+                        }
+                    }
+                )
             }
 
             composable<ProfileScreen> {
-
+                ProfileScreen(
+                    navigateToFriends = {
+                        navControllerMain.navigate(Friends(it)) {
+                            launchSingleTop = true
+                        }
+                    },
+                    navigateToSettings = {
+                        navControllerMain.navigate(Settings) {
+                            launchSingleTop = true
+                        }
+                    },
+                )
             }
         }
     }

@@ -1,4 +1,4 @@
-package com.example.groot
+package com.example.groot.activity
 
 import android.content.res.Configuration
 import android.os.Bundle
@@ -10,6 +10,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updateLayoutParams
 import androidx.core.view.updateMargins
 import androidx.viewpager2.widget.ViewPager2
+import com.example.groot.R
 import com.example.groot.adapter.FriendsViewPagerAdapter
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.tabs.TabLayout

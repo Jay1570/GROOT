@@ -11,7 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.groot.R
-import com.example.groot.RepoDetailsActivity
+import com.example.groot.activity.RepoDetailsActivity
 import com.example.groot.adapter.RepositoryListAdapter
 import com.example.groot.viewmodel.ExploreViewModel
 

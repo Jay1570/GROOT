@@ -20,8 +20,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.groot.AppViewModelProvider
 import com.example.groot.R
-import com.example.groot.TopBar
-import com.example.groot.UserItem
+import com.example.groot.common.TopBar
+import com.example.groot.common.UserItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

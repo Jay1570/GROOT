@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/md_theme_background"
-    tools:context=".RepoDetailsActivity">
+    tools:context=".activity.RepoDetailsActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBar"
@@ -231,7 +231,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent">
 
-                        <com.example.groot.LanguageBarChartView
+                        <com.example.groot.activity.LanguageBarChartView
                             android:id="@+id/languageBarChartView"
                             android:layout_width="match_parent"
                             android:layout_height="20dp"

@@ -23,15 +23,25 @@ data object ExploreScreen : Routes
 data object ProfileScreen : Routes
 
 @Serializable
-data object RepositoryList : Routes
-
-@Serializable
-data class Repository(
-    val id: String
+data class RepositoryList(
+    val username: String
 ) : Routes
 
 @Serializable
-data object StarredRepoList : Routes
+data class Repository(
+    val path: String
+) : Routes
+
+@Serializable
+data object FileList : Routes
+
+@Serializable
+data object FileContent : Routes
+
+@Serializable
+data class StarredRepoList(
+    val userId: String
+) : Routes
 
 @Serializable
 data class UserSearch(
@@ -42,3 +52,22 @@ data class UserSearch(
 data class RepoSearch(
     val query: String
 ) : Routes
+
+@Serializable
+data class User(
+    val id: String
+) : Routes
+
+@Serializable
+data class Friends(
+    val screen: Int
+) : Routes
+
+@Serializable
+data object Followers : Routes
+
+@Serializable
+data object Following : Routes
+
+@Serializable
+data object Settings : Routes

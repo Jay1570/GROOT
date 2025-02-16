@@ -1,4 +1,4 @@
-package com.example.groot
+package com.example.groot.activity
 
 import android.app.SearchManager
 import android.content.Intent
@@ -13,6 +13,7 @@ import androidx.appcompat.widget.SearchView
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.viewpager2.widget.ViewPager2
+import com.example.groot.R
 import com.example.groot.adapter.HomeViewPagerAdapter
 import com.example.groot.adapter.SearchOptionAdapter
 import com.google.android.material.appbar.MaterialToolbar
@@ -39,9 +40,9 @@ class HomeActivity : AppCompatActivity() {
         viewPager.adapter=HomeViewPagerAdapter(this)
         navView.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.home->viewPager.currentItem=0
-                R.id.explore->viewPager.currentItem=1
-                R.id.profile->viewPager.currentItem=2
+                R.id.home ->viewPager.currentItem=0
+                R.id.explore ->viewPager.currentItem=1
+                R.id.profile ->viewPager.currentItem=2
             }
             true
         }

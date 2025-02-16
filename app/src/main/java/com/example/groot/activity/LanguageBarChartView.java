@@ -1,4 +1,4 @@
-package com.example.groot;
+package com.example.groot.activity;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -9,6 +9,8 @@ import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+
+import com.example.groot.R;
 
 import org.json.JSONArray;
 import org.json.JSONObject;

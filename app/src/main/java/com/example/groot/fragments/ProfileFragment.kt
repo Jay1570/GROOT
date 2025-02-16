@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import coil.load
 import coil.transform.CircleCropTransformation
-import com.example.groot.FriendsActivity
+import com.example.groot.activity.FriendsActivity
 import com.example.groot.R
 import com.example.groot.utility.isValidPassword
 import com.example.groot.viewmodel.ProfileViewModel

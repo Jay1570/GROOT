@@ -8,6 +8,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.groot.screens.auth.LoginScreen
 import com.example.groot.screens.auth.RegistrationScreen
 import com.example.groot.screens.home.HomeScreen
+import com.example.groot.screens.repository.RepositoryListScreen
+import com.example.groot.screens.repository.StarredRepoListScreen
 import com.example.groot.screens.search.RepoSearchScreen
 import com.example.groot.screens.search.UserSearchScreen
 
@@ -55,7 +57,14 @@ fun Navigation(
         }
 
         composable<RepositoryList> {
-
+            RepositoryListScreen(
+                navigateBack = { navController.popBackStack() },
+                navigateToRepoDetails = {
+                    navController.navigate(Repository(it)) {
+                        launchSingleTop = true
+                    }
+                }
+            )
         }
 
         composable<Repository> {
@@ -63,13 +72,24 @@ fun Navigation(
         }
 
         composable<StarredRepoList> {
-
+            StarredRepoListScreen(
+                navigateBack = { navController.popBackStack() },
+                navigateToRepoDetails = {
+                    navController.navigate(Repository(it)) {
+                        launchSingleTop = true
+                    }
+                }
+            )
         }
 
         composable<UserSearch> {
             UserSearchScreen(
                 navigateBack = { navController.popBackStack() },
-                navigateToUser = {}
+                navigateToUser = {
+                    navController.navigate(User(it)) {
+                        launchSingleTop = true
+                    }
+                }
             )
         }
 
@@ -82,6 +102,26 @@ fun Navigation(
                     }
                 }
             )
+        }
+
+        composable<User> {
+
+        }
+
+        composable<Friends> {
+
+        }
+
+        composable<Settings> {
+
+        }
+
+        composable<FileList> {
+
+        }
+
+        composable<FileContent> {
+
         }
     }
 }
