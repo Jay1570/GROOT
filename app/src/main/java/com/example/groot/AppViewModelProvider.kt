@@ -3,6 +3,7 @@ package com.example.groot
 import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import com.example.groot.screens.repository.RepositoryDetailsViewModel
 import com.example.groot.screens.repository.RepositoryListViewModel
 import com.example.groot.screens.repository.StarredRepoListViewModel
 import com.example.groot.screens.search.RepoSearchViewModel
@@ -24,6 +25,10 @@ object AppViewModelProvider {
 
         initializer {
             StarredRepoListViewModel(this.createSavedStateHandle())
+        }
+
+        initializer {
+            RepositoryDetailsViewModel(this.createSavedStateHandle())
         }
     }
 }

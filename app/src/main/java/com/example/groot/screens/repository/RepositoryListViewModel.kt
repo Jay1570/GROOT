@@ -7,15 +7,14 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.example.groot.RepositoryList
 import com.example.groot.model.Repository
-import com.example.groot.repositories.RepositoryData
+import com.google.firebase.storage.FirebaseStorage
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 
 class RepositoryListViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
 
-    val repository = RepositoryData()
+    private val firebaseStorage = FirebaseStorage.getInstance()
 
     private val _repoList = MutableStateFlow<List<Repository>>(emptyList())
     val repoList get() = _repoList.asStateFlow()
@@ -31,15 +30,19 @@ class RepositoryListViewModel(savedStateHandle: SavedStateHandle) : ViewModel() 
     }
 
     private fun fetchRepositories(username: String = this.username) {
-        Log.d("RepositoryListViewModel", "Fetching repositories for user: $username")
         viewModelScope.launch {
             _inProcess.value = true
-            repository.fetchRepositories(username)
-                .catch { e -> Log.e("RepositoryListViewModel", e.message.toString()) }
-                .collect { repos ->
-                    _repoList.value = repos
-                    _inProcess.value = false
+            firebaseStorage.reference.child("$username ").listAll().addOnSuccessListener { result ->
+                val list = mutableListOf<Repository>()
+                result.prefixes.forEach {
+                    list.add(Repository(name = it.name.trim(), owner = username))
                 }
+                _repoList.value = list
+                _inProcess.value = false
+            }.addOnFailureListener {
+                _inProcess.value = false
+                Log.e("RepoListViewModel","Error :- ${it.message.toString()}")
+            }
         }
     }
 }

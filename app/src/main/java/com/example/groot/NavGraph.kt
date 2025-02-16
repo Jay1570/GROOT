@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.groot.screens.auth.LoginScreen
 import com.example.groot.screens.auth.RegistrationScreen
 import com.example.groot.screens.home.HomeScreen
+import com.example.groot.screens.repository.RepositoryDetailsScreen
 import com.example.groot.screens.repository.RepositoryListScreen
 import com.example.groot.screens.repository.StarredRepoListScreen
 import com.example.groot.screens.search.RepoSearchScreen
@@ -60,22 +61,29 @@ fun Navigation(
             RepositoryListScreen(
                 navigateBack = { navController.popBackStack() },
                 navigateToRepoDetails = {
-                    navController.navigate(Repository(it)) {
+                    navController.navigate(RepositoryDetails(it)) {
                         launchSingleTop = true
                     }
                 }
             )
         }
 
-        composable<Repository> {
-
+        composable<RepositoryDetails> {
+            RepositoryDetailsScreen(
+                navigateBack = { navController.popBackStack() },
+                navigateToFileList = {
+                    navController.navigate(FileList(it)) {
+                        launchSingleTop = true
+                    }
+                }
+            )
         }
 
         composable<StarredRepoList> {
             StarredRepoListScreen(
                 navigateBack = { navController.popBackStack() },
                 navigateToRepoDetails = {
-                    navController.navigate(Repository(it)) {
+                    navController.navigate(RepositoryDetails(it)) {
                         launchSingleTop = true
                     }
                 }
@@ -97,7 +105,7 @@ fun Navigation(
             RepoSearchScreen(
                 navigateBack = { navController.popBackStack() },
                 navigateToRepository = {
-                    navController.navigate(Repository(it)) {
+                    navController.navigate(RepositoryDetails(it)) {
                         launchSingleTop = true
                     }
                 }

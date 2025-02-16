@@ -28,12 +28,14 @@ data class RepositoryList(
 ) : Routes
 
 @Serializable
-data class Repository(
+data class RepositoryDetails(
     val path: String
 ) : Routes
 
 @Serializable
-data object FileList : Routes
+data class FileList(
+    val path: String
+) : Routes
 
 @Serializable
 data object FileContent : Routes

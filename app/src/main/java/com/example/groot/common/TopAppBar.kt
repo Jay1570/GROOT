@@ -11,6 +11,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -18,6 +19,7 @@ fun TopBar(
     title: String,
     canNavigateBack: Boolean,
     navigateUp: () -> Unit = {},
+    containerColor: Color = MaterialTheme.colorScheme.surfaceContainer,
     scrollBehavior: TopAppBarScrollBehavior? = null,
     actions: @Composable () -> Unit = {},
 ) {
@@ -45,7 +47,7 @@ fun TopBar(
             actions()
         },
         colors = TopAppBarDefaults.topAppBarColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainer,
+            containerColor = containerColor,
             titleContentColor = MaterialTheme.colorScheme.onSurface,
             navigationIconContentColor = MaterialTheme.colorScheme.onBackground,
             actionIconContentColor = MaterialTheme.colorScheme.onBackground

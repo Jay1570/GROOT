@@ -26,7 +26,7 @@ import com.example.groot.HomeScreen
 import com.example.groot.ProfileScreen
 import com.example.groot.R
 import com.example.groot.RepoSearch
-import com.example.groot.Repository
+import com.example.groot.RepositoryDetails
 import com.example.groot.RepositoryList
 import com.example.groot.Routes
 import com.example.groot.Settings
@@ -106,7 +106,7 @@ fun HomeScreen(
             composable<ExploreScreen> {
                 ExploreScreen(
                     navigateToRepository = {
-                        navControllerMain.navigate(Repository(it)) {
+                        navControllerMain.navigate(RepositoryDetails(it)) {
                             launchSingleTop = true
                         }
                     },

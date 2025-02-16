@@ -24,6 +24,7 @@ class RepositoryData {
 
     private val auth = FirebaseAuth.getInstance()
     private val fireStore = FirebaseFirestore.getInstance()
+
     val currentUserId get() = auth.currentUser?.uid ?: ""
 
     private var repoId = ""
@@ -56,6 +57,32 @@ class RepositoryData {
             }
         }
     }
+
+    fun getRepositoryFlow(path: String): Flow<Repository> = callbackFlow {
+        val owner = path.substringBefore("/").trim()
+        val repoName = path.substringAfter("/").trim()
+        val query = fireStore.collection(REPOSITORY_COLLECTION).whereEqualTo("name", repoName).whereEqualTo("owner", owner).get().await()
+        if (query.documents.isEmpty()) {
+            val repo = Repository(name = repoName, owner = owner, private = false, stars = emptyList())
+            repoId = fireStore.collection(REPOSITORY_COLLECTION).add(repo).await().id
+        } else {
+            repoId = query.documents.first().id
+        }
+
+        val listener = fireStore.collection(REPOSITORY_COLLECTION).document(repoId)
+            .addSnapshotListener{ snapshot, e ->
+                if (e != null) {
+                    Log.e("Repository", e.message.toString())
+                    close(e)
+                    return@addSnapshotListener
+                }
+                if (snapshot != null && snapshot.exists()) {
+                    val repo = snapshot.toObject(Repository::class.java) ?: Repository()
+                    trySend(repo)
+                }
+            }
+        awaitClose { listener.remove() }
+    }.flowOn(Dispatchers.IO)
 
     suspend fun starRepo(path: String) {
         try {
@@ -90,22 +117,6 @@ class RepositoryData {
                 if (result != null) {
                     val starRepo = result.toObject(StarredRepositories::class.java) ?: StarredRepositories()
                     trySend(starRepo)
-                }
-            }
-        awaitClose { listener.remove() }
-    }.flowOn(Dispatchers.IO)
-
-    fun fetchRepositories(username: String): Flow<List<Repository>> = callbackFlow {
-        val listener = fireStore.collection(REPOSITORY_COLLECTION)
-            .whereEqualTo("owner", username)
-            .addSnapshotListener { result, e ->
-                if (e != null) {
-                    Log.e("RepositoryData", "Error fetching repositories: ${e.message}")
-                    close(e)
-                    return@addSnapshotListener
-                }
-                if (result != null) {
-                    trySend(result.toObjects(Repository::class.java))
                 }
             }
         awaitClose { listener.remove() }
