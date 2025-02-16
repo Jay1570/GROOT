@@ -6,6 +6,7 @@ import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -43,6 +44,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
 import androidx.compose.ui.graphics.drawscope.withTransform
@@ -154,10 +156,11 @@ private fun RepositoryDetailsContent(
             Spacer(modifier = Modifier.height(8.dp))
             LanguageBarChart(
                 uiState.languageContributions,
+                uiState.totalFiles,
                 colors = listOf(
                     Color(0xffb07219),
                     Color(0xff945db7),
-                    Color(0xffec915c),
+                    Color(0xff3572A5),
                     Color.LightGray
                 )
             )
@@ -200,14 +203,13 @@ private fun RepositoryDetailsContent(
 }
 
 @Composable
-fun LanguageBarChart(languageData: Map<String, Int>, colors: List<Color>, modifier: Modifier = Modifier) {
+fun LanguageBarChart(languageData: Map<String, Int>, totalFiles: Int, colors: List<Color>, modifier: Modifier = Modifier) {
     val sortedLanguages = languageData.entries.sortedByDescending { it.value }
     val topLanguages: MutableMap<String, Int> = sortedLanguages.take(3).associate { it.key to it.value } as MutableMap<String, Int>
     var othersTotal = 0
     sortedLanguages.drop(3).forEach {
         othersTotal += it.value
     }
-    val totalSum = sortedLanguages.sumOf { it.value }
     if (othersTotal > 0) topLanguages["Others"] = othersTotal
     var start = 0F
     Column(Modifier.fillMaxHeight()) {
@@ -217,15 +219,15 @@ fun LanguageBarChart(languageData: Map<String, Int>, colors: List<Color>, modifi
         ) {
             Canvas(modifier = Modifier.fillMaxSize()) {
                 topLanguages.entries.forEachIndexed { index, entry ->
-                    val proportion = entry.value.toFloat() / totalSum
+                    val proportion = entry.value.toFloat() / totalFiles
                     val color = colors[index]
                     val end = start + proportion * size.width
                     drawIntoCanvas { _ ->
                         withTransform({}) {
                             drawRect(
                                 color = color,
-                                topLeft = androidx.compose.ui.geometry.Offset(start, 0f),
-                                size = androidx.compose.ui.geometry.Size(end - start, size.height)
+                                topLeft = Offset(start, 0f),
+                                size = Size(end - start, size.height)
                             )
                         }
                     }

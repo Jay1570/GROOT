@@ -10,6 +10,7 @@ import com.example.groot.SnackbarEvent
 import com.example.groot.SnackbarManager
 import com.example.groot.model.Repository
 import com.example.groot.repositories.RepositoryData
+import com.example.groot.utility.LanguageData
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageException
 import com.google.firebase.storage.StorageReference
@@ -88,9 +89,7 @@ class RepositoryDetailsViewModel(savedStateHandle: SavedStateHandle) : ViewModel
         val folderRef = firebaseStorage.reference.child(path)
         fetchFilesInDirectory(folderRef) { files ->
             if (files.isNotEmpty()) {
-                calculateLanguageContributions(files) { contribution ->
-                    _uiState.update { it.copy(languageContributions = contribution) }
-                }
+                calculateLanguageContributions(files)
             }
         }
     }
@@ -124,24 +123,15 @@ class RepositoryDetailsViewModel(savedStateHandle: SavedStateHandle) : ViewModel
         }
     }
 
-    private fun calculateLanguageContributions(files: List<StorageReference>, callback: (Map<String, Int>) -> Unit) {
+    private fun calculateLanguageContributions(files: List<StorageReference>) {
         val languageCount = mutableMapOf<String, Int>()
-        var pendingFiles = files.size
         files.forEach { fileRef ->
-            fileRef.metadata.addOnSuccessListener { metadata ->
-                if (metadata.contentType!!.startsWith("text/")) {
-                    val language = fileRef.name.substringAfterLast(".")
-                    languageCount[language] = (languageCount[language] ?: 0) + 1
-                }
-                if (--pendingFiles == 0) {
-                    callback(languageCount)
-                }
-            }.addOnFailureListener { error ->
-                Log.e("repo_details", error.message.toString())
-                if (--pendingFiles == 0) {
-                    callback(languageCount)
-                }
-            }
+            val extension = ".${fileRef.name.substringAfterLast(".", missingDelimiterValue = "").lowercase()}"
+            val language = LanguageData.extensions[extension] ?: "Others"
+            languageCount[language] = (languageCount[language] ?: 0) + 1
+        }
+        _uiState.update {
+            it.copy(languageContributions = languageCount, totalFiles = files.size)
         }
     }
 }
@@ -149,6 +139,7 @@ class RepositoryDetailsViewModel(savedStateHandle: SavedStateHandle) : ViewModel
 data class RepoDetailsUiState(
     val repository: Repository = Repository(),
     val isStarred: Boolean = false,
+    val totalFiles: Int = 0,
     val starCount: Int = 0,
     val languageContributions: Map<String, Int> = emptyMap(),
     val readmeContent: String = "",
