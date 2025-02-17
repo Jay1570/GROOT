@@ -8,6 +8,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.groot.screens.auth.LoginScreen
 import com.example.groot.screens.auth.RegistrationScreen
 import com.example.groot.screens.home.HomeScreen
+import com.example.groot.screens.repository.FileContentScreen
+import com.example.groot.screens.repository.FileListScreen
 import com.example.groot.screens.repository.RepositoryDetailsScreen
 import com.example.groot.screens.repository.RepositoryListScreen
 import com.example.groot.screens.repository.StarredRepoListScreen
@@ -125,11 +127,20 @@ fun Navigation(
         }
 
         composable<FileList> {
-
+            FileListScreen(
+                navigateToFileContent = {
+                    navController.navigate(FileContent(it)) {
+                        launchSingleTop = true
+                    }
+                },
+                navigateBack = { navController.popBackStack() }
+            )
         }
 
         composable<FileContent> {
-
+            FileContentScreen(
+                navigateBack = { navController.popBackStack() }
+            )
         }
     }
 }

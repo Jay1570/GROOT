@@ -145,4 +145,3 @@ data class RepoDetailsUiState(
     val readmeContent: String = "",
     val inProcess: Boolean = false,
 )
-

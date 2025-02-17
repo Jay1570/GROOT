@@ -3,6 +3,8 @@ package com.example.groot
 import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
+import com.example.groot.screens.repository.FileContentViewModel
+import com.example.groot.screens.repository.FileListViewModel
 import com.example.groot.screens.repository.RepositoryDetailsViewModel
 import com.example.groot.screens.repository.RepositoryListViewModel
 import com.example.groot.screens.repository.StarredRepoListViewModel
@@ -29,6 +31,14 @@ object AppViewModelProvider {
 
         initializer {
             RepositoryDetailsViewModel(this.createSavedStateHandle())
+        }
+
+        initializer {
+            FileListViewModel(this.createSavedStateHandle())
+        }
+
+        initializer {
+            FileContentViewModel(this.createSavedStateHandle())
         }
     }
 }

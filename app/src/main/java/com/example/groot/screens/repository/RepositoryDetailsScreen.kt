@@ -12,6 +12,8 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -64,6 +66,7 @@ import com.example.groot.model.Repository
 import com.example.groot.ui.theme.GROOTTheme
 import com.google.android.material.textview.MaterialTextView
 import io.noties.markwon.Markwon
+import okhttp3.internal.format
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -202,6 +205,7 @@ private fun RepositoryDetailsContent(
     }
 }
 
+@OptIn(ExperimentalLayoutApi::class)
 @Composable
 fun LanguageBarChart(languageData: Map<String, Int>, totalFiles: Int, colors: List<Color>, modifier: Modifier = Modifier) {
     val sortedLanguages = languageData.entries.sortedByDescending { it.value }
@@ -236,12 +240,13 @@ fun LanguageBarChart(languageData: Map<String, Int>, totalFiles: Int, colors: Li
             }
         }
         Spacer(modifier = Modifier.height(8.dp))
-        Row(
+        FlowRow(
             modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             topLanguages.entries.forEachIndexed { index, entry ->
                 val color = colors.getOrElse(index) { Color.Gray }
+                val percentage = format("%.2f", entry.value.toFloat() / totalFiles * 100)
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Box(
                         modifier = Modifier.size(12.dp)
@@ -249,7 +254,7 @@ fun LanguageBarChart(languageData: Map<String, Int>, totalFiles: Int, colors: Li
                     )
                     Spacer(modifier = Modifier.width(4.dp))
                     Text(
-                        text = entry.key,
+                        text = "${entry.key}(${percentage}%)",
                         fontSize = 14.sp,
                         color = MaterialTheme.colorScheme.onBackground
                     )
@@ -269,6 +274,7 @@ fun RepoDetailsPreview() {
                     repository = Repository(name = "Repository", owner = "Username"),
                     readmeContent = "This is README content",
                     starCount = 0,
+                    totalFiles = 100,
                     languageContributions = mapOf(
                         Pair("Java", 20),
                         Pair("Kotlin", 80)

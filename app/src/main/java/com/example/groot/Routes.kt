@@ -38,7 +38,9 @@ data class FileList(
 ) : Routes
 
 @Serializable
-data object FileContent : Routes
+data class FileContent(
+    val path: String
+) : Routes
 
 @Serializable
 data class StarredRepoList(
