@@ -29,34 +29,8 @@ class RepositoryData {
 
     private var repoId = ""
 
-    private val _repository = MutableStateFlow(Repository())
-    val repository: StateFlow<Repository> get() =  _repository
-
     private val _exploreRepositories = MutableStateFlow<List<Repository>>(emptyList())
     val exploreRepositories: StateFlow<List<Repository>> get() = _exploreRepositories
-
-    suspend fun getRepository (path: String) {
-        val owner = path.substringBefore("/").trim()
-        val repoName = path.substringAfter("/").trim()
-        val query = fireStore.collection(REPOSITORY_COLLECTION).whereEqualTo("name", repoName).whereEqualTo("owner", owner).get().await()
-        if (query.documents.isEmpty()) {
-            val repo = Repository(name = repoName, owner = owner, private = false, stars = emptyList())
-            repoId = fireStore.collection(REPOSITORY_COLLECTION).add(repo).await().id
-            _repository.value = repo.copy(id = repoId)
-        } else {
-            repoId = query.documents.first().id
-        }
-        val docRef = fireStore.collection(REPOSITORY_COLLECTION).document(repoId)
-        docRef.addSnapshotListener { snapshot, e ->
-            if (e != null) {
-                Log.e("Repository", e.message.toString())
-                return@addSnapshotListener
-            }
-            if (snapshot != null && snapshot.exists()) {
-                _repository.value = snapshot.toObject(Repository::class.java) ?: Repository()
-            }
-        }
-    }
 
     fun getRepositoryFlow(path: String): Flow<Repository> = callbackFlow {
         val owner = path.substringBefore("/").trim()

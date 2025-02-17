@@ -158,8 +158,7 @@ private fun RepositoryDetailsContent(
             Text(text = "Languages", fontSize = 20.sp, color = MaterialTheme.colorScheme.onBackground)
             Spacer(modifier = Modifier.height(8.dp))
             LanguageBarChart(
-                uiState.languageContributions,
-                uiState.totalFiles,
+                uiState.languageContributions.toMutableMap(),
                 colors = listOf(
                     Color(0xffb07219),
                     Color(0xff945db7),
@@ -207,14 +206,16 @@ private fun RepositoryDetailsContent(
 
 @OptIn(ExperimentalLayoutApi::class)
 @Composable
-fun LanguageBarChart(languageData: Map<String, Int>, totalFiles: Int, colors: List<Color>, modifier: Modifier = Modifier) {
+private fun LanguageBarChart(languageData: MutableMap<String, Int>, colors: List<Color>, modifier: Modifier = Modifier) {
+    var othersTotal = languageData.remove("Others") ?: 0
     val sortedLanguages = languageData.entries.sortedByDescending { it.value }
-    val topLanguages: MutableMap<String, Int> = sortedLanguages.take(3).associate { it.key to it.value } as MutableMap<String, Int>
-    var othersTotal = 0
+    val topLanguages: MutableMap<String, Int> = sortedLanguages.take(3).associate { it.key to it.value }.toMutableMap()
     sortedLanguages.drop(3).forEach {
         othersTotal += it.value
     }
     if (othersTotal > 0) topLanguages["Others"] = othersTotal
+    var total = 0
+    topLanguages.entries.forEach { total += it.value }
     var start = 0F
     Column(Modifier.fillMaxHeight()) {
         Card(
@@ -223,7 +224,7 @@ fun LanguageBarChart(languageData: Map<String, Int>, totalFiles: Int, colors: Li
         ) {
             Canvas(modifier = Modifier.fillMaxSize()) {
                 topLanguages.entries.forEachIndexed { index, entry ->
-                    val proportion = entry.value.toFloat() / totalFiles
+                    val proportion = entry.value.toFloat() / total
                     val color = colors[index]
                     val end = start + proportion * size.width
                     drawIntoCanvas { _ ->
@@ -246,7 +247,7 @@ fun LanguageBarChart(languageData: Map<String, Int>, totalFiles: Int, colors: Li
         ) {
             topLanguages.entries.forEachIndexed { index, entry ->
                 val color = colors.getOrElse(index) { Color.Gray }
-                val percentage = format("%.2f", entry.value.toFloat() / totalFiles * 100)
+                val percentage = format("%.2f", entry.value.toFloat() / total * 100)
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Box(
                         modifier = Modifier.size(12.dp)
@@ -274,7 +275,6 @@ fun RepoDetailsPreview() {
                     repository = Repository(name = "Repository", owner = "Username"),
                     readmeContent = "This is README content",
                     starCount = 0,
-                    totalFiles = 100,
                     languageContributions = mapOf(
                         Pair("Java", 20),
                         Pair("Kotlin", 80)

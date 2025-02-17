@@ -48,8 +48,8 @@ fun FileListScreen(
         topBar = {
             TopBar(
                 title = uiState.currNode!!.name,
-                canNavigateBack = !uiState.inProcess,
-                navigateUp = { viewModel.navigateBack(navigateBack) }
+                canNavigateBack = true,
+                navigateUp = { if(!uiState.inProcess) viewModel.navigateBack(navigateBack) }
             )
         },
         contentWindowInsets = WindowInsets.safeDrawing
@@ -63,23 +63,21 @@ fun FileListScreen(
                 ) {
                     CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
                 }
-            }
-            LazyColumn {
-                items(uiState.fileList) {
-                    FileItem(
-                        node = it,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .clickable(onClick = {
-                                if (uiState.inProcess) return@clickable
-                                if (it.isFolder)
-                                    viewModel.navigateToFolder(it)
-                                else
-                                    navigateToFileContent(it.path)
-                            })
-                            .padding(horizontal = 16.dp)
-                            .heightIn(min = 56.dp)
-                    )
+            } else {
+                LazyColumn {
+                    items(uiState.fileList) {
+                        FileItem(
+                            node = it,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clickable(onClick = {
+                                    if (it.isFolder) viewModel.navigateToFolder(it)
+                                    else navigateToFileContent(it.path)
+                                })
+                                .padding(horizontal = 16.dp)
+                                .heightIn(min = 56.dp)
+                        )
+                    }
                 }
             }
         }
@@ -87,7 +85,7 @@ fun FileListScreen(
 }
 
 @Composable
-fun FileItem(
+private fun FileItem(
     node: TreeNode,
     modifier: Modifier = Modifier
 ) {

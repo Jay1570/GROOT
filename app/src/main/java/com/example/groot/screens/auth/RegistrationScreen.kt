@@ -83,7 +83,7 @@ fun RegistrationScreen(
 }
 
 @Composable
-fun RegistrationContent(
+private fun RegistrationContent(
     uiState: RegistrationUiState,
     onUsernameChange: (String) -> Unit,
     onEmailChange: (String) -> Unit,

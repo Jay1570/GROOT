@@ -98,7 +98,7 @@ fun GROOTTheme(
     content: @Composable () -> Unit
 ) {
     val colorScheme = when(darkTheme) {
-        darkTheme -> darkScheme
+        true -> darkScheme
         else -> lightScheme
     }
     val view = LocalView.current

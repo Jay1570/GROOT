@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <application
+        android:name=".MyApp"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -15,7 +16,6 @@
         <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/title_activity_main"
             android:windowSoftInputMode="adjustResize"
             android:theme="@style/AppTheme" >
             <intent-filter>
@@ -24,57 +24,5 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".activity.FileContentActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.Files"
-            android:exported="false" />
-        <activity
-            android:name=".activity.RepoDetailsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.SettingsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.StarredActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.UserActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.UserSearchActivity"
-            android:exported="false"
-            android:launchMode="singleTop"
-            android:parentActivityName=".activity.HomeActivity"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".activity.FriendsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".activity.RepoActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".activity.HomeActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".activity.RegistrationActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".activity.LoginActivity"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".activity.RoutingActivity"
-            android:exported="true"
-            android:theme="@style/Theme.App.Starting"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
-            android:name=".activity.RepositorySearchActivity"
-            android:exported="false" />
     </application>
-
 </manifest>

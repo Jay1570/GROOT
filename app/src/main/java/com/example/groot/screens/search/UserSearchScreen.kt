@@ -11,6 +11,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -43,14 +44,23 @@ fun UserSearchScreen(
       contentWindowInsets = WindowInsets.safeDrawing
    ) { innerPadding ->
       Box(modifier = Modifier.fillMaxSize()) {
-         LazyColumn(
-            contentPadding = innerPadding,
-         ) {
-            items(userList) { user ->
-               UserItem(
-                  user = user,
-                  onClick = { navigateToUser(user.id) }
+         if (userList.isEmpty() && !inProcess) {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+               Text(
+                  text = "No Users",
+                  style = MaterialTheme.typography.titleLarge,
                )
+            }
+         } else {
+            LazyColumn(
+               contentPadding = innerPadding,
+            ) {
+               items(userList) { user ->
+                  UserItem(
+                     user = user,
+                     onClick = { navigateToUser(user.id) }
+                  )
+               }
             }
          }
          if (inProcess) {
@@ -60,7 +70,8 @@ fun UserSearchScreen(
                   .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.5f))
             ) {
                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
-            }         }
+            }
+         }
       }
    }
 }

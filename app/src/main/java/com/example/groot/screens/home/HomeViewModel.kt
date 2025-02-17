@@ -18,7 +18,7 @@ class HomeViewModel : ViewModel() {
         loadUsername()
     }
 
-    fun loadUsername() {
+    private fun loadUsername() {
         viewModelScope.launch {
             _username.value = userRepository.getUsername()
         }

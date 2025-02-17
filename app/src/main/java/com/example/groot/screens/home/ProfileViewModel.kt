@@ -30,8 +30,8 @@ class ProfileViewModel : ViewModel() {
 
     val profile = userRepository.profile
     val friends = userRepository.friends
-    private val followingProfiles get() = userRepository.followingProfiles
-    private val followerProfiles get() = userRepository.followerProfiles
+    val followingProfiles get() = userRepository.followingProfiles
+    val followerProfiles get() = userRepository.followerProfiles
 
     val followingCount = followingProfiles.map { it.size }.stateIn(
         scope = viewModelScope,

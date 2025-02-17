@@ -79,7 +79,7 @@ fun FileContentScreen(
 }
 
 @Composable
-fun LineItem(lineNumber: String, lineContent: String) {
+private fun LineItem(lineNumber: String, lineContent: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()

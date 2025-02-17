@@ -5,8 +5,10 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.example.groot.screens.auth.LoginScreen
 import com.example.groot.screens.auth.RegistrationScreen
+import com.example.groot.screens.home.FriendsScreen
 import com.example.groot.screens.home.HomeScreen
 import com.example.groot.screens.repository.FileContentScreen
 import com.example.groot.screens.repository.FileListScreen
@@ -15,6 +17,8 @@ import com.example.groot.screens.repository.RepositoryListScreen
 import com.example.groot.screens.repository.StarredRepoListScreen
 import com.example.groot.screens.search.RepoSearchScreen
 import com.example.groot.screens.search.UserSearchScreen
+import com.example.groot.screens.settings.SettingsScreen
+import com.example.groot.screens.user.UserScreen
 
 @Composable
 fun Navigation(
@@ -96,7 +100,7 @@ fun Navigation(
             UserSearchScreen(
                 navigateBack = { navController.popBackStack() },
                 navigateToUser = {
-                    navController.navigate(User(it)) {
+                    navController.navigate(UserScreen(it)) {
                         launchSingleTop = true
                     }
                 }
@@ -114,16 +118,45 @@ fun Navigation(
             )
         }
 
-        composable<User> {
-
+        composable<UserScreen> {
+            UserScreen(
+                navigateBack = { navController.popBackStack() },
+                navigateToRepoList = {
+                    navController.navigate(RepositoryList(it)) {
+                        launchSingleTop = true
+                    }
+                },
+                navigateToStarredRepo = {
+                    navController.navigate(StarredRepoList(it)) {
+                        launchSingleTop = true
+                    }
+                }
+            )
         }
 
         composable<Friends> {
-
+            val screen = it.toRoute<Friends>().screen
+            FriendsScreen(
+                navigateToUser = { id ->
+                    navController.navigate(UserScreen(id)) {
+                        launchSingleTop = true
+                    }
+                },
+                navigateBack = { navController.popBackStack() },
+                screen = screen
+            )
         }
 
         composable<Settings> {
-
+            SettingsScreen(
+                navigateBack = { navController.popBackStack() },
+                navigateToLogin = {
+                    navController.navigate(Login) {
+                        launchSingleTop = true
+                        popUpTo(0) { inclusive = true }
+                    }
+                },
+            )
         }
 
         composable<FileList> {

@@ -58,7 +58,7 @@ data class RepoSearch(
 ) : Routes
 
 @Serializable
-data class User(
+data class UserScreen(
     val id: String
 ) : Routes
 
@@ -66,12 +66,6 @@ data class User(
 data class Friends(
     val screen: Int
 ) : Routes
-
-@Serializable
-data object Followers : Routes
-
-@Serializable
-data object Following : Routes
 
 @Serializable
 data object Settings : Routes

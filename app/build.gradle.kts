@@ -48,10 +48,7 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
     implementation(libs.material)
-    implementation(libs.androidx.activity)
-    implementation(libs.androidx.constraintlayout)
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.auth)
     implementation(libs.firebase.firestore)
@@ -60,7 +57,6 @@ dependencies {
     implementation(libs.firebase.crashlytics)
     implementation(libs.firebase.perf)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
-    implementation(libs.circleimageview)
     implementation("io.noties.markwon:core:4.6.2")
     implementation("io.noties.markwon:image:4.6.2")
     implementation("io.noties.markwon:ext-strikethrough:4.6.2")

@@ -21,6 +21,8 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
+import java.util.Collections
+import java.util.concurrent.atomic.AtomicInteger
 
 class RepositoryDetailsViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
 
@@ -87,40 +89,31 @@ class RepositoryDetailsViewModel(savedStateHandle: SavedStateHandle) : ViewModel
 
     private fun fetchFilesAndCalculateContributions(path: String) {
         val folderRef = firebaseStorage.reference.child(path)
-        fetchFilesInDirectory(folderRef) { files ->
-            if (files.isNotEmpty()) {
-                calculateLanguageContributions(files)
+        val allFiles = Collections.synchronizedList(mutableListOf<StorageReference>())
+        val pendingRequests = AtomicInteger(1)
+
+        fun onComplete() {
+            if (pendingRequests.decrementAndGet() == 0) {
+                calculateLanguageContributions(allFiles)
             }
         }
-    }
 
-    private fun fetchFilesInDirectory(directory: StorageReference, callback: (List<StorageReference>) -> Unit) {
-        directory.listAll().addOnSuccessListener {
-            directory.listAll().addOnSuccessListener { listResult ->
-                val allFiles = ArrayList(listResult.items)
-                val prefixes = listResult.prefixes
-
-                if (prefixes.isEmpty()) {
-                    callback(allFiles)
-                } else {
-                    var pendingPrefixes = prefixes.size
-                    prefixes.forEach { folderRef ->
-                        if (!folderRef.name.startsWith(".")) {
-                            fetchFilesInDirectory(folderRef) { files ->
-                                allFiles.addAll(files)
-                                if (--pendingPrefixes == 0) {
-                                    callback(allFiles)
-                                }
-                            }
-                        } else {
-                            callback(allFiles)
-                        }
+        fun fetchFilesInDirectory(directory: StorageReference) {
+            directory.listAll()
+                .addOnSuccessListener { listResult ->
+                    allFiles.addAll(listResult.items)
+                    val subfolders = listResult.prefixes.filter { !it.name.startsWith(".") }
+                    if (subfolders.isNotEmpty()) {
+                        pendingRequests.addAndGet(subfolders.size)
+                        subfolders.forEach { fetchFilesInDirectory(it) }
                     }
-                }
+                    onComplete()
             }.addOnFailureListener { exception ->
-                Log.e("RepoDetailsViewModel",exception.message.toString())
+                Log.e("RepoDetailsViewModel", "Error: ${exception.message}")
+                onComplete()
             }
         }
+        fetchFilesInDirectory(folderRef)
     }
 
     private fun calculateLanguageContributions(files: List<StorageReference>) {
@@ -131,7 +124,7 @@ class RepositoryDetailsViewModel(savedStateHandle: SavedStateHandle) : ViewModel
             languageCount[language] = (languageCount[language] ?: 0) + 1
         }
         _uiState.update {
-            it.copy(languageContributions = languageCount, totalFiles = files.size)
+            it.copy(languageContributions = languageCount)
         }
     }
 }
@@ -139,7 +132,6 @@ class RepositoryDetailsViewModel(savedStateHandle: SavedStateHandle) : ViewModel
 data class RepoDetailsUiState(
     val repository: Repository = Repository(),
     val isStarred: Boolean = false,
-    val totalFiles: Int = 0,
     val starCount: Int = 0,
     val languageContributions: Map<String, Int> = emptyMap(),
     val readmeContent: String = "",

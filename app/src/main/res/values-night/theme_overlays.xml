@@ -1,17 +1,6 @@
 <resources>
     <style name="ThemeOverlay.AppTheme.MediumContrast" parent="Theme.Material3.Dark.NoActionBar">
         <item name="colorPrimary">@color/md_theme_primary_mediumContrast</item>
-        <item name="colorOnPrimary">@color/md_theme_onPrimary_mediumContrast</item>
-        <item name="colorPrimaryContainer">@color/md_theme_primaryContainer_mediumContrast</item>
-        <item name="colorOnPrimaryContainer">@color/md_theme_onPrimaryContainer_mediumContrast</item>
-        <item name="colorSecondary">@color/md_theme_secondary_mediumContrast</item>
-        <item name="colorOnSecondary">@color/md_theme_onSecondary_mediumContrast</item>
-        <item name="colorSecondaryContainer">@color/md_theme_secondaryContainer_mediumContrast</item>
-        <item name="colorOnSecondaryContainer">@color/md_theme_onSecondaryContainer_mediumContrast</item>
-        <item name="colorTertiary">@color/md_theme_tertiary_mediumContrast</item>
-        <item name="colorOnTertiary">@color/md_theme_onTertiary_mediumContrast</item>
-        <item name="colorTertiaryContainer">@color/md_theme_tertiaryContainer_mediumContrast</item>
-        <item name="colorOnTertiaryContainer">@color/md_theme_onTertiaryContainer_mediumContrast</item>
         <item name="colorError">@color/md_theme_error_mediumContrast</item>
         <item name="colorOnError">@color/md_theme_onError_mediumContrast</item>
         <item name="colorErrorContainer">@color/md_theme_errorContainer_mediumContrast</item>

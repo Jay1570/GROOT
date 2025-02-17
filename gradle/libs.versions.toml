@@ -5,17 +5,13 @@ coreKtx = "1.15.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
-appcompat = "1.7.0"
 material = "1.12.0"
-activity = "1.10.0"
-constraintlayout = "2.2.0"
 googleGmsGoogleServices = "4.4.2"
 firebaseBom = "33.9.0"
 firebaseAnalytics = "22.2.0"
 firebaseCrashlytics = "19.4.0"
 firebasePerf = "21.0.4"
 lifecycleViewmodelKtx = "2.8.7"
-circleimageview = "3.1.0"
 coil = "2.7.0"
 coreSplashscreen = "1.0.1"
 kotlinSerialization = "1.8.0"
@@ -33,10 +29,7 @@ androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = 
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
-androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
-androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
-androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 firebase-auth = { group = "com.google.firebase", name = "firebase-auth-ktx" }
 firebase-firestore = { group = "com.google.firebase", name = "firebase-firestore-ktx" }
 firebase-storage = { group = "com.google.firebase", name = "firebase-storage-ktx"}
@@ -45,7 +38,6 @@ firebase-analytics = { group = "com.google.firebase", name = "firebase-analytics
 firebase-crashlytics = { group = "com.google.firebase", name = "firebase-crashlytics", version.ref = "firebaseCrashlytics" }
 firebase-perf = { group = "com.google.firebase", name = "firebase-perf", version.ref = "firebasePerf" }
 androidx-lifecycle-viewmodel-ktx = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
-circleimageview = { group = "de.hdodenhof", name = "circleimageview", version.ref = "circleimageview" }
 coil = { group = "io.coil-kt", name = "coil", version.ref = "coil" }
 androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version.ref = "coreSplashscreen" }
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "kotlinSerialization" }

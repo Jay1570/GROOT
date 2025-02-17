@@ -12,6 +12,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -44,13 +45,22 @@ fun RepositoryListScreen(
         contentWindowInsets = WindowInsets.safeDrawing
     ) { innerPadding ->
         Box(Modifier.fillMaxSize().padding(innerPadding)) {
-            LazyColumn {
-                items(repoList) { repository ->
-                    RepositoryItem(
-                        owner = repository.owner,
-                        name = repository.name,
-                        onClick = { navigateToRepoDetails("${repository.owner} / ${repository.name}") }
+            if (repoList.isEmpty() && !inProcess) {
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    Text(
+                        text = stringResource(R.string.no_repositories),
+                        style = MaterialTheme.typography.titleLarge,
                     )
+                }
+            } else {
+                LazyColumn {
+                    items(repoList) { repository ->
+                        RepositoryItem(
+                            owner = repository.owner,
+                            name = repository.name,
+                            onClick = { navigateToRepoDetails("${repository.owner} / ${repository.name}") }
+                        )
+                    }
                 }
             }
             if (inProcess) {

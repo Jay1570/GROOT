@@ -96,7 +96,7 @@ fun ProfileScreen(
 }
 
 @Composable
-fun ProfileContent(
+private fun ProfileContent(
     uiState: ProfileUiState,
     profile: User,
     followingCount: Int,
