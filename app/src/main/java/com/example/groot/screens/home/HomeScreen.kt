@@ -21,18 +21,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.example.groot.ExploreScreen
-import com.example.groot.Friends
-import com.example.groot.HomeScreen
-import com.example.groot.ProfileScreen
-import com.example.groot.R
-import com.example.groot.RepoSearch
-import com.example.groot.RepositoryDetails
-import com.example.groot.RepositoryList
-import com.example.groot.Routes
-import com.example.groot.Settings
-import com.example.groot.StarredRepoList
-import com.example.groot.UserSearch
+import com.example.groot.*
 
 @Composable
 fun HomeScreen(

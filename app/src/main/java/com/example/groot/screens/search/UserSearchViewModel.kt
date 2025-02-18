@@ -16,7 +16,6 @@ import kotlinx.coroutines.launch
 
 class UserSearchViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
 
-
     private val query = savedStateHandle.toRoute<RepoSearch>().query
 
     private val _userList = MutableStateFlow<List<User>>(emptyList())

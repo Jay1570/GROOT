@@ -5,11 +5,7 @@ import androidx.lifecycle.createSavedStateHandle
 import androidx.lifecycle.viewmodel.CreationExtras
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
-import com.example.groot.screens.repository.FileContentViewModel
-import com.example.groot.screens.repository.FileListViewModel
-import com.example.groot.screens.repository.RepositoryDetailsViewModel
-import com.example.groot.screens.repository.RepositoryListViewModel
-import com.example.groot.screens.repository.StarredRepoListViewModel
+import com.example.groot.screens.repository.*
 import com.example.groot.screens.search.RepoSearchViewModel
 import com.example.groot.screens.search.UserSearchViewModel
 import com.example.groot.screens.settings.SettingsViewModel

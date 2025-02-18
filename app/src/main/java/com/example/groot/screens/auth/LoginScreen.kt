@@ -2,16 +2,7 @@ package com.example.groot.screens.auth
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -22,18 +13,7 @@ import androidx.compose.material.icons.filled.Email
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
-import androidx.compose.material3.Button
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
-import androidx.compose.material3.Icon
-import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextButton
+import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
@@ -98,42 +78,7 @@ private fun LoginScreenContent(
                 .verticalScroll(rememberScrollState())
                 .padding(horizontal = 16.dp),
         ) {
-            Spacer(modifier = Modifier.height(50.dp))
-            Image(
-                painter = painterResource(id = R.drawable.logo),
-                contentDescription = "Logo",
-                modifier = Modifier
-                    .size(120.dp)
-                    .clip(CircleShape)
-            )
-            Spacer(modifier = Modifier.height(20.dp))
-            Text(
-                text = stringResource(id = R.string.logo_nm),
-                style = MaterialTheme.typography.headlineMedium,
-                fontWeight = FontWeight.Bold,
-                color = MaterialTheme.colorScheme.onSurface,
-            )
-            Spacer(modifier = Modifier.height(10.dp))
-            Text(
-                text = stringResource(id = R.string.login_description),
-                style = MaterialTheme.typography.bodyMedium,
-                textAlign = TextAlign.Left,
-                color = MaterialTheme.colorScheme.onSurface,
-            )
-            Spacer(modifier = Modifier.height(20.dp))
-            Card(
-                modifier = Modifier.fillMaxWidth(),
-                colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surfaceContainer),
-                shape = RoundedCornerShape(12.dp)
-            ) {
-                Text(
-                    text = stringResource(id = R.string.note),
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = Modifier.padding(20.dp),
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-            }
-            Spacer(modifier = Modifier.height(20.dp))
+            Information()
             Card(
                 modifier = Modifier.fillMaxWidth(),
                 colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surfaceContainer),
@@ -218,6 +163,46 @@ private fun LoginScreenContent(
             }
         }
     }
+}
+
+@Composable
+fun Information() {
+    Spacer(modifier = Modifier.height(50.dp))
+    Image(
+        painter = painterResource(id = R.drawable.logo),
+        contentDescription = "Logo",
+        modifier = Modifier
+            .size(120.dp)
+            .clip(CircleShape)
+    )
+    Spacer(modifier = Modifier.height(20.dp))
+    Text(
+        text = stringResource(id = R.string.logo_nm),
+        style = MaterialTheme.typography.headlineMedium,
+        fontWeight = FontWeight.Bold,
+        color = MaterialTheme.colorScheme.onSurface,
+    )
+    Spacer(modifier = Modifier.height(10.dp))
+    Text(
+        text = stringResource(id = R.string.login_description),
+        style = MaterialTheme.typography.bodyMedium,
+        textAlign = TextAlign.Left,
+        color = MaterialTheme.colorScheme.onSurface,
+    )
+    Spacer(modifier = Modifier.height(20.dp))
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.surfaceContainer),
+        shape = RoundedCornerShape(12.dp)
+    ) {
+        Text(
+            text = stringResource(id = R.string.note),
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier.padding(20.dp),
+            color = MaterialTheme.colorScheme.onSurface
+        )
+    }
+    Spacer(modifier = Modifier.height(20.dp))
 }
 
 @Preview(showBackground = true)

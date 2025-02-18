@@ -10,11 +10,7 @@ import com.example.groot.screens.auth.LoginScreen
 import com.example.groot.screens.auth.RegistrationScreen
 import com.example.groot.screens.home.FriendsScreen
 import com.example.groot.screens.home.HomeScreen
-import com.example.groot.screens.repository.FileContentScreen
-import com.example.groot.screens.repository.FileListScreen
-import com.example.groot.screens.repository.RepositoryDetailsScreen
-import com.example.groot.screens.repository.RepositoryListScreen
-import com.example.groot.screens.repository.StarredRepoListScreen
+import com.example.groot.screens.repository.*
 import com.example.groot.screens.search.RepoSearchScreen
 import com.example.groot.screens.search.UserSearchScreen
 import com.example.groot.screens.settings.SettingsScreen
@@ -164,6 +160,7 @@ fun Navigation(
                 navigateToFileContent = {
                     navController.navigate(FileContent(it)) {
                         launchSingleTop = true
+                        restoreState = true
                     }
                 },
                 navigateBack = { navController.popBackStack() }

@@ -14,11 +14,7 @@ import com.example.groot.utility.LanguageData
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageException
 import com.google.firebase.storage.StorageReference
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import java.util.Collections
@@ -119,9 +115,12 @@ class RepositoryDetailsViewModel(savedStateHandle: SavedStateHandle) : ViewModel
     private fun calculateLanguageContributions(files: List<StorageReference>) {
         val languageCount = mutableMapOf<String, Int>()
         files.forEach { fileRef ->
-            val extension = ".${fileRef.name.substringAfterLast(".", missingDelimiterValue = "").lowercase()}"
-            val language = LanguageData.extensions[extension] ?: "Others"
-            languageCount[language] = (languageCount[language] ?: 0) + 1
+            val extension = fileRef.name.substringAfterLast(".", missingDelimiterValue = "").lowercase()
+            if(extension.trim().isNotEmpty()) {
+                val language = LanguageData.extensions[".$extension"] ?: "Others"
+                languageCount[language] = (languageCount[language] ?: 0) + 1
+
+            }
         }
         _uiState.update {
             it.copy(languageContributions = languageCount)
