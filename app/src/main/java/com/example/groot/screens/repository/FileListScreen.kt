@@ -56,7 +56,7 @@ fun FileListScreen(
                 }
             } else {
                 LazyColumn {
-                    items(uiState.fileList) {
+                    items(uiState.currNode!!.children) {
                         FileItem(
                             node = it,
                             modifier = Modifier

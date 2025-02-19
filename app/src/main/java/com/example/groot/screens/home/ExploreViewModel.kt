@@ -4,14 +4,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.groot.repositories.RepositoryData
 import com.example.groot.repositories.UserRepository
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class ExploreViewModel : ViewModel() {
 
     private val userRepository = UserRepository()
     private val repository = RepositoryData()
-
-    private val friends get() = userRepository.friends
 
     val exploreRepository get() = repository.exploreRepositories
 
@@ -21,7 +20,7 @@ class ExploreViewModel : ViewModel() {
 
     fun fetchRepo() {
         viewModelScope.launch {
-            friends.collect {
+            userRepository.getFriends().collectLatest {
                 repository.fetchExplorerRepositories(it)
             }
         }

@@ -5,6 +5,7 @@ import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
@@ -20,14 +21,13 @@ fun FriendsScreen(
     screen: Int = 0,
     navigateToUser: (String) -> Unit,
     navigateBack: () -> Unit,
-    viewModel: ProfileViewModel = viewModel()
+    viewModel: FriendsViewModel = viewModel()
 ) {
     val coroutineScope = rememberCoroutineScope()
     val tabTitles = listOf(stringResource(R.string.followers), stringResource(R.string.following))
     val pagerState = rememberPagerState(initialPage = screen) { tabTitles.size }
 
-    val followingProfiles = viewModel.followingProfiles.collectAsStateWithLifecycle()
-    val followersProfiles = viewModel.followerProfiles.collectAsStateWithLifecycle()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     Scaffold(
         topBar = {
@@ -63,8 +63,8 @@ fun FriendsScreen(
                 .padding(innerPadding)
         ) { page ->
             when (page) {
-                0 -> UserListScreen(followersProfiles.value, navigateToUser)
-                1 -> UserListScreen(followingProfiles.value, navigateToUser)
+                0 -> UserListScreen(uiState.followersProfile, navigateToUser)
+                1 -> UserListScreen(uiState.followingProfile, navigateToUser)
             }
         }
     }

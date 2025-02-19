@@ -42,6 +42,7 @@ class FileListViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
 
 
     private fun fetchList(node: TreeNode) {
+        _uiState.update { it.copy(inProcess = true) }
         val reference = firebaseStorage.reference.child(node.path)
         reference.listAll().addOnSuccessListener { listResult ->
             for (folderRef in listResult.prefixes) {
@@ -55,7 +56,7 @@ class FileListViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
                 node.children.add(fileNode)
             }
             _uiState.update {
-                it.copy(fileList = node.children, inProcess = false)
+                it.copy(inProcess = false)
             }
         }.addOnFailureListener { e ->
             Log.e("FileListViewModel", e.message.toString())
@@ -67,7 +68,7 @@ class FileListViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
         _uiState.value = _uiState.value.copy(inProcess = true)
         parents.push(_uiState.value.currNode)
         _uiState.update {
-            it.copy(currNode = node, isParentsEmpty = false)
+            it.copy(currNode = node, isParentsEmpty = false, inProcess = false)
         }
         if (_uiState.value.currNode!!.children.isEmpty()) {
             viewModelScope.launch {
@@ -77,15 +78,17 @@ class FileListViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
     }
 
     fun navigateBack(navigateBack: () -> Unit) {
+        _uiState.update { it.copy(inProcess = true) }
         if (_uiState.value.isParentsEmpty) {
+            _uiState.update { it.copy(inProcess = false) }
             navigateBack()
         } else {
             val parentNode = parents.pop()
             _uiState.update {
                 it.copy(
                     currNode = parentNode,
-                    fileList = parentNode.children,
-                    isParentsEmpty = parents.isEmpty()
+                    isParentsEmpty = parents.isEmpty(),
+                    inProcess = false
                 )
             }
         }
@@ -93,7 +96,6 @@ class FileListViewModel(savedStateHandle: SavedStateHandle) : ViewModel() {
 }
 
 data class FileListUiState(
-    val fileList: List<TreeNode> = emptyList(),
     val inProcess: Boolean = false,
     val isParentsEmpty: Boolean = true,
     val currNode: TreeNode? = null

@@ -16,8 +16,6 @@ import com.example.groot.AppViewModelProvider
 import com.example.groot.R
 import com.example.groot.common.ProfileCard
 import com.example.groot.common.TopBar
-import com.example.groot.model.Friends
-import com.example.groot.model.User
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -27,14 +25,12 @@ fun UserScreen(
     navigateBack: () -> Unit,
     viewModel: UserViewModel = viewModel(factory = AppViewModelProvider.factory)
 ) {
-    val profile by viewModel.profile.collectAsStateWithLifecycle()
-    val friends by viewModel.friends.collectAsStateWithLifecycle()
-    val isFollowing by viewModel.isFollowing.collectAsStateWithLifecycle()
 
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     Scaffold(
         topBar = {
             TopBar(
-                title = profile.userName,
+                title = uiState.profile.userName,
                 canNavigateBack = true,
                 navigateUp = navigateBack
             )
@@ -42,9 +38,7 @@ fun UserScreen(
         contentWindowInsets = WindowInsets.safeDrawing
     ) { innerPadding ->
         UserScreenContent(
-            profile = profile,
-            friends = friends,
-            isFollowing = isFollowing,
+            uiState = uiState,
             onFollowClick = viewModel::onFollowClick,
             navigateToRepoList = navigateToRepoList,
             navigateToStarredRepo = navigateToStarredRepo,
@@ -55,9 +49,7 @@ fun UserScreen(
 
 @Composable
 private fun UserScreenContent(
-    profile: User,
-    friends: Friends,
-    isFollowing: Boolean,
+    uiState: UserUiState,
     onFollowClick: () -> Unit,
     navigateToRepoList: (String) -> Unit,
     navigateToStarredRepo: (String) -> Unit,
@@ -71,9 +63,9 @@ private fun UserScreenContent(
                 .verticalScroll(rememberScrollState())
         ) {
             ProfileCard(
-                profile = profile,
-                followersCount = friends.followers.size,
-                followingCount = friends.following.size,
+                profile = uiState.profile,
+                followersCount = uiState.friends.followers.size,
+                followingCount = uiState.friends.following.size,
                 onFollowersClick = {},
                 onFollowingClick = {}
             )
@@ -81,13 +73,13 @@ private fun UserScreenContent(
             Spacer(modifier = Modifier.height(16.dp))
 
             Button(onClick = onFollowClick, modifier = Modifier.fillMaxWidth(), colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.surfaceContainer, contentColor = MaterialTheme.colorScheme.onSurface)) {
-                Text(if (isFollowing) "Unfollow" else "Follow")
+                Text(if (uiState.isFollowing) "Unfollow" else "Follow")
             }
 
             Spacer(Modifier.height(16.dp))
 
             TextButton(
-                onClick = { navigateToRepoList(profile.userName) },
+                onClick = { navigateToRepoList(uiState.profile.userName) },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.background,
                     contentColor = MaterialTheme.colorScheme.onBackground,
@@ -109,7 +101,7 @@ private fun UserScreenContent(
                 )
             }
             TextButton(
-                onClick = { navigateToStarredRepo(profile.userId) },
+                onClick = { navigateToStarredRepo(uiState.profile.userId) },
                 colors = ButtonDefaults.buttonColors(
                     containerColor = MaterialTheme.colorScheme.background,
                     contentColor = MaterialTheme.colorScheme.onBackground,

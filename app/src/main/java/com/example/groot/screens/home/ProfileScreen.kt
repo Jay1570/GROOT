@@ -24,7 +24,6 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.groot.R
 import com.example.groot.common.ProfileCard
 import com.example.groot.common.TopBar
-import com.example.groot.model.User
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -47,15 +46,9 @@ fun ProfileScreen(
         },
         contentWindowInsets = WindowInsets.safeDrawing
     ) { innerPadding ->
-        val profile by viewModel.profile.collectAsStateWithLifecycle()
-        val followingCount by viewModel.followingCount.collectAsStateWithLifecycle()
-        val followersCount by viewModel.followersCount.collectAsStateWithLifecycle()
         val uiState by viewModel.uiState.collectAsStateWithLifecycle()
         ProfileContent(
             uiState = uiState,
-            profile = profile,
-            followingCount = followingCount,
-            followersCount = followersCount,
             onOldPasswordChange = viewModel::onOldPasswordChange,
             onNewPasswordChange = viewModel::onNewPasswordChange,
             onConfirmPasswordChange = viewModel::onConfirmPasswordChange,
@@ -77,9 +70,6 @@ fun ProfileScreen(
 @Composable
 private fun ProfileContent(
     uiState: ProfileUiState,
-    profile: User,
-    followingCount: Int,
-    followersCount: Int,
     onOldPasswordChange: (String) -> Unit,
     onNewPasswordChange: (String) -> Unit,
     onConfirmPasswordChange: (String) -> Unit,
@@ -98,9 +88,9 @@ private fun ProfileContent(
                 .verticalScroll(rememberScrollState())
         ) {
             ProfileCard(
-                profile = profile,
-                followersCount = followersCount,
-                followingCount = followingCount,
+                profile = uiState.profile,
+                followersCount = uiState.friends.followers.size,
+                followingCount = uiState.friends.following.size,
                 onFollowersClick = onFollowersClick,
                 onFollowingClick = onFollowingClick,
                 enabled = enabled

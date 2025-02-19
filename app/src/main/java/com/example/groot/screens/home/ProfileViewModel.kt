@@ -1,9 +1,12 @@
 package com.example.groot.screens.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.groot.SnackbarEvent
 import com.example.groot.SnackbarManager
+import com.example.groot.model.Friends
+import com.example.groot.model.User
 import com.example.groot.repositories.AuthRepository
 import com.example.groot.repositories.UserRepository
 import com.example.groot.utility.isValidPassword
@@ -23,26 +26,29 @@ class ProfileViewModel : ViewModel() {
     private val newPassword get() = _uiState.value.newPassword
     private val confirmPassword get() = _uiState.value.confirmPassword
 
-    val profile = userRepository.profile
-    val friends = userRepository.friends
-    val followingProfiles get() = userRepository.followingProfiles
-    val followerProfiles get() = userRepository.followerProfiles
-
-    val followingCount = followingProfiles.map { it.size }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5000),
-        initialValue = 0
-    )
-
-    val followersCount = followerProfiles.map { it.size }.stateIn(
-        scope = viewModelScope,
-        started = SharingStarted.WhileSubscribed(5000),
-        initialValue = 0
-    )
-
     init {
-        userRepository.getProfile()
-        userRepository.getFriends()
+        fetchProfile()
+        fetchFriends()
+    }
+
+    private fun fetchProfile() {
+        viewModelScope.launch {
+            userRepository.getProfile()
+                .catch { e -> Log.e("ProfileViewModel", e.message.toString()) }
+                .collectLatest { user ->
+                    _uiState.update { it.copy(profile = user) }
+                }
+        }
+    }
+
+    private fun fetchFriends() {
+        viewModelScope.launch {
+            userRepository.getFriends()
+                .catch { e -> Log.e("ProfileViewModel", e.message.toString()) }
+                .collectLatest { friends ->
+                    _uiState.update { it.copy(friends = friends) }
+                }
+        }
     }
 
     fun onOldPasswordChange(newValue: String) {
@@ -110,6 +116,8 @@ class ProfileViewModel : ViewModel() {
 }
 
 data class ProfileUiState(
+    val profile: User = User(),
+    val friends: Friends = Friends(),
     val oldPassword: String = "",
     val newPassword: String = "",
     val confirmPassword: String = "",
